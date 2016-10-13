@@ -1,11 +1,11 @@
 # HashiCorp Atlas Token (Vagrant)
-export ATLAS_TOKEN='BhJWmmzU4ZbYVw.atlasv1.3SZsoMpK2KZzrA.atlasv1.IAZhza6plWZIqd3fC76qzdU3TnnsYoAQseeNzeuKw1zwiAeyNV3ERmaRl4BgqMOdtHI'
+export ATLAS_TOKEN=''
 
 # Initiate rbenv
 eval "$(rbenv init -)"
 
 # JumpCloud Connect Keys for provision_agnets.yml (vagrant/ansible)
-export JUMPCLOUD_CONNECTKEY_PRD='098a04df16f30159e19c3f3ed0b07e3d82164c2d'
+export JUMPCLOUD_CONNECTKEY_PRD=''
 export JUMPCLOUD_CONNECTKEY_STG='kjpstg'
 
 # Setting PATH for Python 3.6
@@ -26,7 +26,5 @@ if [ -f /Users/kevin/Downloads/google-cloud-sdk/completion.bash.inc ]; then
 fi
 
 ssh-add &> /dev/null
-ssh-add ~/.ssh/google_compute_engine &> /dev/null
-ssh-add ~/.ssh/AWSQaTest.pem ~/.ssh/AmazonNewKey.pem ~/.ssh/KJP-AWS-QA.pem &> /dev/null
 
 fish
