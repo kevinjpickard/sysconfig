@@ -55,5 +55,6 @@ set shiftwidth=2
 au Bufread,BufNewFile *.feature set filetype=gherkin
 syntax on
 set backspace=indent,eol,start
+set number
 
 autocmd vimenter * NERDTree
