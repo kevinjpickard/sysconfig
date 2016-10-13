@@ -1,0 +1,21 @@
+# This is Git's per-user configuration file.
+[user]
+  name = Kevin Pickard
+  email = kevin.pickard@jumpcloud.com
+
+[alias]
+  st = status -sb
+  df = diff
+  co = checkout
+  ci = commit
+  br = branch
+  lg = log -p
+  lol = log --graph --pretty=oneline --abbrev-commit --decorate
+  lola = log --graph --pretty=oneline --abbrev-commit --decorate --all
+  loln = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --decorate
+  lolan = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --decorate --all
+  # Omits any commits that came in from a merge, showing only the merge commit
+  lofirst = log --graph --pretty=oneline --abbrev-commit --decorate --first-parent
+  lonfirst = log --graph --pretty=format:'<%= log_format %>' --abbrev-commit --decorate --first-parent
+  # Shows commits per person in descending order
+  loscore = shortlog -n --summary
