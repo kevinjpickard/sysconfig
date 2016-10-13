@@ -33,3 +33,8 @@ dots fetch
 dots checkout osx
 echo ".dotfiles" >> .gitignore
 dots config --local status.showUntrackedFiles no
+
+## Step 6: Install Vundle ##
+git clone https://github.com/VundleVim/Vundle/vim.git ~/.vim/bundle/Vundle.vim
+#		Initialize and install plugins
+vim +PluginInstall +qall
