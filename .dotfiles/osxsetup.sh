@@ -1,4 +1,4 @@
-#/bin/bash -x
+#/bin/bash -xe
 
 # Script to setup a new macOS system. 
 # 	Author: Kevin Pickard
@@ -7,6 +7,7 @@
 #			Installs Xcode CLI Tools, Homebrew, Fish, and vim. 
 
 ## Step 1: Install Xcode CLI Tools ##
+echo "Parsing Xcode CLI install command..."
 touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress;
 PROD=$(softwareupdate -l |
   grep "\*.*Command Line" |
@@ -16,25 +17,46 @@ PROD=$(softwareupdate -l |
 softwareupdate -i "$PROD" --verbose;
 
 ## Step 2: Install Homebrew ##
+echo "Installing Homebrew..."
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 #		Update
 brew update
 
 ## Step 3: Install Fish ##
+echo "Installing Fish"
 brew install fish
 
 ## Step 4: Install vim ##
+echo "Installing vim..."
 brew install vim
 
 ## Step 5: Clone github .dotfiles repo
-git clone --bare kevinjpickard/.dotfiles $HOME/.cfg
+echo "Pulling down system configuration files..."
+git clone --bare https://github.com/kevinjpickard/.dotfiles $HOME/.dotfiles
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 dots fetch
 dots checkout osx
+dots pull origin osx
 echo ".dotfiles" >> .gitignore
 dots config --local status.showUntrackedFiles no
 
 ## Step 6: Install Vundle ##
+echo "Installing Vundle..."
 git clone https://github.com/VundleVim/Vundle/vim.git ~/.vim/bundle/Vundle.vim
 #		Initialize and install plugins
+echo "Initializing vim plugins..."
 vim +PluginInstall +qall
+
+## Step 7: Install Color Schemes ##
+#		Create scratch directory
+mkdir scratch
+#		Clone git repo
+echo "Downloading iTerm2 color schemes..."
+git clone https://github.com/mbadolato/iTerm2-Color-Schemes.git ~/scratch/
+
+## Step 8: Set shell to fish ##
+echo "Setting default user shell to Fish..."
+#		First we must add fish to /etc/shells
+echo "/usr/local/bin/fish" >> /etc/shells
+#		Now set shell to fish
+sudo chsh -s '/usr/local/bin/fish'
