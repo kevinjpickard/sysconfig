@@ -1,5 +1,5 @@
 function fish_prompt
-    ~/powerline-shell/powerline-shell.py $status --shell bare ^/dev/null
+    ~/scratch/powerline-shell/powerline-shell.py $status --shell bare ^/dev/null
 end
 
 set -gx PATH $PATH /usr/local/lib/ruby/gems
