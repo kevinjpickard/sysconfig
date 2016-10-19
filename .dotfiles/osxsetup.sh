@@ -45,12 +45,14 @@ dots config --local status.showUntrackedFiles no
 brew install python
 #		Install Powerline
 pip install powerline-status
-pip install git+git://github.com/powline/powerline
-git clone https://github.com/milkbikis/powerline-shell ~/scratch
+pip install git+git://github.com/powerline/powerline
+mkdir ~/scratch/powerline-shell
+git clone https://github.com/milkbikis/powerline-shell ~/scratch/powerline-shell
 cp ~/scratch/powerline-shell/config.py.dist ~/scratch/powerline-shell/config.py
-~/scratch/install.py
+~/scratch/powerline-shell/install.py
 #		Install powerline fonts
-git clone https://github.com/powerline/fonts.git ~/scratch
+mkdir ~/scratch/fonts
+git clone https://github.com/powerline/fonts.git ~/scratch/fonts
 ~/scratch/fonts/install.sh
 
 ## Step 6: Install Vundle ##
@@ -70,7 +72,7 @@ git clone https://github.com/mbadolato/iTerm2-Color-Schemes.git ~/scratch/
 ## Step 8: Set shell to fish ##
 echo "Setting default user shell to Fish..."
 #		First we must add fish to /etc/shells
-sudo echo "/usr/local/bin/fish" >> /etc/shells
+echo "/usr/local/bin/fish" | sudo tee -a /etc/shells
 #		Now set shell to fish
 chsh -s '/usr/local/bin/fish
 
