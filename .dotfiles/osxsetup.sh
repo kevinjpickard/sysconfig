@@ -34,11 +34,11 @@ brew install vim
 echo "Pulling down system configuration files..."
 git clone --bare https://github.com/kevinjpickard/.dotfiles $HOME/.dotfiles
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-dots fetch
-dots checkout osx
-dots pull origin osx
+/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME fetch
+/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout osx
+/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull origin osx
 echo ".dotfiles" >> .gitignore
-dots config --local status.showUntrackedFiles no
+/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
 
 ## Step 6: Install Powerline ##
 #		Install python
@@ -49,7 +49,12 @@ pip install git+git://github.com/powerline/powerline
 mkdir ~/scratch/powerline-shell
 git clone https://github.com/milkbikis/powerline-shell ~/scratch/powerline-shell
 cp ~/scratch/powerline-shell/config.py.dist ~/scratch/powerline-shell/config.py
-~/scratch/powerline-shell/install.py
+cd ~/scratch/powerline-shell
+chmod 777 segments/
+chmod 777 segments/*
+./install.py
+cd ~
+
 #		Install powerline fonts
 mkdir ~/scratch/fonts
 git clone https://github.com/powerline/fonts.git ~/scratch/fonts
