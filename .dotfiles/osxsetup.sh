@@ -54,27 +54,26 @@ chmod +r segments/
 chmod +r segments/*
 ./install.py
 cd ~
-
 #		Install powerline fonts
 mkdir ~/scratch/fonts
 git clone https://github.com/powerline/fonts.git ~/scratch/fonts
 ~/scratch/fonts/install.sh
 
-## Step 6: Install Vundle ##
+## Step 7: Install Vundle ##
 echo "Installing Vundle..."
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 #		Initialize and install plugins
 echo "Initializing vim plugins..."
 vim +PluginInstall +qall
 
-## Step 7: Install Color Schemes ##
+## Step 8: Install Color Schemes ##
 #		Create scratch directory
 mkdir scratch
 #		Clone git repo
 echo "Downloading iTerm2 color schemes..."
 git clone https://github.com/mbadolato/iTerm2-Color-Schemes.git ~/scratch/
 
-## Step 8: Set shell to fish ##
+## Step 9: Set shell to fish ##
 echo "Setting default user shell to Fish..."
 #		First we must add fish to /etc/shells
 echo "/usr/local/bin/fish" | sudo tee -a /etc/shells
