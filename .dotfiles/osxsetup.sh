@@ -74,5 +74,5 @@ echo "Setting default user shell to Fish..."
 #		First we must add fish to /etc/shells
 echo "/usr/local/bin/fish" | sudo tee -a /etc/shells
 #		Now set shell to fish
-chsh -s '/usr/local/bin/fish
+chsh -s '/usr/local/bin/fish'
 
