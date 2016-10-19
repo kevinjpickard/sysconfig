@@ -33,12 +33,12 @@ brew install vim
 ## Step 5: Clone github .dotfiles repo
 echo "Pulling down system configuration files..."
 git clone --bare https://github.com/kevinjpickard/.dotfiles $HOME/.dotfiles
-alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME fetch
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout osx
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull origin osx
 echo ".dotfiles" >> .gitignore
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
+alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 ## Step 6: Install Powerline ##
 #		Install python
@@ -50,8 +50,8 @@ mkdir ~/scratch/powerline-shell
 git clone https://github.com/milkbikis/powerline-shell ~/scratch/powerline-shell
 cp ~/scratch/powerline-shell/config.py.dist ~/scratch/powerline-shell/config.py
 cd ~/scratch/powerline-shell
-chmod 777 segments/
-chmod 777 segments/*
+chmod +r segments/
+chmod +r segments/*
 ./install.py
 cd ~
 
@@ -80,4 +80,7 @@ echo "Setting default user shell to Fish..."
 echo "/usr/local/bin/fish" | sudo tee -a /etc/shells
 #		Now set shell to fish
 chsh -s '/usr/local/bin/fish'
+
+## Finished ##
+echo "Configuration complete!"
 
