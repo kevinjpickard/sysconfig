@@ -40,9 +40,22 @@ dots pull origin osx
 echo ".dotfiles" >> .gitignore
 dots config --local status.showUntrackedFiles no
 
+## Step 6: Install Powerline ##
+#		Install python
+brew install python
+#		Install Powerline
+pip install powerline-status
+pip install git+git://github.com/powline/powerline
+git clone https://github.com/milkbikis/powerline-shell ~/scratch
+cp ~/scratch/powerline-shell/config.py.dist ~/scratch/powerline-shell/config.py
+~/scratch/install.py
+#		Install powerline fonts
+git clone https://github.com/powerline/fonts.git ~/scratch
+~/scratch/fonts/install.sh
+
 ## Step 6: Install Vundle ##
 echo "Installing Vundle..."
-git clone https://github.com/VundleVim/Vundle/vim.git ~/.vim/bundle/Vundle.vim
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 #		Initialize and install plugins
 echo "Initializing vim plugins..."
 vim +PluginInstall +qall
@@ -57,6 +70,7 @@ git clone https://github.com/mbadolato/iTerm2-Color-Schemes.git ~/scratch/
 ## Step 8: Set shell to fish ##
 echo "Setting default user shell to Fish..."
 #		First we must add fish to /etc/shells
-echo "/usr/local/bin/fish" >> /etc/shells
+sudo echo "/usr/local/bin/fish" >> /etc/shells
 #		Now set shell to fish
-sudo chsh -s '/usr/local/bin/fish'
+chsh -s '/usr/local/bin/fish
+
