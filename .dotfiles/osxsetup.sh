@@ -34,6 +34,7 @@ alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 ## Install a lot of shit ##
 echo "Installing a lot of shit..."
+brew cask install java
 brew tap homebrew/bundle
 brew bundle --file=~/.dotfiles/Brewfile
 
