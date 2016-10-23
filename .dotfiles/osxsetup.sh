@@ -16,13 +16,11 @@ PROD=$(softwareupdate -l |
 	tr -d '\n')
 softwareupdate -i "$PROD" --verbose;
 
-## Step 2: Install Homebrew and a lot of other shit (a lot)##
+## Step 2: Install Homebrew ##
 echo "Installing Homebrew..."
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 #		Update
 brew update
-brew tap homebrew/bundle
-brew bundle
 
 ## Step 5: Clone github .dotfiles repo
 echo "Pulling down system configuration files..."
@@ -33,6 +31,11 @@ git clone --bare https://github.com/kevinjpickard/.dotfiles $HOME/.dotfiles
 echo ".dotfiles" >> .gitignore
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+## Install a lot of shit ##
+echo "Installing a lot of shit..."
+brew tap homebrew/bundle
+brew bundle ~/.dotfiles/Brewfile
 
 ## Step 6: Install Powerline ##
 #		Install python
