@@ -83,12 +83,12 @@ vagrant plugin install vagrant-saltdeps vagrant-scp vagrant-serverspec vagrant-s
 
 ## Step 11: Set various OSX Settings. ##
 echo "Tweaking some shit so its juuuuuuuuuust the way I like it..."
-~/.dotfiles/osx_settings.sh
+chmod +x ~/.dotfiles/osx_settings.sh
+sudo ~/.dotfiles/osx_settings.sh
 
 ## Step 12: Dark menu bar and dock ##
 echo "Dark Theme?"
-defaults write /Library/Preferences/.GlobalPreferences 
-AppleInterfaceTheme Dark
+defaults write /Library/Preferences/.GlobalPreferences AppleInterfaceTheme Dark
 
 ## Finished ##
 echo "Configuration complete!"
