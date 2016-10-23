@@ -81,6 +81,10 @@ chsh -s '/usr/local/bin/fish'
 ## Step : Install vagrant plugins
 vagrant plugin install vagrant-saltdeps vagrant-scp vagrant-serverspec vagrant-share vagrant-vmware-fusion vagrant-winrm
 
+## Step : Set various OSX Settings. ##
+echo "Tweaking some shit so its juuuuuuuuuust the way I like it..."
+~/.dotfiles/osx_settings.sh
+
 ## Finished ##
 echo "Configuration complete!"
 
