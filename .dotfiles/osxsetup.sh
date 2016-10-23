@@ -35,7 +35,7 @@ alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 ## Install a lot of shit ##
 echo "Installing a lot of shit..."
 brew tap homebrew/bundle
-brew bundle ~/.dotfiles/Brewfile
+brew bundle --file=~/.dotfiles/Brewfile
 
 ## Step 6: Install Powerline ##
 #		Install python
