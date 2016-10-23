@@ -16,19 +16,13 @@ PROD=$(softwareupdate -l |
 	tr -d '\n')
 softwareupdate -i "$PROD" --verbose;
 
-## Step 2: Install Homebrew ##
+## Step 2: Install Homebrew and a lot of other shit (a lot)##
 echo "Installing Homebrew..."
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 #		Update
 brew update
-
-## Step 3: Install Fish ##
-echo "Installing Fish"
-brew install fish
-
-## Step 4: Install vim ##
-echo "Installing vim..."
-brew install vim
+brew tap homebrew/bundle
+brew bundle
 
 ## Step 5: Clone github .dotfiles repo
 echo "Pulling down system configuration files..."
