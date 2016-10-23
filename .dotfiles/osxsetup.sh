@@ -22,7 +22,7 @@ echo "Installing Homebrew..."
 #		Update
 brew update
 
-## Step 5: Clone github .dotfiles repo
+## Step 3: Clone github .dotfiles repo
 echo "Pulling down system configuration files..."
 git clone --bare https://github.com/kevinjpickard/.dotfiles $HOME/.dotfiles
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME fetch
@@ -32,7 +32,7 @@ echo ".dotfiles" >> .gitignore
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
-## Install a lot of shit ##
+## Step 4: Install a lot of shit ##
 echo "Installing a lot of shit..."
 brew cask install java
 brew tap homebrew/bundle
@@ -78,12 +78,17 @@ echo "/usr/local/bin/fish" | sudo tee -a /etc/shells
 #		Now set shell to fish
 chsh -s '/usr/local/bin/fish'
 
-## Step : Install vagrant plugins
+## Step 10: Install vagrant plugins
 vagrant plugin install vagrant-saltdeps vagrant-scp vagrant-serverspec vagrant-share vagrant-vmware-fusion vagrant-winrm
 
-## Step : Set various OSX Settings. ##
+## Step 11: Set various OSX Settings. ##
 echo "Tweaking some shit so its juuuuuuuuuust the way I like it..."
 ~/.dotfiles/osx_settings.sh
+
+## Step 12: Dark menu bar and dock ##
+echo "Dark Theme?"
+defaults write /Library/Preferences/.GlobalPreferences 
+AppleInterfaceTheme Dark
 
 ## Finished ##
 echo "Configuration complete!"
