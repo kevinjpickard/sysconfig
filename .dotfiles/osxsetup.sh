@@ -74,6 +74,9 @@ echo "/usr/local/bin/fish" | sudo tee -a /etc/shells
 #		Now set shell to fish
 chsh -s '/usr/local/bin/fish'
 
+## Step : Install vagrant plugins
+vagrant plugin install vagrant-saltdeps vagrant-scp vagrant-serverspec vagrant-share vagrant-vmware-fusion vagrant-winrm
+
 ## Finished ##
 echo "Configuration complete!"
 
