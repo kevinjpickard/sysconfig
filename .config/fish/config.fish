@@ -16,9 +16,15 @@ set PATH $PATH /usr/local/opt/go/libexec/bin
 # Dev Env.
 set -x JUMPCLOUD_WORKSPACE ~/Documents/github/jumpcloud/
 
+# Default Vagrant Provider: VirtualBox (Stops translation missing errors)
+set -x VAGRANT_DEFAULT_PROVIDER virtualbox
+
+# Import my environment variables
 source ~/.myenvvars
 
+# Setup nvm environment requirements
 set -x NVM_DIR "$HOME/.nvm"
 bass source "/usr/local/opt/nvm/nvm.sh"
-	
+# Enable Fish as a login shell to fix some nvm behavior (use <version>)
 test -e {$HOME}/.iterm2_shell_integration.fish ; and source {$HOME}/.iterm2_shell_integration.fish
+rvm default
