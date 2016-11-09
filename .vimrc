@@ -60,3 +60,4 @@ set backspace=indent,eol,start
 set number
 
 autocmd vimenter * NERDTree
+let NERDTreeShowHidden=1
