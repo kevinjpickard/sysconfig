@@ -1,3 +1,3 @@
 function tre
-	tree $argv -CDFp
+	tree $argv -CDFpa
 end

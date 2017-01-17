@@ -9,6 +9,10 @@ export PATH
 PATH="/Users/kevin/Scripts:${PATH}"
 export PATH
 
+# Setting up Golang
+export GOPATH=$HOME/Documents/go
+export GOBIN=$GOPATH/bin
+
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f /Users/kevin/Downloads/google-cloud-sdk/path.bash.inc ]; then
   source '/Users/kevin/Downloads/google-cloud-sdk/path.bash.inc'

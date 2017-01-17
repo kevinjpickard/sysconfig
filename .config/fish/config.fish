@@ -12,12 +12,16 @@ set -x MANPATH /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/help
 
 # GoLang
 set PATH $PATH /usr/local/opt/go/libexec/bin
+set -gx GOPATH ~/Documents/go/
 
 # Dev Env.
 set -x JUMPCLOUD_WORKSPACE ~/Documents/github/jumpcloud/
 
 # Default Vagrant Provider: VirtualBox (Stops translation missing errors)
 set -x VAGRANT_DEFAULT_PROVIDER virtualbox
+
+# Add Hyper Plugin paths to $PATH for custom commands
+set -x PATH $PATH ~/.hyper_plugins/
 
 # Import my environment variables
 source ~/.myenvvars

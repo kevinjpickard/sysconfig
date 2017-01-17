@@ -30,7 +30,7 @@ Plugin 'VundleVim/Vundle.vim'
 " Kevin's vim Plugins
 " NerdTree
 Plugin 'scrooloose/nerdtree'
-Plugin 'Valloric/YouCompleteMe'
+"Plugin 'Valloric/YouCompleteMe'
 Plugin 'dag/vim-fish'
 Plugin 'PProvost/vim-ps1'
 " All of your Plugins must be added before the following line
@@ -54,10 +54,18 @@ set laststatus=2
 set tabstop=2
 set softtabstop=0 noexpandtab
 set shiftwidth=2
+set smarttab
 au Bufread,BufNewFile *.feature set filetype=gherkin
 syntax on
 set backspace=indent,eol,start
 set number
+
+if exists('+colorcolumn')
+	set colorcolumn=80
+else
+	highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+	match OverLength /\%>79v.\+/	
+endif
 
 autocmd vimenter * NERDTree
 let NERDTreeShowHidden=1

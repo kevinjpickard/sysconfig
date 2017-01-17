@@ -8,7 +8,6 @@
   df = diff
   co = checkout
   ci = commit
-  br = branch
   lg = log -p
   lol = log --graph --pretty=oneline --abbrev-commit --decorate
   lola = log --graph --pretty=oneline --abbrev-commit --decorate --all
@@ -18,4 +17,9 @@
   lofirst = log --graph --pretty=oneline --abbrev-commit --decorate --first-parent
   lonfirst = log --graph --pretty=format:'<%= log_format %>' --abbrev-commit --decorate --first-parent
   # Shows commits per person in descending order
-  loscore = shortlog -n --summary
+	loscore = shortlog -n --summary
+
+	br = for-each-ref refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject)'
+	brs = for-each-ref refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject)' --sort=committerdate
+	brn = for-each-ref refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))'
+	brsn = for-each-ref refs/heads/ --format='%(HEAD) %(color:yellow)%(refname:short)%(color:reset) - %(color:red)%(objectname:short)%(color:reset) - %(contents:subject) - %(authorname) (%(color:green)%(committerdate:relative)%(color:reset))' --sort=committerdate
