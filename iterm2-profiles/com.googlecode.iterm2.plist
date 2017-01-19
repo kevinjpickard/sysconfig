@@ -7,7 +7,7 @@
 	<key>AboutToPasteTabsWithCancel_selection</key>
 	<integer>0</integer>
 	<key>AlternateMouseScroll</key>
-	<false/>
+	<true/>
 	<key>AppleAntiAliasingThreshold</key>
 	<integer>1</integer>
 	<key>AppleScrollAnimationEnabled</key>
@@ -358,10 +358,12 @@
 	<integer>524288</integer>
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
+	<key>NSFontPanelAttributes</key>
+	<string>1, 4</string>
 	<key>NSNavLastRootDirectory</key>
 	<string>~/iterm2-profiles</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
-	<string>{712, 448}</string>
+	<string>{712, 459}</string>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
 	<key>NSRepeatCountBinding</key>
@@ -394,25 +396,17 @@
 	<key>NSTableView Supports v2 KeyBingingTable</key>
 	<true/>
 	<key>NSWindow Frame NSFontPanel</key>
-	<string>55 580 716 308 0 0 1920 1057 </string>
+	<string>105 143 1028 490 0 0 1920 1057 </string>
+	<key>NSWindow Frame SUAutomaticUpdateAlert</key>
+	<string>652 664 616 174 0 0 1920 1058 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>-1330 1189 620 392 -1560 60 1080 1898 </string>
-	<key>NSWindow Frame SessionsPreferences</key>
-	<string>-1463 391 606 456 -1560 60 1080 1898 </string>
+	<string>650 499 620 392 0 0 1920 1057 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>-1397 937 918 512 -1560 60 1080 1898 </string>
+	<string>-1005 5 918 512 -1080 -840 1080 1920 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 1920 1080 0 0 1920 1058 </string>
+	<string>0 7 1914 1051 0 0 1920 1058 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>0 19 1438 859 0 0 1440 878 </string>
-	<key>NSWindow Frame iTerm Window 2</key>
-	<string>-1559 1127 570 427 -1560 60 1080 1920 </string>
-	<key>NSWindow Frame iTerm Window 3</key>
-	<string>-1559 1127 570 427 -1560 60 1080 1920 </string>
-	<key>NSWindow Frame iTerm Window 4</key>
-	<string>-480 911 1074 859 -480 900 1920 1058 </string>
-	<key>NSWindow Frame iTerm Window 5</key>
-	<string>-1560 75 1074 1883 -1560 60 1080 1898 </string>
+	<string>-1077 653 570 427 -1080 -840 1080 1920 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -972,8 +966,6 @@
 				<key>Red Component</key>
 				<real>0.023</real>
 			</dict>
-			<key>Minimum Contrast</key>
-			<real>0.23417721518987342</real>
 			<key>Mouse Reporting</key>
 			<true/>
 			<key>Name</key>
@@ -1031,7 +1023,7 @@
 			<key>Transparency</key>
 			<real>0.0</real>
 			<key>Unlimited Scrollback</key>
-			<true/>
+			<false/>
 			<key>Use Bold Font</key>
 			<true/>
 			<key>Use Bright Bold</key>
@@ -1612,8 +1604,6 @@
 				<key>Red Component</key>
 				<real>0.023</real>
 			</dict>
-			<key>Minimum Contrast</key>
-			<real>0.23486946202531644</real>
 			<key>Mouse Reporting</key>
 			<true/>
 			<key>Name</key>
@@ -1633,7 +1623,7 @@
 			<key>Rows</key>
 			<integer>25</integer>
 			<key>Screen</key>
-			<integer>2</integer>
+			<integer>-2</integer>
 			<key>Scrollback Lines</key>
 			<integer>4096</integer>
 			<key>Selected Text Color</key>
@@ -1692,18 +1682,14 @@
 			<string>/Users/kevin</string>
 		</dict>
 	</array>
-	<key>NoSyncCommandHistoryHasEverBeenUsed</key>
-	<true/>
 	<key>NoSyncDoNotWarnBeforeMultilinePaste</key>
 	<true/>
 	<key>NoSyncDoNotWarnBeforeMultilinePaste_selection</key>
 	<integer>0</integer>
-	<key>NoSyncDoNotWarnBeforePastingOneLineEndingInNewlineAtShellPrompt</key>
+	<key>NoSyncHaveWarnedAboutIncompatibleSoftware</key>
 	<true/>
-	<key>NoSyncDoNotWarnBeforePastingOneLineEndingInNewlineAtShellPrompt_selection</key>
-	<integer>1</integer>
 	<key>NoSyncInstallationId</key>
-	<string>AD9CE1C0-AF07-46AF-98DB-774D0E1A119F</string>
+	<string>91517B05-3322-4264-B683-D35CF20EABC0</string>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -1711,15 +1697,13 @@
 	<key>NoSyncPermissionToShowTip</key>
 	<false/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
-	<real>495669990.40736598</real>
+	<real>497898089.437823</real>
 	<key>OpenArrangementAtStartup</key>
 	<false/>
 	<key>OpenNoWindowsAtStartup</key>
 	<true/>
 	<key>OpenTmuxWindowsIn</key>
 	<integer>0</integer>
-	<key>PerformDictionaryLookupOnQuickLook</key>
-	<false/>
 	<key>PointerActions</key>
 	<dict>
 		<key>Button,1,1,,</key>
@@ -1754,7 +1738,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/kevin/iterm2-profiles</string>
+	<string>/Users/it/iterm2-profiles</string>
 	<key>QuitWhenAllWindowsClosed</key>
 	<false/>
 	<key>SUAutomaticallyUpdate</key>
@@ -1764,26 +1748,22 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/final.xml?shard=25</string>
+	<string>https://iterm2.com/appcasts/final.xml?shard=74</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-01-10T16:32:47Z</date>
+	<date>2017-01-17T17:19:42Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
 	<false/>
-	<key>SplitPaneDimmingAmount</key>
-	<real>0.28087690304487178</real>
 	<key>TabStyle</key>
 	<integer>1</integer>
-	<key>TabViewType</key>
-	<integer>0</integer>
 	<key>UseLionStyleFullscreen</key>
 	<true/>
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>iTerm Version</key>
-	<string>3.0.13</string>
+	<string>3.0.12</string>
 </dict>
 </plist>
