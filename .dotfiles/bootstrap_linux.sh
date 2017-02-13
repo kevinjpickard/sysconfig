@@ -43,6 +43,16 @@ git clone https://github.com/powerline/fonts.git ~/Documents/github/scratch/font
 ~/Documents/github/scratch/fonts/install.sh
 cd ~
 
+## Step 3: Clone github .dotfiles repo
+echo "Pulling down system configuration files..."
+git clone --bare https://github.com/kevinjpickard/.dotfiles $HOME/.dotfiles
+/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME fetch
+/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout osx
+/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull origin osx
+echo ".dotfiles" >> .gitignore
+/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
+alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
 ## Step 7: Install Vundle ##
 echo "Installing Vundle..."
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
