@@ -1,8 +1,8 @@
 # Linux Boostrapper
 ## Update and Upgrade ##
 sudo apt update
-sudo apt upgrade
-sudo apt dist-upgrade
+sudo apt upgrade -y
+sudo apt dist-upgrade -y
 
 ## Repositories
 #	Chrome
