@@ -21,7 +21,7 @@ sudo apt update
 
 ## Apps
 sudo curl https://raw.githubusercontent.com/kevinjpickard/.dotfiles/apt/.dotfiles/apps.conf -o ~/apps.conf 
-cat 'apps.conf' | sudo apt install -y
+apt-get install $(grep -vE "^\s*#" apps.conf | tr "\n" " ") -y
 
 ## Powerline
 #	Scratch directory
