@@ -20,7 +20,8 @@ sudo add-apt-repository ppa:unit193/encryption
 sudo apt update
 
 ## Apps
-echo 'apps.conf' | sudo apt install -y
+sudo curl https://raw.githubusercontent.com/kevinjpickard/.dotfiles/apt/.dotfiles/apps.conf -o ~/apps.conf 
+cat 'apps.conf' | sudo apt install -y
 
 ## Powerline
 #	Scratch directory
