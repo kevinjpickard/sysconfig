@@ -1,0 +1,60 @@
+# Linux Boostrapper
+## Update and Upgrade ##
+sudo apt update
+sudo apt upgrade
+sudo apt dist-upgrade
+
+## Repositories
+#	Chrome
+wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
+sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+#	Spotify
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
+echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
+#	Sublime
+sudo add-apt-repository ppa:webupd8team/sublime-text-3
+#	Veracrypt
+sudo add-apt-repository ppa:unit193/encryption
+
+## Update New Repos
+sudo apt update
+
+## Apps
+echo 'apps.conf' | sudo apt install -y
+
+## Powerline
+#	Scratch directory
+mkdir ~/Documents/github
+mkdir ~/Documents/github/scratch
+sudo apt install python-pip
+pip install powerline-status
+pip install git+git://github.com/powerline/powerline
+mkdir ~/Documents/github/scratch/powerline-shell
+git clone https://github.com/milkbikis/powerline-shell ~/scratch/powerline-shell
+cp ~/Documents/github/scratch/powerline-shell/config.py.dist ~/scratch/powerline-shell/config.py
+cd ~/Documents/github/scratch/powerline-shell
+chmod +r segments/
+chmod +r segments/*
+./install.py
+cd ~
+#	Install powerline fonts
+mkdir ~/scratch/fonts
+git clone https://github.com/powerline/fonts.git ~/Documents/github/scratch/fonts
+~/Documents/github/scratch/fonts/install.sh
+cd ~
+
+## Step 7: Install Vundle ##
+echo "Installing Vundle..."
+git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+#	Initialize and install plugins
+echo "Initializing vim plugins..."
+vim +PluginInstall +qall
+
+## Step 10: Install vagrant plugins
+vagrant plugin install vagrant-saltdeps vagrant-scp vagrant-serverspec vagrant-share vagrant-vmware-fusion vagrant-winrm
+
+## Settings
+
+
+## Aliases
+sudo tee -a "alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'" ~/.bash_profile
