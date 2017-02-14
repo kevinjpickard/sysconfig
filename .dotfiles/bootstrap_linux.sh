@@ -2,7 +2,8 @@
 ## Update and Upgrade ##
 sudo apt update
 sudo apt upgrade -y
-sudo apt dist-upgrade -y
+#sudo apt dist-upgrade -y
+sudo apt autoremove
 
 ## Repositories
 #	Chrome
