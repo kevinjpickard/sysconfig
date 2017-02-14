@@ -1,9 +1,9 @@
 # Linux Boostrapper
 ## Update and Upgrade ##
-sudo apt update
+sudo apt update -y
 sudo apt upgrade -y
 #sudo apt dist-upgrade -y
-sudo apt autoremove
+sudo apt autoremove -y
 
 ## Repositories
 #	Chrome
@@ -22,7 +22,7 @@ sudo apt update
 
 ## Apps
 sudo curl https://raw.githubusercontent.com/kevinjpickard/.dotfiles/apt/.dotfiles/apps.conf -o ~/apps.conf 
-apt-get install $(grep -vE "^\s*#" apps.conf | tr "\n" " ") -y
+sudo apt-get install -y $(grep -vE "^\s*#" apps.conf | tr "\n" " ")
 
 ## Powerline
 #	Scratch directory
