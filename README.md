@@ -1,4 +1,4 @@
 # .dotfiles
 My system config files
 
-`https://raw.githubusercontent.com/kevinjpickard/.dotfiles/apt/.dotfiles/bootstrap_linux.sh > bootstrap.sh && chmod +x setup.sh && ./bootstrap.sh`
+sudo curl https://raw.githubusercontent.com/kevinjpickard/.dotfiles/apt/.dotfiles/bootstrap_linux.sh -o ~/bootstrap.sh && chmod +x ~/bootstrap.sh && sudo bash ~/bootstrap.sh
