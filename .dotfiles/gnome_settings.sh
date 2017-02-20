@@ -19,7 +19,7 @@ if [ $DESKTOP_SESSION == 'gnome' ]; then
     # Multi-Monitors
     gnomeshell-extension-manage --install --extension-id 921
     # Workspaces to dock
-    gnomeshell-extension-manage --install --extension-id 427
+    #gnomeshell-extension-manage --install --extension-id 427
     # Docker Integration
     gnomeshell-extension-manage --install --extension-id 1055
     # Keys indicator
