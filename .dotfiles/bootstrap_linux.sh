@@ -28,7 +28,6 @@ sudo apt-get install -y $(grep -vE "^\s*#" apps.conf | tr "\n" " ")
 #	Scratch directory
 mkdir ~/Documents/github
 mkdir ~/Documents/github/scratch
-sudo apt-get install python-pip
 pip install --upgrade pip
 pip install --user git+git://github.com/powerline/powerline
 #	Install powerline fonts
