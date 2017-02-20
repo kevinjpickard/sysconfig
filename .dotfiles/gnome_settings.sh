@@ -29,12 +29,6 @@ if [ $DESKTOP_SESSION == 'gnome' ]; then
     # Switcher
     gnomeshell-extension-manage --install --extension-id 973
 
-	## Detect System sensors
-	sudo sensors-detect
-	
-  ## Restarting GNOME
-  gnome-shell --replace &
-
 	## settings
 	#	Dark theme
 	touch ~/.config/gtk-3.0/settings.ini
