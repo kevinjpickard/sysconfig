@@ -77,6 +77,7 @@ chmod +x ~/.dotfiles/gnome_settings.sh
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 ## Changing shells
+upgrade_oh_my_zsh
 chsh -s `which zsh`
 
 ## Changing origin
