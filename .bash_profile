@@ -28,3 +28,4 @@ ssh-add ~/.ssh/google_compute_engine &> /dev/null
 ssh-add ~/.ssh/AWSQaTest.pem ~/.ssh/AmazonNewKey.pem ~/.ssh/KJP-AWS-QA.pem &> /dev/null
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+alias dots='/usr/bin/git --git-dir=/home/kevin/.dotfiles/ --work-tree=/home/kevin'
