@@ -80,3 +80,6 @@ chmod +x ~/.dotfiles/gnome_settings.sh
 
 ## Aliases
 echo "alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'" | sudo tee -a ~/.bash_profile
+
+# Done
+echo "Configuration finished! Please reboot, then run 'sudo sensors-detect'"
