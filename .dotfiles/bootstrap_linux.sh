@@ -13,9 +13,9 @@ sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable
 sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys BBEBDCB318AD50EC6865090613B00F1FD2C19886
 echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sources.list.d/spotify.list
 #	Sublime
-sudo add-apt-repository ppa:webupd8team/sublime-text-3 -y
+sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
 #	Veracrypt
-sudo add-apt-repository ppa:unit193/encryption -y
+sudo add-apt-repository -y ppa:unit193/encryption
 
 ## Update New Repos
 sudo apt update
