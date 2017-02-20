@@ -75,6 +75,7 @@ vagrant plugin install vagrant-saltdeps vagrant-scp vagrant-serverspec vagrant-s
 
 ## Settings
 #   GNOME DE Extensions + Configs, if running
+chmod +x ~/.dotfiles/gnome_settings.sh
 ~/.dotfiles/gnome_settings.sh
 
 ## Aliases
