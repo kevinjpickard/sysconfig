@@ -1,34 +1,42 @@
 #!/bin/bash
 if [ $DESKTOP_SESSION == 'gnome' ]; then
 	echo "GNOME DE detected, applying GNOME settings..."
+  ## Installing GNOME-shell-manager
+  sudo wget -O /usr/local/bin/gnomeshell-extension-manage "https://raw.githubusercontent.com/NicolasBernaerts/ubuntu-scripts/master/ubuntugnome/gnomeshell-extension-manage"
+  sudo chmod +x /usr/local/bin/gnomeshell-extension-manage
   
   ## Installing GNOME extensions
     # Dash to Dock
-    shell-extension-install `gnome-shell --version` 307
+    gnomeshell-extension-manage --install --extension-id 307
     # Sensory Perception
-    shell-extension-install `gnome-shell --version` 1145
+    gnomeshell-extension-manage --install --extension-id 1145
     # Pixel Saver
-    shell-extension-install `gnome-shell --version` 723
+    gnomeshell-extension-manage --install --extension-id 723
     # Transparent GNOME panel
-    shell-extension-install `gnome-shell --version` 1099
+    gnomeshell-extension-manage --install --extension-id 1099
     # CoverFlow alt-tab
-    shell-extension-install `gnome-shell --version` 97
+    gnomeshell-extension-manage --install --extension-id 97
     # Multi-Monitors
-    shell-extension-install `gnome-shell --version` 921
+    gnomeshell-extension-manage --install --extension-id 921
     # Workspaces to dock
-    shell-extension-install `gnome-shell --version` 427
+    gnomeshell-extension-manage --install --extension-id 427
     # Docker Integration
-    shell-extension-install `gnome-shell --version` 1055
+    gnomeshell-extension-manage --install --extension-id 1055
     # Keys indicator
-    shell-extension-install `gnome-shell --version` 1105
+    gnomeshell-extension-manage --install --extension-id 1105
     # Random Wallpaper
-    shell-extension-install `gnome-shell --version` 1040
+    gnomeshell-extension-manage --install --extension-id 1040
     # Switcher
-    shell-extension-install `gnome-shell --version` 973
+    gnomeshell-extension-manage --install --extension-id 973
 
   ## Restarting GNOME
   gnome-shell --replace &
 
+	## settings
+	#	Dark theme
+	touch ~/.config/gtk-3.0/settings.ini
+	echo "[Settings]" >> ~/.config/gtk-3.0/settings.ini
+	echo "gtk-application-prefer-dark-theme=1" >> ~/.config/gtk-3.0/settings.ini
 else 
 	echo "GNOME DE not detected."
 fi
