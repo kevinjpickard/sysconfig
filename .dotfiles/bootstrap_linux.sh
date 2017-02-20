@@ -30,16 +30,16 @@ mkdir ~/Documents/github
 mkdir ~/Documents/github/scratch
 sudo apt-get install python-pip
 pip install --upgrade pip
-sudo -H pip install powerline-status
-sudo -H pip install git+git://github.com/powerline/powerline
-mkdir ~/Documents/github/scratch/powerline-shell
-sudo git clone https://github.com/milkbikis/powerline-shell ~/scratch/powerline-shell
-cp ~/Documents/github/scratch/powerline-shell/config.py.dist ~/scratch/powerline-shell/config.py
-cd ~/Documents/github/scratch/powerline-shell
-chmod +r segments/
-chmod +r segments/*
-sudo -H ./install.py
-cd ~
+#sudo -H pip install powerline-status
+pip install git+git://github.com/powerline/powerline
+#mkdir ~/Documents/github/scratch/powerline-shell
+#sudo git clone https://github.com/milkbikis/powerline-shell ~/scratch/powerline-shell
+#cp ~/Documents/github/scratch/powerline-shell/config.py.dist ~/scratch/powerline-shell/config.py
+#cd ~/Documents/github/scratch/powerline-shell
+#chmod +r segments/
+#chmod +r segments/*
+#sudo -H ./install.py
+#cd ~
 #	Install powerline fonts
 mkdir ~/scratch/fonts
 sudo git clone https://github.com/powerline/fonts.git /home/kevin/Documents/github/scratch/fonts
@@ -52,7 +52,7 @@ sudo dpkg -i keybase_amd64.deb
 sudo apt-get install -f
 #run_keybase
 
-## Step 3: Clone github .dotfiles repo
+## Clone github .dotfiles repo
 echo "Pulling down system configuration files..."
 rm ~/.bashrc
 git clone --bare https://github.com/kevinjpickard/.dotfiles.git $HOME/.dotfiles
@@ -63,14 +63,18 @@ echo ".dotfiles" >> .gitignore
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
-## Step 7: Install Vundle ##
+## Monokai color scheme for Gnome Terminal
+git clone git://github.com/pricco/gnome-terminal-colors-monokai.git $HOME/Documents/github/scratch
+$HOME/Documents/github/scratch/gnome-terminal-colors-monokai/install.sh
+
+## Install Vundle ##
 echo "Installing Vundle..."
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 #	Initialize and install plugins
 echo "Initializing vim plugins..."
 vim +PluginInstall +qall
 
-## Step 10: Install vagrant plugins
+## Install vagrant plugins
 vagrant plugin install vagrant-saltdeps vagrant-scp vagrant-serverspec vagrant-share vagrant-vmware-fusion vagrant-winrm
 
 ## Settings
@@ -80,6 +84,9 @@ chmod +x ~/.dotfiles/gnome_settings.sh
 
 ## Aliases
 echo "alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'" | sudo tee -a ~/.bash_profile
+
+## Changing shells
+chsh -s `which zsh`
 
 # Done
 echo "Configuration finished! Please reboot, then run 'sudo sensors-detect'"
