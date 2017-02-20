@@ -37,6 +37,9 @@ if [ $DESKTOP_SESSION == 'gnome' ]; then
 	touch ~/.config/gtk-3.0/settings.ini
 	echo "[Settings]" >> ~/.config/gtk-3.0/settings.ini
 	echo "gtk-application-prefer-dark-theme=1" >> ~/.config/gtk-3.0/settings.ini
+	#	Minimize, Maximize
+	gsettings set org.gnome.desktop.wm.preferences button-layout ":minimize,maximize,close"
+	
 else 
 	echo "GNOME DE not detected."
 fi
