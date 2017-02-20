@@ -1,9 +1,9 @@
 # Linux Boostrapper
 ## Update and Upgrade ##
-sudo apt update -y
-sudo apt upgrade -y
+sudo apt-get update -y
+sudo apt-get upgrade -y
 #sudo apt dist-upgrade -y
-sudo apt autoremove -y
+sudo apt-get autoremove -y
 
 ## Repositories
 #	Chrome
@@ -18,7 +18,7 @@ sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
 sudo add-apt-repository -y ppa:unit193/encryption
 
 ## Update New Repos
-sudo apt update
+sudo apt-get update
 
 ## Apps
 sudo curl https://raw.githubusercontent.com/kevinjpickard/.dotfiles/apt/.dotfiles/apps.conf -o ~/apps.conf 
@@ -28,7 +28,7 @@ sudo apt-get install -y $(grep -vE "^\s*#" apps.conf | tr "\n" " ")
 #	Scratch directory
 mkdir ~/Documents/github
 mkdir ~/Documents/github/scratch
-sudo apt install python-pip
+sudo apt-get install python-pip
 pip install --upgrade pip
 pip install powerline-status
 pip install git+git://github.com/powerline/powerline
