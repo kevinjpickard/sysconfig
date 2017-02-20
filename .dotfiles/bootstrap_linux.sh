@@ -45,6 +45,12 @@ git clone https://github.com/powerline/fonts.git ~/Documents/github/scratch/font
 ~/Documents/github/scratch/fonts/install.sh
 cd ~
 
+## Install Keybase
+curl -O https://prerelease.keybase.io/keybase_amd64.deb
+sudo dpkg -i keybase_amd64.deb
+sudo apt-get install -f
+run_keybase
+
 ## Step 3: Clone github .dotfiles repo
 echo "Pulling down system configuration files..."
 git clone --bare https://github.com/kevinjpickard/.dotfiles $HOME/.dotfiles
