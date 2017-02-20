@@ -24,6 +24,9 @@ sudo apt-get update
 sudo curl https://raw.githubusercontent.com/kevinjpickard/.dotfiles/apt/.dotfiles/apps.conf -o ~/apps.conf 
 sudo apt-get install -y $(grep -vE "^\s*#" apps.conf | tr "\n" " ")
 
+## Install oh-my-zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
 ## Powerline
 #	Scratch directory
 mkdir ~/Documents/github
