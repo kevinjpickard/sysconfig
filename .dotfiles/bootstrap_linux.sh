@@ -30,15 +30,15 @@ mkdir ~/Documents/github
 mkdir ~/Documents/github/scratch
 sudo apt-get install python-pip
 pip install --upgrade pip
-sudo -Hiu kevin pip install powerline-status
-pip install git+git://github.com/powerline/powerline
+sudo -H pip install powerline-status
+sudo -H pip install git+git://github.com/powerline/powerline
 mkdir ~/Documents/github/scratch/powerline-shell
-git clone https://github.com/milkbikis/powerline-shell ~/scratch/powerline-shell
+sudo git clone https://github.com/milkbikis/powerline-shell ~/scratch/powerline-shell
 cp ~/Documents/github/scratch/powerline-shell/config.py.dist ~/scratch/powerline-shell/config.py
 cd ~/Documents/github/scratch/powerline-shell
 chmod +r segments/
 chmod +r segments/*
-sudo -Hiu kevin ./install.py
+sudo -H ./install.py
 cd ~
 #	Install powerline fonts
 mkdir ~/scratch/fonts
