@@ -30,7 +30,7 @@ mkdir ~/Documents/github
 mkdir ~/Documents/github/scratch
 sudo apt-get install python-pip
 pip install --upgrade pip
-pip install powerline-status
+sudo -Hiu kevin pip install powerline-status
 pip install git+git://github.com/powerline/powerline
 mkdir ~/Documents/github/scratch/powerline-shell
 git clone https://github.com/milkbikis/powerline-shell ~/scratch/powerline-shell
@@ -38,12 +38,12 @@ cp ~/Documents/github/scratch/powerline-shell/config.py.dist ~/scratch/powerline
 cd ~/Documents/github/scratch/powerline-shell
 chmod +r segments/
 chmod +r segments/*
-./install.py
+sudo -Hiu kevin ./install.py
 cd ~
 #	Install powerline fonts
 mkdir ~/scratch/fonts
 git clone https://github.com/powerline/fonts.git ~/Documents/github/scratch/fonts
-~/Documents/github/scratch/fonts/install.sh
+sudo ~/Documents/github/scratch/fonts/install.sh
 cd ~
 
 ## Install Keybase
