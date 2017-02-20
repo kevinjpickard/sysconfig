@@ -73,7 +73,13 @@ vim +PluginInstall +qall
 vagrant plugin install vagrant-saltdeps vagrant-scp vagrant-serverspec vagrant-share vagrant-vmware-fusion vagrant-winrm
 
 ## Settings
-
+#   GNOME DE Extensions + Configs, if running
+if [ $DESKTOP_SESSION == 'gnome' ]; then
+	echo "GNOME DE detected, applying GNOME settings..."
+  ~/.dotfiles/gnome_settings.sh
+else 
+	echo "GNOME DE not detected."
+fi
 
 ## Aliases
 echo "alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'" | sudo tee -a ~/.bash_profile
