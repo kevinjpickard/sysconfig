@@ -29,6 +29,7 @@ sudo apt-get install -y $(grep -vE "^\s*#" apps.conf | tr "\n" " ")
 mkdir ~/Documents/github
 mkdir ~/Documents/github/scratch
 sudo apt install python-pip
+pip install --upgrade pip
 pip install powerline-status
 pip install git+git://github.com/powerline/powerline
 mkdir ~/Documents/github/scratch/powerline-shell
@@ -49,7 +50,7 @@ cd ~
 curl -O https://prerelease.keybase.io/keybase_amd64.deb
 sudo dpkg -i keybase_amd64.deb
 sudo apt-get install -f
-run_keybase
+#run_keybase
 
 ## Step 3: Clone github .dotfiles repo
 echo "Pulling down system configuration files..."
