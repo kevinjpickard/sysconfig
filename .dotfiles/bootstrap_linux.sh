@@ -42,8 +42,8 @@ sudo -H ./install.py
 cd ~
 #	Install powerline fonts
 mkdir ~/scratch/fonts
-git clone https://github.com/powerline/fonts.git ~/Documents/github/scratch/fonts
-sudo ~/Documents/github/scratch/fonts/install.sh
+sudo git clone https://github.com/powerline/fonts.git /home/kevin/Documents/github/scratch/fonts
+sudo /home/kevin/Documents/github/scratch/fonts/install.sh
 cd ~
 
 ## Install Keybase
