@@ -83,10 +83,13 @@ chmod +x ~/.dotfiles/gnome_settings.sh
 ~/.dotfiles/gnome_settings.sh
 
 ## Aliases
-echo "alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'" | sudo tee -a ~/.bash_profile
+alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 ## Changing shells
 chsh -s `which zsh`
+
+## Changing origin
+dots remote set-url origin git@github.com:kevinjpickard/.dotfiles.git
 
 # Done
 echo "Configuration finished! Please reboot, then run 'sudo sensors-detect'"
