@@ -33,16 +33,7 @@ mkdir ~/Documents/github
 mkdir ~/Documents/github/scratch
 sudo apt-get install python-pip
 pip install --upgrade pip
-#sudo -H pip install powerline-status
 pip install --user git+git://github.com/powerline/powerline
-#mkdir ~/Documents/github/scratch/powerline-shell
-#sudo git clone https://github.com/milkbikis/powerline-shell ~/scratch/powerline-shell
-#cp ~/Documents/github/scratch/powerline-shell/config.py.dist ~/scratch/powerline-shell/config.py
-#cd ~/Documents/github/scratch/powerline-shell
-#chmod +r segments/
-#chmod +r segments/*
-#sudo -H ./install.py
-#cd ~
 #	Install powerline fonts
 mkdir ~/scratch/fonts
 sudo git clone https://github.com/powerline/fonts.git /home/kevin/Documents/github/scratch/fonts
@@ -57,7 +48,8 @@ sudo apt-get install -f
 
 ## Clone github .dotfiles repo
 echo "Pulling down system configuration files..."
-rm ~/.bashrc
+rm ~/.bashrc ~/.bash_profile ~/.zshrc README.md ~/.vimrc
+rm -rf ~/.dotfiles
 git clone --bare https://github.com/kevinjpickard/.dotfiles.git $HOME/.dotfiles
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME fetch
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout apt
