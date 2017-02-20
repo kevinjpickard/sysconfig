@@ -57,8 +57,8 @@ echo "Pulling down system configuration files..."
 rm ~/.bashrc
 git clone --bare https://github.com/kevinjpickard/.dotfiles.git $HOME/.dotfiles
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME fetch
-/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout osx
-/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull origin osx
+/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout apt
+/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull origin apt
 echo ".dotfiles" >> .gitignore
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
