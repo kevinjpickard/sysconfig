@@ -31,7 +31,7 @@ mkdir ~/Documents/github/scratch
 sudo apt-get install python-pip
 pip install --upgrade pip
 #sudo -H pip install powerline-status
-pip install git+git://github.com/powerline/powerline
+pip install --user git+git://github.com/powerline/powerline
 #mkdir ~/Documents/github/scratch/powerline-shell
 #sudo git clone https://github.com/milkbikis/powerline-shell ~/scratch/powerline-shell
 #cp ~/Documents/github/scratch/powerline-shell/config.py.dist ~/scratch/powerline-shell/config.py
