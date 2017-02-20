@@ -54,6 +54,7 @@ sudo apt-get install -f
 
 ## Step 3: Clone github .dotfiles repo
 echo "Pulling down system configuration files..."
+rm ~/.bashrc
 git clone --bare https://github.com/kevinjpickard/.dotfiles.git $HOME/.dotfiles
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME fetch
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout osx
