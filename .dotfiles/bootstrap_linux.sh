@@ -16,6 +16,8 @@ echo deb http://repository.spotify.com stable non-free | sudo tee /etc/apt/sourc
 sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
 #	Veracrypt
 sudo add-apt-repository -y ppa:unit193/encryption
+# Kodi
+sudo add-apt-repository -y ppa:team-xbmc/ppa
 
 ## Update New Repos
 sudo apt-get update
