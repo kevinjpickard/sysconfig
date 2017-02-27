@@ -42,20 +42,26 @@ brew bundle --file=~/.dotfiles/Brewfile
 #		Install python
 brew install python
 #		Install Powerline
-pip install powerline-status
-pip install git+git://github.com/powerline/powerline
-mkdir ~/scratch/powerline-shell
-git clone https://github.com/milkbikis/powerline-shell ~/scratch/powerline-shell
-cp ~/scratch/powerline-shell/config.py.dist ~/scratch/powerline-shell/config.py
-cd ~/scratch/powerline-shell
-chmod +r segments/
-chmod +r segments/*
-./install.py
-cd ~
+pip install --user powerline-status
+#pip install git+git://github.com/powerline/powerline
+#mkdir ~/scratch/powerline-shell
+#git clone https://github.com/milkbikis/powerline-shell ~/scratch/powerline-shell
+#cp ~/scratch/powerline-shell/config.py.dist ~/scratch/powerline-shell/config.py
+#cd ~/scratch/powerline-shell
+#chmod +r segments/
+#chmod +r segments/*
+#./install.py
+#cd ~
 #		Install powerline fonts
 mkdir ~/scratch/fonts
 git clone https://github.com/powerline/fonts.git ~/scratch/fonts
 ~/scratch/fonts/install.sh
+
+## Install oh-my-zsh
+git clone git://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
+
+## ZSH Syntax Highlighting
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 ## Step 7: Install Vundle ##
 echo "Installing Vundle..."
@@ -71,12 +77,10 @@ mkdir scratch
 echo "Downloading iTerm2 color schemes..."
 git clone https://github.com/mbadolato/iTerm2-Color-Schemes.git ~/scratch/
 
-## Step 9: Set shell to fish ##
-echo "Setting default user shell to Fish..."
-#		First we must add fish to /etc/shells
-echo "/usr/local/bin/fish" | sudo tee -a /etc/shells
+## Set shell to fish ##
+echo "Setting default user shell to ZSH..."
 #		Now set shell to fish
-chsh -s '/usr/local/bin/fish'
+chsh -s '/usr/local/bin/zsh'
 
 ## Step 10: Install vagrant plugins
 vagrant plugin install vagrant-saltdeps vagrant-scp vagrant-serverspec vagrant-share vagrant-vmware-fusion vagrant-winrm
@@ -92,4 +96,3 @@ defaults write /Library/Preferences/.GlobalPreferences AppleInterfaceTheme Dark
 
 ## Finished ##
 echo "Configuration complete!"
-
