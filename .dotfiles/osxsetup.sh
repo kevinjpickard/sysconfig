@@ -40,16 +40,7 @@ brew bundle --file=~/.dotfiles/Brewfile
 
 ## Install Powerline ##
 #	Install Powerline
-pip install --user powerline-status
-#pip install git+git://github.com/powerline/powerline
-#mkdir ~/scratch/powerline-shell
-#git clone https://github.com/milkbikis/powerline-shell ~/scratch/powerline-shell
-#cp ~/scratch/powerline-shell/config.py.dist ~/scratch/powerline-shell/config.py
-#cd ~/scratch/powerline-shell
-#chmod +r segments/
-#chmod +r segments/*
-#./install.py
-#cd ~
+pip install --install-option="--prefix=/usr/local/lib/python2.7/site-packages" powerline-status
 #	Install powerline fonts
 mkdir ~/scratch/fonts
 git clone https://github.com/powerline/fonts.git ~/scratch/fonts
@@ -77,6 +68,8 @@ git clone https://github.com/mbadolato/iTerm2-Color-Schemes.git ~/scratch/
 
 ## Set shell to ZSH ##
 echo "Setting default user shell to ZSH..."
+#		Need to add ZSH to /etc/shells
+echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
 #		Now set shell to fish
 chsh -s '/usr/local/bin/zsh'
 
