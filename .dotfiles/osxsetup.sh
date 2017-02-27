@@ -24,7 +24,7 @@ brew update
 
 ## Clone github .dotfiles repo
 echo "Pulling down system configuration files..."
-git clone --bare git@github.com:kevinjpickard/.dotfiles.git $HOME/.dotfiles
+git clone --bare https://github.com/kevinjpickard/.dotfiles.git $HOME/.dotfiles
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME fetch
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout osx
 /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull origin osx
