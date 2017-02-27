@@ -400,6 +400,7 @@
 	<key>NSTableView Supports v2 KeyBingingTable</key>
 	<true/>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>105 143 1028 490 0 0 1920 1057 </string>
 	<key>NSWindow Frame SUAutomaticUpdateAlert</key>
@@ -414,12 +415,21 @@
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>-961 -33 796 473 -1080 -450 1080 1898 </string>
 >>>>>>> Stashed changes
+=======
+	<key>NSWindow Frame SUUpdateAlert</key>
+	<string>786 -536 620 392 376 -900 1440 878 </string>
+	<key>NSWindow Frame SharedPreferences</key>
+	<string>-961 -33 796 473 -1080 -450 1080 1898 </string>
+>>>>>>> Stashed changes
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>0 7 1914 1051 0 0 1920 1058 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	<string>-1077 653 570 427 -1080 -840 1080 1920 </string>
 =======
+=======
+>>>>>>> Stashed changes
 	<string>-1080 -441 585 427 -1080 -450 1080 1898 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>1 11 1440 859 0 0 1920 1080 </string>
@@ -429,6 +439,9 @@
 	<string>376 -881 1453 859 376 -900 1440 878 </string>
 	<key>NSWindow Frame iTerm Window 5</key>
 	<string>781 -769 585 427 376 -900 1440 900 </string>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 	<key>New Bookmarks</key>
 	<array>
@@ -1708,6 +1721,7 @@
 		</dict>
 	</array>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	<key>NoSyncDoNotWarnBeforeMultilinePaste</key>
 	<true/>
 	<key>NoSyncDoNotWarnBeforeMultilinePaste_selection</key>
@@ -1717,10 +1731,15 @@
 	<key>NoSyncInstallationId</key>
 	<string>91517B05-3322-4264-B683-D35CF20EABC0</string>
 =======
+=======
+>>>>>>> Stashed changes
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
 	<string>7C74B33D-66A7-4FB1-8713-9E25A8D3AA24</string>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
@@ -1730,7 +1749,11 @@
 	<false/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	<real>497898089.437823</real>
+=======
+	<real>506380311.89681298</real>
+>>>>>>> Stashed changes
 =======
 	<real>506380311.89681298</real>
 >>>>>>> Stashed changes
@@ -1783,17 +1806,23 @@
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	<string>https://iterm2.com/appcasts/final.xml?shard=74</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
 	<date>2017-01-17T17:19:42Z</date>
 =======
+=======
+>>>>>>> Stashed changes
 	<string>https://iterm2.com/appcasts/final.xml?shard=5</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
 	<date>2040-09-07T10:08:19Z</date>
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
 	<key>SUSendProfileInfo</key>
 	<false/>
@@ -1807,7 +1836,11 @@
 	<string>/-+\~_.</string>
 	<key>iTerm Version</key>
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 	<string>3.0.12</string>
+=======
+	<string>3.0.14</string>
+>>>>>>> Stashed changes
 =======
 	<string>3.0.14</string>
 >>>>>>> Stashed changes
