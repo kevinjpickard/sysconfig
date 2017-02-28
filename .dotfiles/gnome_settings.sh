@@ -5,29 +5,8 @@ if [ $DESKTOP_SESSION == 'gnome' ]; then
   sudo wget -O /usr/local/bin/gnomeshell-extension-manage "https://raw.githubusercontent.com/NicolasBernaerts/ubuntu-scripts/master/ubuntugnome/gnomeshell-extension-manage"
   sudo chmod +x /usr/local/bin/gnomeshell-extension-manage
   
-  ## Installing GNOME extensions
-    # Dash to Dock
-    gnomeshell-extension-manage --install --extension-id 307
-    # Sensory Perception
-    gnomeshell-extension-manage --install --extension-id 1145
-    # Pixel Saver
-    gnomeshell-extension-manage --install --extension-id 723
-    # Transparent GNOME panel
-    gnomeshell-extension-manage --install --extension-id 1099
-    # CoverFlow alt-tab
-    gnomeshell-extension-manage --install --extension-id 97
-    # Multi-Monitors
-    gnomeshell-extension-manage --install --extension-id 921
-    # Workspaces to dock
-    #gnomeshell-extension-manage --install --extension-id 427
-    # Docker Integration
-    gnomeshell-extension-manage --install --extension-id 1055
-    # Keys indicator
-    gnomeshell-extension-manage --install --extension-id 1105
-    # Random Wallpaper
-    gnomeshell-extension-manage --install --extension-id 1040
-    # Switcher
-    gnomeshell-extension-manage --install --extension-id 973
+	## extensions
+	$HOME/.dotfiles/gnome_extensions.sh
 
 	## settings
 	#	Dark theme
