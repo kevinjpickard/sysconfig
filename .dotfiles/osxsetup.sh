@@ -40,7 +40,7 @@ brew bundle --file=~/.dotfiles/Brewfile
 
 ## Install Powerline ##
 #	Install Powerline
-pip install --install-option="--prefix=/usr/local/lib/python2.7/site-packages" powerline-status
+pip install powerline-status
 #	Install powerline fonts
 mkdir ~/scratch/fonts
 git clone https://github.com/powerline/fonts.git ~/scratch/fonts
