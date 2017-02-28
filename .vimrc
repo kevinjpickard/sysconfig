@@ -49,7 +49,7 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 
-source ~/.local/lib/python2.7/site-packages/powerline/bindings/vim/plugin/powerline.vim 
+source /usr/local/lib/python2.7/*-packages/powerline/bindings/vim/plugin/powerline.vim 
 set laststatus=2
 set tabstop=2
 set softtabstop=0 noexpandtab
