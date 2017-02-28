@@ -90,5 +90,6 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ll='ls -lha'
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias tre='tree -CDFfpaugh'
 
 . /usr/local/lib/python2.7/*-packages/powerline/bindings/zsh/powerline.zsh
