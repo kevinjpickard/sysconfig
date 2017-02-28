@@ -61,10 +61,10 @@ vim +PluginInstall +qall
 
 ## Install Color Schemes ##
 #	Create scratch directory
-mkdir scratch
+#mkdir scratch
 #	Clone git repo
-echo "Downloading iTerm2 color schemes..."
-git clone https://github.com/mbadolato/iTerm2-Color-Schemes.git ~/scratch/
+#echo "Downloading iTerm2 color schemes..."
+#git clone https://github.com/mbadolato/iTerm2-Color-Schemes.git ~/scratch/
 
 ## Set shell to ZSH ##
 echo "Setting default user shell to ZSH..."
