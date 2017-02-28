@@ -91,4 +91,4 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 alias ll='ls -lha'
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
-. /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh
+. /usr/local/lib/python2.7/*-packages/powerline/bindings/zsh/powerline.zsh

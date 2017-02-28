@@ -31,12 +31,17 @@ sudo apt-get install -y $(grep -vE "^\s*#" apps.conf | tr "\n" " ")
 mkdir ~/Documents/github
 mkdir ~/Documents/github/scratch
 pip install --upgrade pip
-pip install --user git+git://github.com/powerline/powerline
+sudo -H pip install powerline-status
 #	Install powerline fonts
 mkdir ~/scratch/fonts
 sudo git clone https://github.com/powerline/fonts.git /home/kevin/Documents/github/scratch/fonts
 sudo /home/kevin/Documents/github/scratch/fonts/install.sh
-cd ~
+
+## Install oh-my-zsh
+git clone git://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
+
+## ZSH Syntax Highlighting
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 ## Install Keybase
 curl -O https://prerelease.keybase.io/keybase_amd64.deb
@@ -79,7 +84,6 @@ chmod +x ~/.dotfiles/gnome_settings.sh
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 ## Changing shells
-upgrade_oh_my_zsh
 chsh -s `which zsh`
 
 ## Changing origin
