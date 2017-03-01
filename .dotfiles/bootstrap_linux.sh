@@ -18,6 +18,10 @@ sudo add-apt-repository -y ppa:webupd8team/sublime-text-3
 sudo add-apt-repository -y ppa:unit193/encryption
 # Kodi
 sudo add-apt-repository -y ppa:team-xbmc/ppa
+# Docker
+curl -fsSL https://apt.dockerproject.org/gpg | sudo apt-key add -
+apt-key fingerprint 58118E89F3A912897C070ADBF76221572C52609D
+sudo add-apt-repository -y "deb https://apt.dockerproject.org/repo/ ubuntu-$(lsb_release -cs) main"
 
 ## Update New Repos
 sudo apt-get update
@@ -79,15 +83,17 @@ vagrant plugin install vagrant-saltdeps vagrant-scp vagrant-serverspec vagrant-s
 #   GNOME DE Extensions + Configs, if running
 chmod +x ~/.dotfiles/gnome_settings.sh
 ~/.dotfiles/gnome_settings.sh
-
-## Aliases
-alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+#		Start docker at boot
+sudo systemctl enable docker
+#		Manage docker sans sudo
+sudo groupadd docker
+sudo usermod -aG docker $USER
 
 ## Changing shells
 chsh -s `which zsh`
 
 ## Changing origin
-dots remote set-url origin git@github.com:kevinjpickard/.dotfiles.git
+/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME remote set-url origin git@github.com:kevinjpickard/.dotfiles.git
 
 # Done
 echo "Configuration finished! Please reboot, then run 'sudo sensors-detect'"
