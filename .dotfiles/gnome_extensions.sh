@@ -5,7 +5,7 @@ wget "https://extensions.gnome.org/download-extension/dash-to-dock@micxgx.gmail.
 mv "dash-to-dock@micxgx.gmail.com.shell-extension.zip?version_tag=6553" \
  "dash-to-dock@micxgx.gmail.com.shell-extension.zip?version_tag=6553.zip"
 mkdir -p "$HOME/.local/share/gnome-shell/extensions/dash-to-dock@micxgx.gmail.com"
-unzip -o "dash-to-dock@micxgx.gmail.com" -d "$HOME/.local/share/gnome-shell/extensions/dash-to-dock@micxgx.gmail.com"
+unzip -o "dash-to-dock@micxgx.gmail.com.shell-extension.zip?version_tag=6553.zip" -d "$HOME/.local/share/gnome-shell/extensions/dash-to-dock@micxgx.gmail.com"
 
 ##	Sensory Perception
 wget "https://extensions.gnome.org/download-extension/sensory-perception@HarlemSquirrel.github.io.shell-extension.zip?version_tag=6503" 
