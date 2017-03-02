@@ -60,6 +60,14 @@ source $ZSH/oh-my-zsh.sh
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
+# Go env settings
+export GOPATH="$HOME/go"
+export GOBIN="$GOPATH/bin"
+export GOEXE="$GOPATH/exe"
+
+# Docker env
+eval $(docker-machine env)
+
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
