@@ -65,6 +65,9 @@ export GOPATH="$HOME/go"
 export GOBIN="$GOPATH/bin"
 export GOEXE="$GOPATH/exe"
 
+# env variables
+source ~/.myenvvars
+
 # Docker env
 eval $(docker-machine env)
 
@@ -101,3 +104,6 @@ alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias tre='tree -CDFfpaugh'
 
 . /usr/local/lib/python2.7/*-packages/powerline/bindings/zsh/powerline.zsh
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
