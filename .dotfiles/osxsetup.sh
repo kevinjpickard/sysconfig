@@ -76,6 +76,9 @@ chsh -s '/usr/local/bin/zsh'
 ## Install vagrant plugins
 vagrant plugin install vagrant-saltdeps vagrant-scp vagrant-serverspec vagrant-share vagrant-vmware-fusion vagrant-winrm
 
+# Install NVM
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
+
 ## Set various OSX Settings. ##
 echo "Tweaking some shit so its juuuuuuuuuust the way I like it..."
 chmod +x ~/.dotfiles/osx_settings.sh
