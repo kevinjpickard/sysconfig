@@ -79,6 +79,9 @@ vim +PluginInstall +qall
 ## Install vagrant plugins
 vagrant plugin install vagrant-saltdeps vagrant-scp vagrant-serverspec vagrant-share vagrant-vmware-fusion vagrant-winrm
 
+# Install NVM
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
+
 ## Settings
 #   GNOME DE Extensions + Configs, if running
 chmod +x ~/.dotfiles/gnome_settings.sh
