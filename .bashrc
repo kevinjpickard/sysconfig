@@ -8,3 +8,6 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export SSH_AUTH_SOCK=/tmp/ssh-rFLX4BViP6/agent.12982
 export JUMPCLOUD_WORKSPACE=/Users/kevin/Documents/github/jumpcloud/
 source ~/.myenvvars
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

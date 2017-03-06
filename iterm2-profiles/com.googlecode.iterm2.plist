@@ -397,22 +397,10 @@
 	</data>
 	<key>NSTableView Supports v2 KeyBingingTable</key>
 	<true/>
-	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>786 -536 620 392 376 -900 1440 878 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>646 -752 796 473 376 -900 1440 878 </string>
+	<string>748 -602 796 473 480 -900 1440 878 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 1103 1883 0 0 1080 1898 </string>
-	<key>NSWindow Frame iTerm Window 1</key>
-	<string>0 0 1915 1051 0 0 1080 1898 </string>
-	<key>NSWindow Frame iTerm Window 2</key>
-	<string>2 7 1075 1051 0 0 1080 1898 </string>
-	<key>NSWindow Frame iTerm Window 3</key>
-	<string>345 473 585 427 0 0 1080 1898 </string>
-	<key>NSWindow Frame iTerm Window 4</key>
-	<string>2 7 1075 1051 0 0 1080 1898 </string>
-	<key>NSWindow Frame iTerm Window 5</key>
-	<string>0 15 1187 1883 0 0 1080 1898 </string>
+	<string>0 19 1438 859 0 0 1440 878 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -655,7 +643,7 @@
 			<key>Disable Window Resizing</key>
 			<true/>
 			<key>Flashing Bell</key>
-			<false/>
+			<true/>
 			<key>Foreground Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -975,7 +963,7 @@
 				<real>0.023</real>
 			</dict>
 			<key>Minimum Contrast</key>
-			<real>0.23417721518987342</real>
+			<real>0.41186214398734178</real>
 			<key>Mouse Reporting</key>
 			<true/>
 			<key>Name</key>
@@ -1021,7 +1009,7 @@
 			<key>Shortcut</key>
 			<string></string>
 			<key>Silence Bell</key>
-			<false/>
+			<true/>
 			<key>Sync Title</key>
 			<false/>
 			<key>Tags</key>
@@ -1635,7 +1623,7 @@
 			<key>Rows</key>
 			<integer>25</integer>
 			<key>Screen</key>
-			<integer>2</integer>
+			<integer>1</integer>
 			<key>Scrollback Lines</key>
 			<integer>4096</integer>
 			<key>Selected Text Color</key>
@@ -1697,15 +1685,13 @@
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
-	<string>7C74B33D-66A7-4FB1-8713-9E25A8D3AA24</string>
+	<string>F96B9C8B-7F3C-4EFF-8C74-87553CD222AC</string>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
 	<integer>0</integer>
-	<key>NoSyncPermissionToShowTip</key>
-	<false/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
-	<real>506380311.89681298</real>
+	<real>510453784.40214503</real>
 	<key>OpenArrangementAtStartup</key>
 	<false/>
 	<key>OpenNoWindowsAtStartup</key>
@@ -1756,11 +1742,11 @@
 	<key>SUFeedAlternateAppNameKey</key>
 	<string>iTerm</string>
 	<key>SUFeedURL</key>
-	<string>https://iterm2.com/appcasts/final.xml?shard=5</string>
+	<string>https://iterm2.com/appcasts/final.xml?shard=97</string>
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2040-09-07T10:08:19Z</date>
+	<date>2017-03-06T00:46:24Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>

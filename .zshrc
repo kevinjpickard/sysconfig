@@ -58,6 +58,11 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
+# GO env
+export GOPATH="$HOME/go"
+export GOBIN="$GOPATH/bin"
+export GOEXE="$GOPATH/exe"
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -90,5 +95,7 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 alias ll='ls -lha'
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias tre='tree -CDFfpugha'
 
 . /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh 
+source ~/.myenvvars
