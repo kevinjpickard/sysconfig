@@ -51,7 +51,7 @@
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-syntax-highlighting)
+plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
 
 export ZSH=$HOME/.oh-my-zsh
 source $ZSH/oh-my-zsh.sh
@@ -99,3 +99,11 @@ alias tre='tree -CDFfpugha'
 
 . /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh 
 source ~/.myenvvars
+
+export JUMPCLOUD_WORKSPACE='/Users/kevin/Documents/github/jumpcloud'
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# SSH AUTH SOCKET for docker shtuff (OSX Only)
+export SSH_AUTH_SOCK=/tmp/ssh-4dvkFlwhJY/agent.3217
