@@ -52,6 +52,9 @@ git clone git://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
 ## ZSH Syntax Highlighting
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
+## ZSH Completion Suggestions 
+git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+
 ## Install Vundle ##
 echo "Installing Vundle..."
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
