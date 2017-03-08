@@ -7,6 +7,7 @@ tap 'homebrew/brewdler'
 
 # dev stuff
 brew 'amazon-ecs-cli'
+brew 'ansible'
 brew 'atool'
 brew 'autoconf'
 brew 'automake'
