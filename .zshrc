@@ -107,3 +107,5 @@ export NVM_DIR="$HOME/.nvm"
 
 # SSH AUTH SOCKET for docker shtuff (OSX Only)
 export SSH_AUTH_SOCK=/tmp/ssh-4dvkFlwhJY/agent.3217
+PGDATA=/var/lib/postgresql/data/pgdata
+alias vcheck="python ~/scripts/vcheck.py"

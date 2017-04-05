@@ -52,7 +52,7 @@ filetype plugin indent on    " required
 source /usr/local/lib/python2.7/site-packages/powerline/bindings/vim/plugin/powerline.vim
 set laststatus=2
 set tabstop=2
-set softtabstop=0 noexpandtab
+set softtabstop=0 expandtab
 set shiftwidth=2
 set smarttab
 au Bufread,BufNewFile *.feature set filetype=gherkin
