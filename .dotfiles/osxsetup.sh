@@ -61,6 +61,9 @@ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 #	Initialize and install plugins
 echo "Initializing vim plugins..."
 vim +PluginInstall +qall
+# Make swap, backup, etc directories, set permissions
+mkdir -p ~/backups/vim{backups,swap,undo}
+chmod -R 766 ~/backups
 
 ## Install Color Schemes ##
 #	Create scratch directory
@@ -73,7 +76,7 @@ vim +PluginInstall +qall
 echo "Setting default user shell to ZSH..."
 #		Need to add ZSH to /etc/shells
 echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
-#		Now set shell to fish
+#		Now set shell to zsh
 chsh -s '/usr/local/bin/zsh'
 
 ## Install vagrant plugins
