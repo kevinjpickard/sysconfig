@@ -72,18 +72,23 @@ let NERDTreeShowHidden=1
 
 " persistent undo
 if has("persistent_undo")
-    let &undodir='$HOME/backups/vim/undo//' " undo files in a folder
+    let &undodir='$HOME/backups/vim/vimundo//' " undo files in a folder
     set undofile                         " Save undo history to file
     set undolevels=100000                " Maximum number of undos
     set undoreload=100000                " Save complete files for undo on reload "
 endif
 
 " backups
-set backup
-let &backupdir='.,$HOME/backups/vim/backups/'
+"set backup
+"set backupdir=".,$HOME/backups/vim/vimbackups//"
+" Ok this isn't cooperating either. Fuck it.
+set nobackup
+set nowritebackup
 
 " swap files
-let &directory='.,$HOME/backups/vim/swap/'
+"let &directory='.,$HOME/backups/vim/swap/'
+" Since vim REFUSES to move my swap files, fuck em
+set noswapfile
 
 " Open new splits below and to the right
 set sb spr

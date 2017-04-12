@@ -90,6 +90,11 @@ echo "Tweaking some shit so its juuuuuuuuuust the way I like it..."
 chmod +x ~/.dotfiles/osx_settings.sh
 sudo ~/.dotfiles/osx_settings.sh
 
+## Hammerspoon Addons
+#   hs.tiling
+mkdir -p $HOME/.hammerspoon/hs
+git clone https://github.com/dsanson/hs.tiling $HOME/.hammerspoon/hs/tiling
+
 ## Dark menu bar and dock ##
 echo "Dark Theme?"
 defaults write /Library/Preferences/.GlobalPreferences AppleInterfaceTheme Dark
