@@ -397,16 +397,18 @@
 	</data>
 	<key>NSTableView Supports v2 KeyBingingTable</key>
 	<true/>
+	<key>NSWindow Frame ProfilesPanel</key>
+	<string>-1174 -178 735 382 -1440 -1120 1440 2560 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>-850 704 620 392 -1080 -442 1080 1920 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>748 -495 796 473 480 -900 1440 878 </string>
+	<string>715 344 796 473 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 0 1920 1080 0 0 1920 1058 </string>
+	<string>0 0 2560 1440 0 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>0 13 1899 1041 0 0 1920 1058 </string>
+	<string>688 450 585 427 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>480 -457 585 427 480 -900 1440 878 </string>
+	<string>0 1013 585 427 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
 	<string>293 341 585 427 0 0 1920 1080 </string>
 	<key>New Bookmarks</key>
@@ -1244,7 +1246,7 @@
 			<key>Close Sessions On End</key>
 			<true/>
 			<key>Columns</key>
-			<integer>80</integer>
+			<integer>256</integer>
 			<key>Command</key>
 			<string>/usr/local/bin/fish</string>
 			<key>Cursor Color</key>
@@ -1622,6 +1624,8 @@
 			<true/>
 			<key>Normal Font</key>
 			<string>SauceCodePowerline-Regular 12</string>
+			<key>Only The Default BG Color Uses Transparency</key>
+			<true/>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -1629,7 +1633,7 @@
 			<key>Right Option Key Sends</key>
 			<integer>0</integer>
 			<key>Rows</key>
-			<integer>25</integer>
+			<integer>256</integer>
 			<key>Screen</key>
 			<integer>0</integer>
 			<key>Scrollback Lines</key>
@@ -1685,7 +1689,7 @@
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
-			<integer>1</integer>
+			<integer>2</integer>
 			<key>Working Directory</key>
 			<string>/Users/kevin</string>
 		</dict>
@@ -1758,11 +1762,11 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-03-30T16:37:23Z</date>
+	<date>2017-04-26T16:07:37Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
-	<false/>
+	<true/>
 	<key>SplitPaneDimmingAmount</key>
 	<real>0.28087690304487178</real>
 	<key>TabStyle</key>

@@ -109,3 +109,6 @@ export NVM_DIR="$HOME/.nvm"
 export SSH_AUTH_SOCK=/tmp/ssh-4dvkFlwhJY/agent.3217
 PGDATA=/var/lib/postgresql/data/pgdata
 alias vcheck="python ~/scripts/vcheck.py"
+
+# added by travis gem
+[ -f /Users/kevin/.travis/travis.sh ] && source /Users/kevin/.travis/travis.sh
