@@ -7,30 +7,30 @@
 #			Installs Xcode CLI Tools, Homebrew, Fish, and vim. 
 
 ## Install Xcode CLI Tools ##
-echo "Parsing Xcode CLI install command..."
-touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress;
-PROD=$(softwareupdate -l |
-  grep "\*.*Command Line" |
-	head -n 1 | awk -F"*" '{print $2}' |
-	sed -e 's/^ *//' |
-	tr -d '\n')
-softwareupdate -i "$PROD" --verbose;
-
-## Install Homebrew ##
-echo "Installing Homebrew..."
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-#		Update
-brew update
-
-## Clone github .dotfiles repo
-echo "Pulling down system configuration files..."
-git clone --bare https://github.com/kevinjpickard/.dotfiles.git $HOME/.dotfiles
-/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME fetch
-/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout osx
-/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull origin osx
-echo ".dotfiles" >> .gitignore
-/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
-alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+#echo "Parsing Xcode CLI install command..."
+#touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress;
+#PROD=$(softwareupdate -l |
+#  grep "\*.*Command Line" |
+#	head -n 1 | awk -F"*" '{print $2}' |
+#	sed -e 's/^ *//' |
+#	tr -d '\n')
+#softwareupdate -i "$PROD" --verbose;
+#
+### Install Homebrew ##
+#echo "Installing Homebrew..."
+#/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+##		Update
+#brew update
+#
+### Clone github .dotfiles repo
+#echo "Pulling down system configuration files..."
+#git clone --bare https://github.com/kevinjpickard/.dotfiles.git $HOME/.dotfiles
+#/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME fetch
+#/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout osx
+#/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull origin osx
+#echo ".dotfiles" >> .gitignore
+#/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
+#alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 ## Step 4: Install a lot of shit ##
 echo "Installing a lot of shit..."
