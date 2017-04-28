@@ -1,8 +1,8 @@
 #/bin/bash -ex
 
-os = uname
+os=`uname`
 
-if [[ os == Darwin ]]; then
+if [[ $os -eq 'Darwin' ]]; then
   echo "Detected macOS, calling Darwin setup scripts..."
   # Install homebrew
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -31,7 +31,7 @@ if [[ os == Darwin ]]; then
   ~/.dotfiles/osxsetup.sh
 fi
 
-if [[ os == Linux ]]; then
+if [[ $os -eq 'Linux' ]]; then
   # Linux setup
   echo "linux detected"
 fi
