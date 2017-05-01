@@ -65,6 +65,17 @@ export GOEXE="$GOPATH/exe"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
+# Go env settings
+export GOPATH="$HOME/go"
+export GOBIN="$GOPATH/bin"
+export GOEXE="$GOPATH/exe"
+
+# env variables
+source ~/.myenvvars
+
+# Docker env
+eval $(docker-machine env)
+
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -97,7 +108,7 @@ alias ll='ls -lha'
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias tre='tree -CDFfpugha'
 
-. /usr/local/lib/python2.7/site-packages/powerline/bindings/zsh/powerline.zsh 
+. /usr/local/lib/python2.7/*-packages/powerline/bindings/zsh/powerline.zsh 
 source ~/.myenvvars
 
 export JUMPCLOUD_WORKSPACE='/Users/kevin/Documents/github/jumpcloud'
