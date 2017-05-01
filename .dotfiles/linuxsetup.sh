@@ -7,7 +7,7 @@ sudo apt-get autoremove -y
 
 ## Repositories
 # Some dependencies, probably already installed
-sudo apt-get install \
+sudo apt-get install -y \
     apt-transport-https ca-certificates curl software-properties-common \
     linux-image-extra-$(uname -r) linux-image-extra-virtual
 #	Chrome
