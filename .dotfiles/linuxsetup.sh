@@ -6,6 +6,10 @@ sudo apt-get upgrade -y
 sudo apt-get autoremove -y
 
 ## Repositories
+# Some dependencies, probably already installed
+sudo apt-get install \
+    apt-transport-https ca-certificates curl software-properties-common \
+    linux-image-extra-$(uname -r) linux-image-extra-virtual
 #	Chrome
 wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add - 
 sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
@@ -19,6 +23,9 @@ sudo add-apt-repository -y ppa:unit193/encryption
 # Kodi
 sudo add-apt-repository -y ppa:team-xbmc/ppa
 # Docker
+## Just in case, removing old ones
+sudo apt-get remove docker docker-engine
+## Adding updated Docker repo
 curl -fsSL https://apt.dockerproject.org/gpg | sudo apt-key add -
 apt-key fingerprint 58118E89F3A912897C070ADBF76221572C52609D
 sudo add-apt-repository -y "deb https://apt.dockerproject.org/repo/ ubuntu-$(lsb_release -cs) main"
