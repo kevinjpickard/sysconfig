@@ -30,7 +30,7 @@ curl -fsSL https://apt.dockerproject.org/gpg | sudo apt-key add -
 apt-key fingerprint 58118E89F3A912897C070ADBF76221572C52609D
 sudo add-apt-repository -y "deb https://apt.dockerproject.org/repo/ ubuntu-$(lsb_release -cs) main"
 ## Since 17.04 isn't supported by Moby yet, we'll install manually
-if [[ `cat /etc/issue` -eq 'Ubuntu 17.04 \n \l' ]]; then
+if [[ `cat /etc/issue` -eq 'Ubuntu 17.04 *' ]]; then
   wget https://get.docker.com/builds/Linux/x86_64/docker-17.04.0-ce.tgz 
   sudo tar xzvf docker-17.04.0-ce.tgz -C /usr/local/bin/
 fi
