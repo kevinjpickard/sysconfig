@@ -28,18 +28,20 @@ sudo apt-get remove docker docker-engine
 ## Adding updated Docker repo
 curl -fsSL https://apt.dockerproject.org/gpg | sudo apt-key add -
 apt-key fingerprint 58118E89F3A912897C070ADBF76221572C52609D
-sudo add-apt-repository -y "deb https://apt.dockerproject.org/repo/ ubuntu-$(lsb_release -cs) main"
-## Since 17.04 isn't supported by Moby yet, we'll install manually
-if [[ `cat /etc/issue` -eq 'Ubuntu 17.04 *' ]]; then
-  wget https://get.docker.com/builds/Linux/x86_64/docker-17.04.0-ce.tgz 
-  sudo tar xzvf docker-17.04.0-ce.tgz -C /usr/local/bin/
-fi
+#sudo add-apt-repository -y "deb https://apt.dockerproject.org/repo/ ubuntu-$(lsb_release -cs) main"
+#   Hard-coding xenial repos since zesty isn't supported yet
+sudo add-apt-repository -y "deb https://apt.dockerproject.org/repo/ ubuntu-xenial main"
 
 ## Update New Repos
 sudo apt-get update
 
 ## Apps
 sudo apt-get install -y $(grep -vE "^\s*#" ~/.dotfiles/apps.conf | tr "\n" " ")
+
+### Install vagrant from vagrant website, debian packaging bugged
+curl https://releases.hashicorp.com/vagrant/1.9.5/vagrant_1.9.5_x86_64.deb -o ~/vagrant_installer.deb
+sudo dpkg -i ~/vagrant_installer.deb
+rm ~/vagrant_installer.deb
 
 ## Powerline
 #	Scratch directory

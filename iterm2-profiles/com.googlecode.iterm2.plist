@@ -36632,11 +36632,11 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>-1171 -981 606 456 -1440 -1120 1440 2560 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>513 -815 796 473 0 -1050 1680 1028 </string>
+	<string>647 378 918 381 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>0 0 2560 1440 0 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>-1440 -669 585 427 -1440 -1120 1440 2538 </string>
+	<string>0 0 2560 1414 0 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
 	<string>0 15 1278 1403 0 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
@@ -36668,21 +36668,29 @@
 			</dict>
 			<key>Ansi 10 Color</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.37254902720451355</real>
+				<real>0.034379057586193085</real>
+				<key>Color Space</key>
+				<string>Calibrated</string>
 				<key>Green Component</key>
-				<real>0.92941176891326904</real>
+				<real>1</real>
 				<key>Red Component</key>
-				<real>0.7450980544090271</real>
+				<real>0.6559709906578064</real>
 			</dict>
 			<key>Ansi 11 Color</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.45490196347236633</real>
+				<real>0.041332144290208817</real>
+				<key>Color Space</key>
+				<string>Calibrated</string>
 				<key>Green Component</key>
-				<real>0.85882353782653809</real>
+				<real>1</real>
 				<key>Red Component</key>
-				<real>0.90196079015731812</real>
+				<real>0.99766957759857178</real>
 			</dict>
 			<key>Ansi 12 Color</key>
 			<dict>
@@ -36822,8 +36830,10 @@
 				<key>Red Component</key>
 				<real>1</real>
 			</dict>
+			<key>Blink Allowed</key>
+			<true/>
 			<key>Blinking Cursor</key>
-			<false/>
+			<true/>
 			<key>Blur</key>
 			<false/>
 			<key>Bold Color</key>
@@ -36847,6 +36857,8 @@
 			<integer>80</integer>
 			<key>Command</key>
 			<string>/usr/local/bin/fish</string>
+			<key>Cursor Boost</key>
+			<real>0.0</real>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Blue Component</key>
@@ -37219,7 +37231,7 @@
 				<real>0.023</real>
 			</dict>
 			<key>Minimum Contrast</key>
-			<real>0.41186214398734178</real>
+			<real>0.41537282436708861</real>
 			<key>Mouse Reporting</key>
 			<true/>
 			<key>Name</key>
@@ -38040,7 +38052,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-05-30T13:57:34Z</date>
+	<date>2017-06-01T20:19:09Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowBookmarkName</key>
