@@ -1,6 +1,6 @@
 #/bin/bash -ex
 
-os=`uname`
+os=$(uname)
 
 if [[ $os -eq 'Darwin' ]]; then
   echo "Detected macOS, calling Darwin setup scripts..."
