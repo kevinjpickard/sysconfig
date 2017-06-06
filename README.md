@@ -2,5 +2,5 @@
 My system config files
 
 ```
-sudo apt install curl -y && sudo curl https://raw.githubusercontent.com/kevinjpickard/.dotfiles/apt/.dotfiles/bootstrap_linux.sh -o ~/bootstrap.sh && sudo chmod +x ~/bootstrap.sh && bash ~/bootstrap.sh | tee ~/bootstrap.log
+sudo apt install curl -y && sudo curl https://raw.githubusercontent.com/kevinjpickard/.dotfiles/apt/.dotfiles/bootstrap.sh | bash | tee ~/bootstrap.log
 ```
