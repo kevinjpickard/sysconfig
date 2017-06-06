@@ -2,7 +2,7 @@
 
 os=$(uname)
 
-if ( "$os" == "Darwin" ); then
+if [[ $os == "Darwin" ]]; then
   echo "Detected macOS, calling Darwin setup scripts..."
   # Install homebrew
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -31,7 +31,7 @@ if ( "$os" == "Darwin" ); then
   ~/.dotfiles/osxsetup.sh
 fi
 
-if ( "$os" == "Linux" ); then
+if [[ $os == "Linux" ]]; then
   # Linux setup
   echo "linux detected, calling Linux setup scripts..."
   sudo apt-get install git -y
