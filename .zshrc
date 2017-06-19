@@ -123,3 +123,7 @@ alias vcheck="python ~/scripts/vcheck.py"
 
 # added by travis gem
 [ -f /Users/kevin/.travis/travis.sh ] && source /Users/kevin/.travis/travis.sh
+
+# rbenv
+eval "$(rbenv init -)"
+export PATH="$HOME/.rbenv/bin:$PATH"

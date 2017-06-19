@@ -83,6 +83,15 @@ vagrant plugin install vagrant-saltdeps vagrant-scp vagrant-serverspec vagrant-s
 # Install NVM
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
 
+# Setup rbenv cuz its different on Ubuntu
+git clone git://github.com/sstephenson/rbenv.git ~/.rbenv
+git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+git clone https://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash
+exec $SHELL
+rbenv install 2.2.3
+rbenv global 2.2.3
+rbenv rehash
+
 ## Settings
 #   GNOME DE Extensions + Configs, if running
 ~/.dotfiles/gnome_settings.sh
