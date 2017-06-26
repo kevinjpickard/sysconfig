@@ -134,7 +134,6 @@ alias vcheck="python ~/scripts/vcheck.py"
 # added by travis gem
 [ -f /Users/kevin/.travis/travis.sh ] && source /Users/kevin/.travis/travis.sh
 
-export PATH=$PATH:'/Users/kevin/.chefdk/gem/ruby/2.3.0/'
 export RBENV_VERSION="2.2.3"
+export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
-
