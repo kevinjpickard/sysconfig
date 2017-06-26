@@ -24,15 +24,16 @@ Plugin 'VundleVim/Vundle.vim'
 " Pass the path to set the runtimepath properly.
 "Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.
-"Plugin 'ascenator/L9', {'name': 'newL9'}
+" different version somewhere else.  "Plugin 'ascenator/L9', {'name': 'newL9'}
 
 " Kevin's vim Plugins
 " NerdTree
 Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/syntastic'
 "Plugin 'Valloric/YouCompleteMe'
 Plugin 'dag/vim-fish'
 Plugin 'PProvost/vim-ps1'
+Plugin 'tpope/vim-surround'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -92,3 +93,9 @@ set noswapfile
 
 " Open new splits below and to the right
 set sb spr
+
+" Syntastic Settings
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0

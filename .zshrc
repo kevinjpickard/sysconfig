@@ -73,8 +73,19 @@ export GOEXE="$GOPATH/exe"
 # env variables
 source ~/.myenvvars
 
-# Docker env
-eval $(docker-machine env)
+# OSX env
+if [[ $OSTYPE == darwin* ]]; then
+  STATUS=$(docker-machine status default)
+  if [[ $STATUS != "Running" ]]; then
+    nohup docker-machine start &>/dev/null & disown
+  fi
+  eval $(docker-machine env)
+  source ~/.myenvvars
+
+  # Homebrew installs + coreutils
+  export PATH="/usr/local/Cellar:$PATH"
+  export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+fi
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -104,12 +115,11 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias ll='ls -lha'
+alias ll='ls -lha --color'
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias tre='tree -CDFfpugha'
 
 . /usr/local/lib/python2.7/*-packages/powerline/bindings/zsh/powerline.zsh 
-source ~/.myenvvars
 
 export JUMPCLOUD_WORKSPACE='/Users/kevin/Documents/github/jumpcloud'
 
@@ -123,3 +133,8 @@ alias vcheck="python ~/scripts/vcheck.py"
 
 # added by travis gem
 [ -f /Users/kevin/.travis/travis.sh ] && source /Users/kevin/.travis/travis.sh
+
+export PATH=$PATH:'/Users/kevin/.chefdk/gem/ruby/2.3.0/'
+export RBENV_VERSION="2.2.3"
+eval "$(rbenv init -)"
+
