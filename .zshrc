@@ -70,9 +70,6 @@ export GOPATH="$HOME/go"
 export GOBIN="$GOPATH/bin"
 export GOEXE="$GOPATH/exe"
 
-# env variables
-source ~/.myenvvars
-
 # OSX env
 if [[ $OSTYPE == darwin* ]]; then
   STATUS=$(docker-machine status default)
