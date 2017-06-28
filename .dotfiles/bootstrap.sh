@@ -21,8 +21,8 @@ if [[ $os == "Darwin" ]]; then
   echo "Pulling down system configuration files..."
   git clone --bare https://github.com/kevinjpickard/.dotfiles.git $HOME/.dotfiles
   /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME fetch
-  /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout osx
-  /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull origin osx
+  /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout master
+  /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull origin master
   echo ".dotfiles" >> .gitignore
   /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
   alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
@@ -42,8 +42,8 @@ if [[ $os == "Linux" ]]; then
   rm -rf ~/.dotfiles
   git clone --bare https://github.com/kevinjpickard/.dotfiles.git $HOME/.dotfiles
   /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME fetch
-  /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout osx
-  /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull origin osx
+  /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout master
+  /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull origin master
   echo ".dotfiles" >> .gitignore
   /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
   alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
