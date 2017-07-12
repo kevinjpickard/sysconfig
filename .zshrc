@@ -34,7 +34,7 @@ DISABLE_UPDATE_PROMPT="true"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
- COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -67,20 +67,11 @@ export GOEXE="$GOPATH/exe"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
-# Go env settings
-export GOPATH="$HOME/go"
-export GOBIN="$GOPATH/bin"
-export GOEXE="$GOPATH/exe"
-
 # env variables
 source ~/.myenvvars
 
 # OSX env
 if [[ $OSTYPE == darwin* ]]; then
-  STATUS=$(docker-machine status default)
-  if [[ $STATUS != "Running" ]]; then
-    nohup docker-machine start &>/dev/null && eval $(docker-machine env) &>/dev/null & disown
-  fi
   eval $(docker-machine env)
   source ~/.myenvvars
 
@@ -108,6 +99,7 @@ fi
 # Completions
 ## ZSH
 fpath=(/usr/local/share/zsh-completions $fpath)
+source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh

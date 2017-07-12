@@ -101,3 +101,4 @@ defaults write /Library/Preferences/.GlobalPreferences AppleInterfaceTheme Dark
 
 ## Finished ##
 echo "Configuration complete!"
+defaults write com.apple.finder AppleShowAllFiles YES
