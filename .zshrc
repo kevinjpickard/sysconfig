@@ -18,6 +18,8 @@
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
+## Automatically accept update
+DISABLE_UPDATE_PROMPT="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
@@ -77,7 +79,7 @@ source ~/.myenvvars
 if [[ $OSTYPE == darwin* ]]; then
   STATUS=$(docker-machine status default)
   if [[ $STATUS != "Running" ]]; then
-    nohup docker-machine start &>/dev/null & disown
+    nohup docker-machine start &>/dev/null && eval $(docker-machine env) &>/dev/null & disown
   fi
   eval $(docker-machine env)
   source ~/.myenvvars
@@ -137,3 +139,6 @@ alias vcheck="python ~/scripts/vcheck.py"
 export RBENV_VERSION="2.2.3"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+
+# added by Miniconda3 4.3.21 installer
+#export PATH="/Users/kevin/miniconda3/bin:$PATH"

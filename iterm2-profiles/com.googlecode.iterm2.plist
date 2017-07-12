@@ -36634,15 +36634,15 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>-1171 -981 606 456 -1440 -1120 1440 2560 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>647 378 796 473 0 0 2560 1440 </string>
+	<string>647 378 796 473 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>0 5 1439 2555 0 0 2560 1440 </string>
+	<string>-1437 -179 665 477 -1440 -1120 1440 2560 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>1334 915 585 427 0 0 2560 1440 </string>
+	<string>0 33 1273 1377 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>0 15 1278 1403 0 0 2560 1440 </string>
+	<string>0 17 953 1161 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>293 341 585 427 0 0 1920 1080 </string>
+	<string>960 257 953 1161 0 0 2560 1418 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -37987,7 +37987,7 @@
 			<key>Visual Bell</key>
 			<true/>
 			<key>Window Type</key>
-			<integer>2</integer>
+			<integer>1</integer>
 			<key>Working Directory</key>
 			<string>/Users/kevin</string>
 		</dict>
@@ -38060,7 +38060,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-06-12T16:06:02Z</date>
+	<date>2017-07-10T16:23:05Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowBookmarkName</key>
