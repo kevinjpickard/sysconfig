@@ -67,9 +67,6 @@ export GOEXE="$GOPATH/exe"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
-# env variables
-source ~/.myenvvars
-
 # OSX env
 if [[ $OSTYPE == darwin* ]]; then
   eval $(docker-machine env)
