@@ -1,8 +1,10 @@
+#echo 'Executing ~/.zshrc...'
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/kevin/.oh-my-zsh
+#echo 'Exporting ZSH...'
+export ZSH=/home/kevin/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -19,6 +21,7 @@
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
 ## Automatically accept update
+#echo 'Disabling update prompt...'
 DISABLE_UPDATE_PROMPT="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
@@ -34,6 +37,7 @@ DISABLE_UPDATE_PROMPT="true"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
+#echo 'Enabling completion dots...'
 COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
@@ -53,14 +57,16 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
+#echo 'Initializing plugins...'
 plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
 
-export ZSH=$HOME/.oh-my-zsh
+#echo 'Initializing oh-my-zsh...'
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
 # GO env
+#echo 'Setting up GO env...'
 export GOPATH="$HOME/go"
 export GOBIN="$GOPATH/bin"
 export GOEXE="$GOPATH/exe"
@@ -68,13 +74,16 @@ export GOEXE="$GOPATH/exe"
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # OSX env
+#echo 'Setting up macOS env...'
 if [[ $OSTYPE == darwin* ]]; then
-  eval $(docker-machine env)
   source ~/.myenvvars
 
   # Homebrew installs + coreutils
   export PATH="/usr/local/Cellar:$PATH"
   export PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+  
+  # Agent version check
+  alias vcheck='python ~/scripts/vcheck.py'
 fi
 
 # You may need to manually set your language environment
@@ -95,7 +104,9 @@ fi
 
 # Completions
 ## ZSH
+#echo 'Initializing ZSH completions...'
 fpath=(/usr/local/share/zsh-completions $fpath)
+#echo 'Initializing Google Cloud SDK completions...'
 source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
@@ -106,28 +117,41 @@ source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.z
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+#echo 'Setting up aliases...'
 alias ll='ls -lha --color'
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias tre='tree -CDFfpugha'
 
-. /usr/local/lib/python2.7/*-packages/powerline/bindings/zsh/powerline.zsh 
+#echo 'Starting powerline...'
+. /usr/local/lib/python2.7/*-packages/powerline/bindings/zsh/powerline.zsh
 
+#echo 'Setting up JumpCloud workspace...'
 export JUMPCLOUD_WORKSPACE='/Users/kevin/Documents/github/jumpcloud'
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#echo 'Initializing NVM...'
+nvm() { # Lazy-Loading NVM to speed up shell start
+  unset -f nvm
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+  nvm "$@"
+}
 
 # SSH AUTH SOCKET for docker shtuff (OSX Only)
-export SSH_AUTH_SOCK=/tmp/ssh-4dvkFlwhJY/agent.3217
-PGDATA=/var/lib/postgresql/data/pgdata
-alias vcheck="python ~/scripts/vcheck.py"
+#export SSH_AUTH_SOCK=/tmp/ssh-4dvkFlwhJY/agent.3217
+#PGDATA=/var/lib/postgresql/data/pgdata
+#alias vcheck="python ~/scripts/vcheck.py"
 
 # added by travis gem
+#echo 'Initializing TravisCI gem completions...'
 [ -f /Users/kevin/.travis/travis.sh ] && source /Users/kevin/.travis/travis.sh
 
+#echo 'Initializing RBENV...'
 export RBENV_VERSION="2.2.3"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 # added by Miniconda3 4.3.21 installer
 #export PATH="/Users/kevin/miniconda3/bin:$PATH"
+
+# For all those times you just fuck up
+#eval $(thefuck --alias)
