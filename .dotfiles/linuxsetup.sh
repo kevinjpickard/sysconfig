@@ -1,5 +1,5 @@
 # Linux Boostrapper
-## Update and Upgrade ##
+## Update and Upgrade
 sudo apt-get update -y
 sudo apt-get upgrade -y
 #sudo apt dist-upgrade -y
@@ -73,12 +73,18 @@ sudo apt-get install -f
 git clone git://github.com/pricco/gnome-terminal-colors-monokai.git $HOME/Documents/github/scratch
 $HOME/Documents/github/scratch/gnome-terminal-colors-monokai/install.sh
 
-## Install Vundle ##
+## Install dein
 echo "Installing dein..."
 curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > ~/installer.sh
 sh ./installer.sh ~/.config/nvim/dein
+mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
+ln -s ~/.vim $XDG_CONFIG_HOME/nvim
+ln -s ~/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
+
 #	Initialize and install plugins
 echo "Initializing vim/nvim plugins..."
+mkdir -p ~/.vim/colors
+curl https://raw.githubusercontent.com/tamelion/neovim-molokai/master/colors/molokai.vim -o ~/.vim/colors/molokai.vim
 vim +call dein#install()
 
 ## Install vagrant plugins
@@ -92,8 +98,8 @@ git clone git://github.com/sstephenson/rbenv.git ~/.rbenv
 git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 git clone https://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash
 exec $SHELL
-rbenv install 2.2.3
-rbenv global 2.2.3
+rbenv install 2.4.1
+rbenv global 2.4.1
 rbenv rehash
 
 ## Settings

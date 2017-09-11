@@ -24,6 +24,7 @@ if dein#load_state('/Users/kevin/.config/nvim/dein')
   call dein#add('tpope/vim-fugitive')
   call dein#add('vim-airline/vim-airline')
   call dein#add('vim-airline/vim-airline-themes')
+  call dein#add('Shougo/deoplete.nvim')
 
   " Required:
   call dein#end()
@@ -53,7 +54,7 @@ set number
 "	set colorcolumn=80
 "else
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%>79v.\+/	
+match OverLength /\%>79v.\+/
 "endif
 
 autocmd vimenter * NERDTree
@@ -91,9 +92,23 @@ let g:syntastic_check_on_wq = 1
 " vim-airline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='one'
+let g:airline_theme='powerlineish'
 
-" Neovim changes
-set background = "dark"
-set colorscheme = "one"
-set termguicolors
+if has("nvim")
+  " Neovim changes
+  set background = "molokai"
+  colorscheme molokai
+  set termguicolors
+
+  " Run NeoMake on read and write operations
+  autocmd! BufReadPost,BufWritePost * Neomake
+
+  " Disable inherited syntastic
+  let g:syntastic_mode_map = {
+    \ "mode": "passive",
+    \ "active_filetypes": [],
+    \ "passive_filetypes": [] }
+
+  let g:neomake_serialize = 1
+  let g:neomake_serialize_abort_on_error = 1
+endif
