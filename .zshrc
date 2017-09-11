@@ -169,3 +169,6 @@ alias gitpullall='find . -maxdepth 1 -type d -exec sh -c "(cd {} && pwd && git p
 if type nvim > /dev/null 2>&1; then
   alias vim='nvim'
 fi
+
+# Set config home
+export XDG_CONFIG_HOME=~/.config
