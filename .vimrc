@@ -99,6 +99,7 @@ if has("nvim")
   set background = "molokai"
   colorscheme molokai
   set termguicolors
+  set guicursor=
 
   " Run NeoMake on read and write operations
   autocmd! BufReadPost,BufWritePost * Neomake
@@ -111,4 +112,7 @@ if has("nvim")
 
   let g:neomake_serialize = 1
   let g:neomake_serialize_abort_on_error = 1
+
+  " Restore terminal cursor 
+  "au VimLeave * set guicursor=a:block-blinkon0
 endif
