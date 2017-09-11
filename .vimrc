@@ -25,6 +25,8 @@ if dein#load_state('/Users/kevin/.config/nvim/dein')
   call dein#add('vim-airline/vim-airline')
   call dein#add('vim-airline/vim-airline-themes')
   call dein#add('Shougo/deoplete.nvim')
+  call dein#add('zchee/deoplete-go')
+  call dein#add('zchee/deoplete-jedi')
 
   " Required:
   call dein#end()
