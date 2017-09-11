@@ -74,11 +74,12 @@ git clone git://github.com/pricco/gnome-terminal-colors-monokai.git $HOME/Docume
 $HOME/Documents/github/scratch/gnome-terminal-colors-monokai/install.sh
 
 ## Install Vundle ##
-echo "Installing Vundle..."
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+echo "Installing dein..."
+curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > ~/installer.sh
+sh ./installer.sh ~/.config/nvim/dein
 #	Initialize and install plugins
-echo "Initializing vim plugins..."
-vim +PluginInstall +qall
+echo "Initializing vim/nvim plugins..."
+vim +call dein#install()
 
 ## Install vagrant plugins
 vagrant plugin install vagrant-saltdeps vagrant-scp vagrant-serverspec vagrant-share vagrant-winrm

@@ -4,10 +4,9 @@
 
 # Path to your oh-my-zsh installation.
 #echo 'Exporting ZSH...'
-export ZSH=/home/kevin/.oh-my-zsh
+export ZSH="$HOME/.oh-my-zsh"
 
-# Set name of the theme to load. Optionally, if you set this to "random"
-# it'll load a random theme each time that oh-my-zsh is loaded.
+# Set name of the theme to load. Optionally, if you set this to "random" # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 #ZSH_THEME="powerline"
 
@@ -128,6 +127,9 @@ alias tre='tree -CDFfpugha'
 #echo 'Setting up JumpCloud workspace...'
 export JUMPCLOUD_WORKSPACE='/Users/kevin/Documents/github/jumpcloud'
 
+#echo 'Setting git editor...'
+export GIT_EDITOR='/Applications/MacVim.app/Contents/MacOS/Vim -gf '
+
 #echo 'Initializing NVM...'
 nvm() { # Lazy-Loading NVM to speed up shell start
   unset -f nvm
@@ -146,12 +148,24 @@ nvm() { # Lazy-Loading NVM to speed up shell start
 [ -f /Users/kevin/.travis/travis.sh ] && source /Users/kevin/.travis/travis.sh
 
 #echo 'Initializing RBENV...'
-export RBENV_VERSION="2.2.3"
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+rbenv() { # Lazy-Loading RBENV to speed up shell start
+  unset -f rbenv
+  export RBENV_VERSION="2.2.3"
+  export PATH="$HOME/.rbenv/bin:$PATH"
+  eval "$(rbenv init -)"
+  rbenv "$@"
+}
 
 # added by Miniconda3 4.3.21 installer
 #export PATH="/Users/kevin/miniconda3/bin:$PATH"
 
 # For all those times you just fuck up
-#eval $(thefuck --alias)
+eval $(thefuck --alias)
+
+# Alias to update all git repos in a directory
+alias gitpullall='find . -maxdepth 1 -type d -exec sh -c "(cd {} && pwd && git pull)" ";"'
+
+# Use NeoVim if it is installed
+if type nvim > /dev/null 2>&1; then
+  alias vim='nvim'
+fi

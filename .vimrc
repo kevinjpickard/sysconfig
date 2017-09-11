@@ -1,57 +1,44 @@
-set nocompatible              " be iMproved, required
-filetype off                  " required
+if &compatible
+  set nocompatible               " Be iMproved
+endif
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
+" Required:
+set runtimepath+=/Users/kevin/.config/nvim/dein/repos/github.com/Shougo/dein.vim
 
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+" Required:
+if dein#load_state('/Users/kevin/.config/nvim/dein')
+  call dein#begin('/Users/kevin/.config/nvim/dein')
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-"Plugin 'tpope/vim-fugitive'
-" plugin from http://vim-scripts.org/vim/scripts.html
-"Plugin 'L9'
-" Git plugin not hosted on GitHub
-"Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-"Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-"Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.  "Plugin 'ascenator/L9', {'name': 'newL9'}
+  " Let dein manage dein
+  " Required:
+  call dein#add('/Users/kevin/.config/nvim/dein/repos/github.com/Shougo/dein.vim')
 
-" Kevin's vim Plugins
-" NerdTree
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'dag/vim-fish'
-Plugin 'PProvost/vim-ps1'
-Plugin 'tpope/vim-surround'
-Plugin 'saltstack/salt-vim'
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+  " Add or remove your plugins here:
+  call dein#add('scrooloose/nerdtree')
+  call dein#add('neomake/neomake')
+  call dein#add('scrooloose/syntastic')
+  call dein#add('dag/vim-fish')
+  call dein#add('PProvost/vim-ps1')
+  call dein#add('tpope/vim-surround')
+  call dein#add('saltstack/salt-vim')
+  call dein#add('tpope/vim-fugitive')
+  call dein#add('vim-airline/vim-airline')
+  call dein#add('vim-airline/vim-airline-themes')
 
+  " Required:
+  call dein#end()
+  call dein#save_state()
+endif
 
-source /usr/local/lib/python2.7/*-packages/powerline/bindings/vim/plugin/powerline.vim 
+" Required:
+filetype plugin indent on
+syntax enable
+
+" Install uninstalled plugins on startup
+if dein#check_install()
+  call dein#install()
+endif
+
 set laststatus=2
 set tabstop=2
 set softtabstop=0 expandtab
@@ -62,12 +49,12 @@ syntax on
 set backspace=indent,eol,start
 set number
 
-if exists('+colorcolumn')
-	set colorcolumn=80
-else
-	highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-	match OverLength /\%>79v.\+/	
-endif
+" if exists('+colorcolumn')
+"	set colorcolumn=80
+"else
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%>79v.\+/	
+"endif
 
 autocmd vimenter * NERDTree
 let NERDTreeShowHidden=1
@@ -100,3 +87,13 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 0
 let g:syntastic_check_on_wq = 1
+
+" vim-airline
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme='one'
+
+" Neovim changes
+set background = "dark"
+set colorscheme = "one"
+set termguicolors

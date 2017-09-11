@@ -56,11 +56,12 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 
 ## Install Vundle ##
-echo "Installing Vundle..."
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+echo "Installing dein..."
+curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > ~/installer.sh
+sh ./installer.sh ~/.config/nvim/dein
 #	Initialize and install plugins
-echo "Initializing vim plugins..."
-vim +PluginInstall +qall
+echo "Initializing vim/nvim plugins..."
+vim +call dein#install()
 # Make swap, backup, etc directories, set permissions
 mkdir -p ~/backups/vim{backups,swap,undo}
 chmod -R 766 ~/backups
