@@ -27,6 +27,9 @@ if dein#load_state('/Users/kevin/.config/nvim/dein')
   call dein#add('Shougo/deoplete.nvim')
   call dein#add('zchee/deoplete-go')
   call dein#add('zchee/deoplete-jedi')
+  call dein#add('sheerun/vim-polyglot')
+  call dein#add('rcabralc/monokai-airline.vim')
+  call dein#add('sickill/vim-monokai')
 
   " Required:
   call dein#end()
@@ -64,7 +67,7 @@ let NERDTreeShowHidden=1
 
 " persistent undo
 if has("persistent_undo")
-    let &undodir='$HOME/backups/vim/vimundo//' " undo files in a folder
+    let &undodir='$HOME/backups/vim/undo//' " undo files in a folder
     set undofile                         " Save undo history to file
     set undolevels=100000                " Maximum number of undos
     set undoreload=100000                " Save complete files for undo on reload "
@@ -72,7 +75,7 @@ endif
 
 " backups
 "set backup
-"set backupdir=".,$HOME/backups/vim/vimbackups//"
+"set backupdir=".,$HOME/backups/vim/backups//"
 " Ok this isn't cooperating either. Fuck it.
 set nobackup
 set nowritebackup
@@ -94,7 +97,7 @@ let g:syntastic_check_on_wq = 1
 " vim-airline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='powerlineish'
+let g:airline_theme='molokai'
 
 if has("nvim")
   " Neovim changes
@@ -114,7 +117,4 @@ if has("nvim")
 
   let g:neomake_serialize = 1
   let g:neomake_serialize_abort_on_error = 1
-
-  " Restore terminal cursor 
-  "au VimLeave * set guicursor=a:block-blinkon0
 endif
