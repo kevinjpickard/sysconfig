@@ -14,7 +14,7 @@ brew bundle --file=~/.dotfiles/Brewfile
 
 ## Install Powerline
 #	Install Powerline
-pip install powerline-status
+pip3 install powerline-status
 #	Install powerline fonts
 mkdir ~/scratch/fonts
 git clone https://github.com/powerline/fonts.git ~/scratch/fonts
