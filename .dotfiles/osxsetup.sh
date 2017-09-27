@@ -47,19 +47,15 @@ curl https://raw.githubusercontent.com/tamelion/neovim-molokai/master/colors/mol
 mkdir -p ~/backups/vim{backups,swap,undo}
 chmod -R 766 ~/backups
 
-## Install Color Schemes
-#	Create scratch directory
-#mkdir scratch
-#	Clone git repo
-#echo "Downloading iTerm2 color schemes..."
-#git clone https://github.com/mbadolato/iTerm2-Color-Schemes.git ~/scratch/
-
 ## Set shell to ZSH
 echo "Setting default user shell to ZSH..."
 #		Need to add ZSH to /etc/shells
 echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
 #		Now set shell to zsh
 chsh -s '/usr/local/bin/zsh'
+#   Now switch to ZSH, switch to VIM bindings
+zsh
+bindkey -v
 
 ## Install vagrant plugins
 vagrant plugin install vagrant-saltdeps vagrant-scp vagrant-serverspec vagrant-share vagrant-vmware-fusion vagrant-winrm
@@ -82,6 +78,8 @@ echo "Dark Theme?"
 sudo defaults write /Library/Preferences/.GlobalPreferences.plist AppleInterfaceTheme Dark
 defaults write com.apple.finder AppleShowAllFiles YES
 defaults write com.apple.mouse scaling -1
+# Enabling the 'Anywhere' option in Gatekeeper
+sudo spctl --master-disable
 
 ## Finished
 echo "Configuration complete!"
