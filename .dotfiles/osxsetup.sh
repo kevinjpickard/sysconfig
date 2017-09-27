@@ -42,7 +42,6 @@ ln -s ~/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
 echo "Initializing vim/nvim plugins..."
 mkdir -p ~/.vim/colors
 curl https://raw.githubusercontent.com/tamelion/neovim-molokai/master/colors/molokai.vim -o ~/.vim/colors/molokai.vim
-vim +call dein#install()
 
 # Make swap, backup, etc directories, set permissions
 mkdir -p ~/backups/vim{backups,swap,undo}
