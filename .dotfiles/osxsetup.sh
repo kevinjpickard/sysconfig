@@ -32,11 +32,11 @@ git clone git://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh
 
 ## Install dein
 echo "Installing dein..."
-curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > ~/installer.sh
-sh ./installer.sh ~/.config/nvim/dein
 mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
 ln -s ~/.vim $XDG_CONFIG_HOME/nvim
 ln -s ~/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
+curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > ~/installer.sh
+sh ./installer.sh ~/.config/nvim/dein
 
 #	Initialize and install plugins
 echo "Initializing vim/nvim plugins..."
@@ -77,10 +77,11 @@ sudo ~/.dotfiles/osx_settings.sh
 mkdir -p $HOME/.hammerspoon/hs
 git clone https://github.com/dsanson/hs.tiling $HOME/.hammerspoon/hs/tiling
 
-## Dark menu bar and dock
+## macOS Settings
 echo "Dark Theme?"
-defaults write /Library/Preferences/.GlobalPreferences AppleInterfaceTheme Dark
+sudo defaults write /Library/Preferences/.GlobalPreferences.plist AppleInterfaceTheme Dark
+defaults write com.apple.finder AppleShowAllFiles YES
+defaults write com.apple.mouse scaling -1
 
 ## Finished
 echo "Configuration complete!"
-defaults write com.apple.finder AppleShowAllFiles YES
