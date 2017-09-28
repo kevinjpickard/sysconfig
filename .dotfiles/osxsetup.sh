@@ -34,8 +34,8 @@ git clone git://github.com/zsh-users/zsh-autosuggestions ${zsh_custom:-~/.oh-my-
 ## Install dein
 echo "Installing dein..."
 mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
-ln -s ~/.vim $XDG_CONFIG_HOME/nvim
-ln -s ~/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
+ln -s ~/.vim ${XDG_CONFIG_HOME:=$HOME}/nvim
+ln -s ~/.vimrc ${XDG_CONFIG_HOME:=$HOME}/nvim/init.vim
 curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > ~/installer.sh
 sh ./installer.sh ~/.config/nvim/dein
 
@@ -51,12 +51,9 @@ chmod -R 766 ~/backups
 ## Set shell to ZSH
 echo "Setting default user shell to ZSH..."
 #		Need to add ZSH to /etc/shells
-echo "/usr/local/bin/zsh" | sudo tee -a /etc/shells
+echo $(which zsh) | sudo tee -a /etc/shells
 #		Now set shell to zsh
-chsh -s '/usr/local/bin/zsh'
-#   Now switch to ZSH, switch to VIM bindings
-zsh
-bindkey -v
+chsh -s $(which zsh)
 
 ## Install vagrant plugins
 vagrant plugin install vagrant-saltdeps vagrant-scp vagrant-serverspec vagrant-share vagrant-vmware-fusion vagrant-winrm

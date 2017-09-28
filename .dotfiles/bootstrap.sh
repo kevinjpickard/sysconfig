@@ -15,7 +15,8 @@ if [[ $os == "Darwin" ]]; then
     sed -e 's/^ *//' |
     tr -d '\n')
   echo "Installing Xcode..."
-  softwareupdate -i "$PROD" --verbose;
+  softwareupdate -ia "$PROD" --verbose;
+  sudo xcodebuild -license accept
 
   # Clone github .dotfiles repo
   echo "Pulling down system configuration files..."
