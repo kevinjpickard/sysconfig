@@ -35,7 +35,7 @@ git clone git://github.com/zsh-users/zsh-autosuggestions ${zsh_custom:-~/.oh-my-
 echo "Installing dein..."
 mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
 ln -s ~/.vim ${XDG_CONFIG_HOME:=$HOME}/nvim
-ln -s ~/.vimrc ${XDG_CONFIG_HOME:=$HOME}/nvim/init.vim
+ln -s ~/.vimrc ~/.vim/init.vim
 curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > ~/installer.sh
 sh ./installer.sh ~/.config/nvim/dein
 
@@ -62,7 +62,7 @@ vagrant plugin install vagrant-saltdeps vagrant-scp vagrant-serverspec vagrant-s
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
 
 ## Set various OSX Settings.
-echo "Tweaking some shit so its juuuuuuuuuust the way I like it..."
+echo "Tweaking some shit..."
 chmod +x ~/.dotfiles/osx_settings.sh
 sudo ~/.dotfiles/osx_settings.sh
 
