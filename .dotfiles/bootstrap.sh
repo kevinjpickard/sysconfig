@@ -4,28 +4,21 @@ os=$(uname)
 
 if [[ $os == "Darwin" ]]; then
   echo "Detected macOS, calling Darwin setup scripts..."
+
+  # Install dev tools (xcode)
+  echo "Parsing Xcode CLI install command..."
+  PROD=$(softwareupdate -l |
+    grep "\*.*Command Line" |
+    head -n 1 | awk -F"*" '{print $2}' |
+    sed -e 's/^ *//' |
+    tr -d '\n')
+  echo "Installing Xcode..."
+  softwareupdate -ia "$PROD" --verbose;
+
   # Install homebrew
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   brew update
 
-  # Install dev tools (xcode)
-
-  ## KJP(10/3/17): It seems the softwareupdate command is buggered in 10.13. 
-  ## Updates will sometimes (but not always) hang and never finish, or
-  ## will add XCode for 10.11 El Capitan. That Update always fails on High Sierra
-  ## so I perpetually will have an update pending. 
-
-  ## Since Xcode tools SHOULD have been installed with Homebrew, I'm just
-  ## going to take this out for now. Hopefully Apple will actually fix this bug. 
-
-  #echo "Parsing Xcode CLI install command..."
-  #PROD=$(softwareupdate -l |
-  #  grep "\*.*Command Line" |
-  #  head -n 1 | awk -F"*" '{print $2}' |
-  #  sed -e 's/^ *//' |
-  #  tr -d '\n')
-  #echo "Installing Xcode..."
-  #softwareupdate -ia "$PROD" --verbose;
 
   # Clone github .dotfiles repo
   echo "Pulling down system configuration files..."
