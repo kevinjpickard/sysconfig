@@ -63,8 +63,7 @@ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | b
 
 ## Set various OSX Settings.
 echo "Tweaking some shit..."
-chmod +x ~/.dotfiles/osx_settings.sh
-sudo ~/.dotfiles/osx_settings.sh
+~/.dotfiles/osx_settings.sh
 
 ## Hammerspoon Addons
 #   hs.tiling
@@ -73,7 +72,7 @@ git clone https://github.com/dsanson/hs.tiling $HOME/.hammerspoon/hs/tiling
 
 ## macOS Settings
 echo "Dark Theme?"
-sudo defaults write /Library/Preferences/.GlobalPreferences.plist AppleInterfaceTheme Dark
+defaults write /Library/Preferences/.GlobalPreferences.plist AppleInterfaceTheme Dark
 defaults write com.apple.finder AppleShowAllFiles YES
 defaults write com.apple.mouse scaling -1
 # Enabling the 'Anywhere' option in Gatekeeper
