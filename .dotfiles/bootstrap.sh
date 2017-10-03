@@ -12,11 +12,11 @@ if [[ $os == "Darwin" ]]; then
 
   ## KJP(10/3/17): It seems the softwareupdate command is buggered in 10.13. 
   ## Updates will sometimes (but not always) hang and never finish, or
-  ## will add XCode for 10.9 Mavericks. That Update always fails on High Sierra
-  ## (unsurprising) and so I perpetually will have an update pending. 
+  ## will add XCode for 10.11 El Capitan. That Update always fails on High Sierra
+  ## so I perpetually will have an update pending. 
 
   ## Since Xcode tools SHOULD have been installed with Homebrew, I'm just
-  ## going to take this out for now. 
+  ## going to take this out for now. Hopefully Apple will actually fix this bug. 
 
   #echo "Parsing Xcode CLI install command..."
   #PROD=$(softwareupdate -l |
