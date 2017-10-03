@@ -36,6 +36,7 @@ if [[ $os == "Darwin" ]]; then
   echo ".dotfiles" >> .gitignore
   /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
   alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+  dots push --set-upstream origin master
 
   # Run OSX Setup script
   ~/.dotfiles/osxsetup.sh
@@ -57,6 +58,7 @@ if [[ $os == "Linux" ]]; then
   echo ".dotfiles" >> .gitignore
   /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
   alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+  dots push --set-upstream origin master
 
   ~/.dotfiles/linuxsetup.sh
 fi
