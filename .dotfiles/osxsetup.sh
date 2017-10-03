@@ -29,7 +29,7 @@ git clone git://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
 ## ZSH Completion Suggestions 
-git clone git://github.com/zsh-users/zsh-autosuggestions ${zsh_custom:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone git://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 ## Install dein
 echo "Installing dein..."
@@ -37,12 +37,14 @@ mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
 ln -s ~/.vim ${XDG_CONFIG_HOME:=$HOME}/nvim
 ln -s ~/.vimrc ~/.vim/init.vim
 curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > ~/installer.sh
+mkdir -p ~/.config/nvim/dein
 sh ./installer.sh ~/.config/nvim/dein
 
 #	Initialize and install plugins
-echo "Initializing vim/nvim plugins..."
+echo "Initializing vim/nvim plugins, colors..."
 mkdir -p ~/.vim/colors
 curl https://raw.githubusercontent.com/tamelion/neovim-molokai/master/colors/molokai.vim -o ~/.vim/colors/molokai.vim
+vim +call dein#install +qall
 
 # Make swap, backup, etc directories, set permissions
 mkdir -p ~/backups/vim{backups,swap,undo}
