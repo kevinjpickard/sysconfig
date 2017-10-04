@@ -34,7 +34,7 @@ git clone git://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-
 ## Install dein
 echo "Installing dein..."
 mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
-ln -s ~/.vim ${XDG_CONFIG_HOME:=$HOME}/nvim
+ln -s ~/.vim/ ${XDG_CONFIG_HOME:=$HOME}/nvim
 ln -s ~/.vimrc ~/.vim/init.vim
 curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > ~/installer.sh
 mkdir -p ~/.config/nvim/dein
