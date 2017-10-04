@@ -74,7 +74,7 @@ git clone https://github.com/dsanson/hs.tiling $HOME/.hammerspoon/hs/tiling
 
 ## macOS Settings
 echo "Dark Theme?"
-defaults write /Library/Preferences/.GlobalPreferences.plist AppleInterfaceTheme Dark
+defaults write ~/Library/Preferences/.GlobalPreferences.plist AppleInterfaceStyle Dark
 defaults write com.apple.finder AppleShowAllFiles YES
 defaults write com.apple.mouse scaling -1
 # Enabling the 'Anywhere' option in Gatekeeper
