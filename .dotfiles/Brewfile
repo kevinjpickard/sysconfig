@@ -93,6 +93,7 @@ brew 'z'
 brew 'zookeeper'
 brew 'zsh'
 brew 'zsh-completions'
+
 # casks
 cask '1password'
 cask 'atom'
@@ -131,5 +132,6 @@ cask 'virtualbox'
 cask 'vlc'
 cask 'vmware-fusion'
 cask 'wireshark-chmodbpf'
+
 # fonts
 cask 'font-inconsolata'

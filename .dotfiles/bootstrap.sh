@@ -5,20 +5,19 @@ os=$(uname)
 if [[ $os == "Darwin" ]]; then
   echo "Detected macOS, calling Darwin setup scripts..."
 
-  # Install dev tools (xcode)
-  echo "Parsing Xcode CLI install command..."
+  # Update, if needed. Doesn't seem to install xcode anymore. 
+  echo "Checking for updates..."
   PROD=$(softwareupdate -l |
     grep "\*.*Command Line" |
     head -n 1 | awk -F"*" '{print $2}' |
     sed -e 's/^ *//' |
     tr -d '\n')
-  echo "Installing Xcode..."
   softwareupdate -ia "$PROD" --verbose;
 
   # Install homebrew
+  echo "Installing Homebrew..."
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   brew update
-
 
   # Clone github .dotfiles repo
   echo "Pulling down system configuration files..."

@@ -77,6 +77,17 @@ echo "Dark Theme?"
 defaults write ~/Library/Preferences/.GlobalPreferences.plist AppleInterfaceStyle Dark
 defaults write com.apple.finder AppleShowAllFiles YES
 defaults write com.apple.mouse scaling -1
+
+## Login Items
+osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Hammerspoon.app", hidden:false}'
+osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/iTerm.app", hidden:false}'
+osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Spotify.app", hidden:false}'
+osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/CCMenu.app", hidden:false}'
+osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Catlight.app", hidden:false}'
+osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Google Chrome.app", hidden:false}'
+osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Slack.app", hidden:false}'
+osascript -e 'tell application "System Events" to make login item at end with properties {path:"/Applications/Flux.app", hidden:false}'
+
 # Enabling the 'Anywhere' option in Gatekeeper
 sudo spctl --master-disable
 
