@@ -117,7 +117,7 @@ source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.z
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 echo 'Setting up aliases...'
-alias ll='ls -lha --color=auto'
+alias ll='ls -lhaH --color=auto'
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias tre='tree -CDFfpugha'
 
