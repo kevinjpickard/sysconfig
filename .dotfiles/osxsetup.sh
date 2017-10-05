@@ -37,7 +37,7 @@ mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
 ln -s ~/.vim/ ${XDG_CONFIG_HOME:=$HOME}/nvim
 ln -s ~/.vimrc ~/.vim/init.vim
 curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > ~/installer.sh
-mkdir -p ~/.config/nvim/dein
+mkdir -p ~/.vim/dein
 sh ./installer.sh ~/.config/nvim/dein
 
 #	Initialize and install plugins
