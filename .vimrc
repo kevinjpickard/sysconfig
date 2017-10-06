@@ -30,6 +30,7 @@ if dein#load_state('/Users/kevin/.config/nvim/dein')
   call dein#add('sheerun/vim-polyglot')
   call dein#add('rcabralc/monokai-airline.vim')
   call dein#add('sickill/vim-monokai')
+  call dein#add('rizzatti/dash.vim')
 
   " Required:
   call dein#end()
