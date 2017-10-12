@@ -31,6 +31,7 @@ if dein#load_state('/Users/kevin/.config/nvim/dein')
   call dein#add('rcabralc/monokai-airline.vim')
   call dein#add('sickill/vim-monokai')
   call dein#add('rizzatti/dash.vim')
+  call dein#add('davidhalter/jedi-vim')
 
   " Required:
   call dein#end()
@@ -118,4 +119,5 @@ if has("nvim")
 
   let g:neomake_serialize = 1
   let g:neomake_serialize_abort_on_error = 1
+  let g:jedi#completions_enabled = 0
 endif

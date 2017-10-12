@@ -35,7 +35,6 @@ git clone git://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-
 echo "Installing dein..."
 mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config}
 ln -s ${XDG_CONFIG_HOME:=$HOME}/nvim ~/.vim
-ln -s ~/.vimrc ~/.config/nvim/init.vim
 curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > ~/installer.sh
 mkdir -p ~/.config/nvim/dein
 sh ./installer.sh ~/.config/nvim/dein
@@ -43,6 +42,7 @@ sh ./installer.sh ~/.config/nvim/dein
 #	Initialize and install plugins
 echo "Initializing vim/nvim plugins, colors..."
 mkdir -p ~/.config/nvim/colors
+ln -s ~/.vimrc ~/.config/nvim/init.vim
 curl https://raw.githubusercontent.com/tamelion/neovim-molokai/master/colors/molokai.vim -o ~/.config/nvim/colors/molokai.vim
 vim +call dein#install +qall
 
