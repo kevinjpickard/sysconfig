@@ -61,7 +61,7 @@ chsh -s $(which zsh)
 export RBENV_VERSION=2.4.1
 eval "$(rbenv init -)"
 gem install bundler
-bundle install --gemfile=~/.dotfiles/Gemfile.lock
+bundle install --gemfile=~/.dotfiles/Gemfile
 
 ## Install vagrant plugins
 vagrant plugin install vagrant-saltdeps vagrant-scp vagrant-serverspec vagrant-share vagrant-vmware-fusion vagrant-winrm
