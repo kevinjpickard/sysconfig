@@ -3,15 +3,15 @@ if &compatible
 endif
 
 " Required:
-set runtimepath+=/Users/kevin/.config/nvim/dein/repos/github.com/Shougo/dein.vim
+set runtimepath+=$HOME/.config/nvim/dein/repos/github.com/Shougo/dein.vim
 
 " Required:
-if dein#load_state('/Users/kevin/.config/nvim/dein')
-  call dein#begin('/Users/kevin/.config/nvim/dein')
+if dein#load_state('$HOME/.config/nvim/dein')
+  call dein#begin('$HOME/.config/nvim/dein')
 
   " Let dein manage dein
   " Required:
-  call dein#add('/Users/kevin/.config/nvim/dein/repos/github.com/Shougo/dein.vim')
+  call dein#add('$HOME/.config/nvim/dein/repos/github.com/Shougo/dein.vim')
 
   " Add or remove your plugins here:
   call dein#add('scrooloose/nerdtree')
