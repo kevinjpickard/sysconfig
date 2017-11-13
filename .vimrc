@@ -88,7 +88,8 @@ set nowritebackup
 set noswapfile
 
 " Open new splits below and to the right
-set sb spr
+set splitbelow
+set splitright
 
 " Syntastic Settings
 let g:syntastic_always_populate_loc_list = 1

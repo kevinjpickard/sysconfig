@@ -148,13 +148,9 @@ echo 'Initializing TravisCI gem completions...'
 [ -f /Users/kevin/.travis/travis.sh ] && source /Users/kevin/.travis/travis.sh
 
 echo 'Initializing RBENV...'
-rbenv() { # Lazy-Loading RBENV to speed up shell start
-  unset -f rbenv
-  export RBENV_VERSION="2.2.3"
-  export PATH="$HOME/.rbenv/bin:$PATH"
-  eval "$(rbenv init -)"
-  rbenv "$@"
-}
+export RBENV_VERSION="2.4.1"
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
 
 # added by Miniconda3 4.3.21 installer
 export PATH="/Users/kevin/miniconda3/bin:$PATH"
