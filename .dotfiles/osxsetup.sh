@@ -11,7 +11,7 @@ echo "Installing a lot of shit..."
 brew cask install java
 brew tap homebrew/bundle
 brew bundle --file=~/.dotfiles/Brewfile
-curl https://bootstrap.pypa.io/get-pip.py | bash
+#curl https://bootstrap.pypa.io/get-pip.py | bash
 
 ## Install Powerline
 #	Install Powerline
@@ -58,7 +58,8 @@ echo $(which zsh) | sudo tee -a /etc/shells
 chsh -s $(which zsh)
 
 # Ruby Environment and Gems
-rbenv init
+export RBENV_VERSION=2.4.1
+eval "$(rbenv init -)"
 gem install bundler
 bundle install --gemfile=~/.dotfiles/Gemfile.lock
 
