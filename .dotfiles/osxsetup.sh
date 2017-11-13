@@ -57,14 +57,14 @@ echo $(which zsh) | sudo tee -a /etc/shells
 #		Now set shell to zsh
 chsh -s $(which zsh)
 
+## Install vagrant plugins
+vagrant plugin install vagrant-saltdeps vagrant-scp vagrant-serverspec vagrant-share vagrant-vmware-fusion vagrant-winrm
+
 # Ruby Environment and Gems
 export RBENV_VERSION=2.4.1
 eval "$(rbenv init -)"
 gem install bundler
 bundle install --gemfile=~/.dotfiles/Gemfile
-
-## Install vagrant plugins
-vagrant plugin install vagrant-saltdeps vagrant-scp vagrant-serverspec vagrant-share vagrant-vmware-fusion vagrant-winrm
 
 # Install NVM
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.1/install.sh | bash
