@@ -57,6 +57,11 @@ echo $(which zsh) | sudo tee -a /etc/shells
 #		Now set shell to zsh
 chsh -s $(which zsh)
 
+# Ruby Environment and Gems
+rbenv init
+gem install bundler
+bundle install --gemfile=~/.dotfiles/Gemfile.lock
+
 ## Install vagrant plugins
 vagrant plugin install vagrant-saltdeps vagrant-scp vagrant-serverspec vagrant-share vagrant-vmware-fusion vagrant-winrm
 
