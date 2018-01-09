@@ -126,6 +126,7 @@ echo 'Starting powerline...'
 
 echo 'Setting up JumpCloud workspace...'
 export JUMPCLOUD_WORKSPACE='/Users/kevin/Documents/github/jumpcloud'
+export PGDATA='/var/lib/postgresql/data/pgdata'
 
 echo 'Setting git editor...'
 export GIT_EDITOR='/Applications/MacVim.app/Contents/MacOS/Vim -gf '
@@ -175,3 +176,4 @@ export XDG_CONFIG_HOME=~/.config
 echo 'Finished sourcing ~/.zshrc.'
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+export PATH="/usr/local/opt/mongodb@3.0/bin:$PATH"
