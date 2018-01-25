@@ -38,7 +38,7 @@ if [[ $os == "Linux" ]]; then
   # Arch
 	if [[ -e /etc/arch-release ]]; then
 		echo "Detected Arch Linux"
-		sudo pacman -Sy git
+		sudo pacman -Sy --noconfirm git
 	else
 		# Other Linux setup
 		echo "Detected Linux"
