@@ -1,17 +1,20 @@
-echo 'Detected Arch linux, redirecting...'
+#/bin/bash -ex
+
+echo 'Detected Arch linux'
+
 ## Set Locale, Language, Time Zone, Hostname, etc.
 timedatectl set-ntp true
-rm /etc/localtime
-ln -sf /usr/share/zoneinfo/America/Denver /etc/localtime
+sudo rm /etc/localtime
+sudo ln -sf /usr/share/zoneinfo/America/Denver /etc/localtime
 hwclock --systohc
 sed -i '/en-US.utf-8 UTF-8/s/^#//g' /etc/locale.gen
-locale-gen
+sudo locale-gen
 echo "LANGUAGE=en_US
 LANG=en_US.UTF-8
-LC_ALL=C" > /etc/locale.conf
+LC_ALL=C" | sudo tee -a /etc/locale.conf
 echo 'Hostname?'
 read INPUT
-echo $INPUT > /etc/hostname
+echo $INPUT | sudo tee /etc/hostname
 
 ## Install Yaourt
 mkdir -p ~/Documents/github.com/scratch
@@ -25,7 +28,7 @@ $(cd ~/Documents/github.com/scratch/yaourt; makepkg -si)
 #curl -L https://bit.ly/glances | /bin/bash
 
 # All non-AUR Apps
-yaourt --needed -S - < ~/.dotfiles/arch_packages
+yaourt --needed --noconfirm -S - < ~/.dotfiles/arch_packages
 
 ## AUR packages are a bit more difficult
 #	These are a bit more difficult. Read them into an array
