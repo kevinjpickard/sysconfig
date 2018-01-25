@@ -35,9 +35,15 @@ if [[ $os == "Darwin" ]]; then
 fi
 
 if [[ $os == "Linux" ]]; then
-  # Linux setup
-  echo "linux detected, calling Linux setup scripts..."
-  sudo apt-get install git -y
+  # Arch
+	if [[ -e /etc/arch-release ]]; then
+		echo "Detected Arch Linux"
+		sudo pacman -Sy git
+	else
+		# Other Linux setup
+		echo "Detected Linux"
+		sudo apt-get install git -y
+	fi
 
   ## Clone github .dotfiles repo
   echo "Pulling down system configuration files..."
@@ -52,5 +58,9 @@ if [[ $os == "Linux" ]]; then
   alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
   dots push --set-upstream origin master
 
-  ~/.dotfiles/linuxsetup.sh
+	if [[ -e /etc/arch-release ]]; then 
+		~/.dotfiles/arch_setup.sh
+	else
+		~/.dotfiles/linuxsetup.sh
+	fi
 fi

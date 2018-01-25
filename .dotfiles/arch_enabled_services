@@ -1,0 +1,10 @@
+autovt@.service                                                  enabled        
+ckb-daemon.service                                               enabled        
+display-manager.service                                          enabled        
+getty@.service                                                   enabled        
+lm_sensors.service                                               enabled        
+nvidia-persistenced.service                                      enabled        
+sddm-plymouth.service                                            enabled        
+systemd-fsck-root.service                                        enabled-runtime
+systemd-timesyncd.service                                        enabled        
+remote-fs.target                                                 enabled        
