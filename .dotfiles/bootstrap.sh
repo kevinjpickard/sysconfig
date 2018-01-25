@@ -51,16 +51,15 @@ if [[ $os == "Linux" ]]; then
   rm -rf ~/.dotfiles
   git clone --bare https://github.com/kevinjpickard/.dotfiles.git $HOME/.dotfiles
   /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME fetch
-  /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout master
-  /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull origin master
+  /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout -f arch
+  /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull -f origin arch
   echo ".dotfiles" >> .gitignore
   /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
-  alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
   /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME push --set-upstream origin master
 
 	if [[ -e /etc/arch-release ]]; then 
-		~/.dotfiles/arch_setup.sh
+		bash ~/.dotfiles/arch_setup.sh
 	else
-		~/.dotfiles/linuxsetup.sh
+		bash ~/.dotfiles/linuxsetup.sh
 	fi
 fi
