@@ -20,15 +20,15 @@ echo $INPUT | sudo tee /etc/hostname
 mkdir -p ~/Documents/github.com/scratch
 git clone https://aur.archlinux.org/package-query.git ~/Documents/github.com/scratch/package-query
 git clone https://aur.archlinux.org/yaourt.git ~/Documents/github.com/scratch/yaourt
-$(cd ~/Documents/github.com/scratch/package-query; makepkg -si)
-$(cd ~/Documents/github.com/scratch/yaourt; makepkg -si)
+$(cd ~/Documents/github.com/scratch/package-query; makepkg --noconfirm -si)
+$(cd ~/Documents/github.com/scratch/yaourt; makepkg --noconfirm -si)
 
 ## Install Apps
 # Glances
 #curl -L https://bit.ly/glances | /bin/bash
 
 # All non-AUR Apps
-yaourt --needed --noconfirm -S - < ~/.dotfiles/arch_packages
+sudo pacman --needed --noconfirm -S - < ~/.dotfiles/arch_packages
 
 ## AUR packages are a bit more difficult
 #	These are a bit more difficult. Read them into an array
