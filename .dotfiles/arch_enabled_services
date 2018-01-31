@@ -3,9 +3,8 @@ ckb-daemon.service
 display-manager.service        
 getty@.service       
 lm_sensors.service      
-nvidia-persistenced.service
 openvpn-client@US_Midwest.service
-sddm-plymouth.service       
+sddm.service       
 systemd-fsck-root.service
 systemd-timesyncd.service     
 remote-fs.target        
