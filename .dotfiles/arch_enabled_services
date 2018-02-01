@@ -1,6 +1,5 @@
 autovt@.service        
 ckb-daemon.service        
-display-manager.service        
 getty@.service       
 lm_sensors.service      
 openvpn-client@US_Midwest.service
