@@ -28,10 +28,12 @@ $(cd ~/Documents/github.com/scratch/yaourt; makepkg --noconfirm -si)
 #curl -L https://bit.ly/glances | /bin/bash
 
 # All non-AUR Apps
-sudo pacman --needed --noconfirm -S - < ~/.dotfiles/arch_packages
+echo 'Installing Apps...'
+sudo pacman --needed --noconfirm -Sy - < ~/.dotfiles/arch_packages
 
 ## AUR packages are a bit more difficult
 #	These are a bit more difficult. Read them into an array
+echo 'Installing AUR packages...'
 packages=$(<~/.dotfiles/arch_packages_aur)
 # Now iterate and install
 for package in $packages; do
