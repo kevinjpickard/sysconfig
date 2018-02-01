@@ -26,6 +26,8 @@ $(cd ~/Documents/github.com/scratch/yaourt; makepkg --noconfirm -si)
 ## Install Apps
 # Glances
 #curl -L https://bit.ly/glances | /bin/bash
+# Keys
+gpg --recv-keys 8F0871F202119294
 
 # All non-AUR Apps
 echo 'Installing Apps...'
