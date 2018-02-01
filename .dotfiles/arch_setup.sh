@@ -28,6 +28,7 @@ $(cd ~/Documents/github.com/scratch/yaourt; makepkg --noconfirm -si)
 #curl -L https://bit.ly/glances | /bin/bash
 # Keys
 gpg --recv-keys 8F0871F202119294
+gpg --recv-keys 702353E0F7E48EDB
 
 # All non-AUR Apps
 echo 'Installing Apps...'
