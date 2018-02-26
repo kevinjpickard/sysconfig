@@ -32,6 +32,7 @@ if dein#load_state('$HOME/.config/nvim/dein')
   call dein#add('sickill/vim-monokai')
   call dein#add('rizzatti/dash.vim')
   call dein#add('davidhalter/jedi-vim')
+  call dein#add('arcticicestudio/nord-vim')
 
   " Required:
   call dein#end()
@@ -100,12 +101,13 @@ let g:syntastic_check_on_wq = 1
 " vim-airline
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme='molokai'
+let g:airline_theme='nord'
 
 if has("nvim")
   " Neovim changes
-  set background = "molokai"
-  colorscheme molokai
+  "set background = 'molokai'
+  "colorscheme molokai
+  colorscheme nord
   set termguicolors
   set guicursor=
 

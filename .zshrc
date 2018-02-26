@@ -83,6 +83,9 @@ if [[ $OSTYPE == darwin* ]]; then
   
   # Agent version check
   alias vcheck='python ~/scripts/vcheck.py'
+
+  # ZSH iTerm2 Integration
+  test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 fi
 
 # You may need to manually set your language environment
@@ -122,7 +125,7 @@ alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias tre='tree -CDFfpugha'
 
 echo 'Starting powerline...'
-. /usr/local/lib/python3.6/*-packages/powerline/bindings/zsh/powerline.zsh
+. /usr/lib/python3.6/site-packages/powerline/bindings/zsh/powerline.zsh
 
 echo 'Setting up JumpCloud workspace...'
 export JUMPCLOUD_WORKSPACE='/Users/kevin/Documents/github/jumpcloud'
@@ -173,7 +176,14 @@ export XDG_CONFIG_HOME=~/.config
 # Miniconda
 #export PYTHONPATH=/usr/local/miniconda3/bin:$PYTHONPATH
 
+# pyenv
+if [[ -e ~/.pyenv ]]; then
+  export PATH="/home/kevin/.pyenv/bin:$PATH"
+  eval "$(pyenv init -)"
+  eval "$(pyenv virtualenv-init -)"
+  export PYENV_ROOT="$HOME/.pyenv"
+  export PATH="$PYENV_ROOT/bin:$PATH"
+fi
+
 echo 'Finished sourcing ~/.zshrc.'
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-export PATH="/usr/local/opt/mongodb@3.0/bin:$PATH"
