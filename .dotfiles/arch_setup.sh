@@ -64,7 +64,7 @@ sh ./installer.sh ~/.config/nvim/dein
 echo "Setting up folder structure..."
 mkdir -p ${XDG_CONFIG_HOME:=$HOME/.config/nvim}
 ln -s ~/.config/nvim ~/.vim
-ln -s ~/.vimrc $XDG_CONFIG_HOME/nvim/init.vim
+ln -s $XDG_CONFIG_HOME/nvim/init.vim ~/.vimrc
 echo "Setting up neovim..."
 # molokai color scheme
 mkdir ~/.vim/colors
