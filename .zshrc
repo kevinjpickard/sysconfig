@@ -1,14 +1,14 @@
-echo 'Sourcing ~/.zshrc...'
+#echo 'Sourcing ~/.zshrc...'
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-echo 'Exporting ZSH...'
+#echo 'Exporting ZSH...'
 export ZSH="$HOME/.oh-my-zsh"
 
 # Set name of the theme to load. Optionally, if you set this to "random" # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-#ZSH_THEME="minimal"
+#ZSH_THEME="bureau"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -20,7 +20,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # Uncomment the following line to disable bi-weekly auto-update checks.
 # DISABLE_AUTO_UPDATE="true"
 ## Automatically accept update
-echo 'Disabling update prompt...'
+#echo 'Disabling update prompt...'
 DISABLE_UPDATE_PROMPT="true"
 
 # Uncomment the following line to change how often to auto-update (in days).
@@ -36,7 +36,7 @@ DISABLE_UPDATE_PROMPT="true"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-echo 'Enabling completion dots...'
+#echo 'Enabling completion dots...'
 COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
@@ -56,16 +56,16 @@ COMPLETION_WAITING_DOTS="true"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-echo 'Initializing plugins...'
+#echo 'Initializing plugins...'
 plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
 
-echo 'Initializing oh-my-zsh...'
+#echo 'Initializing oh-my-zsh...'
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
 # GO env
-echo 'Setting up GO env...'
+#echo 'Setting up GO env...'
 export GOPATH="$HOME/go"
 export GOBIN="$GOPATH/bin"
 export GOEXE="$GOPATH/exe"
@@ -74,7 +74,7 @@ export GOEXE="$GOPATH/exe"
 
 # OSX env
 if [[ $OSTYPE == darwin* ]]; then
-  echo 'Setting up macOS env...'
+  #echo 'Setting up macOS env...'
   source ~/.myenvvars
 
   # Homebrew installs + coreutils
@@ -103,9 +103,9 @@ fi
 
 # Completions
 ## ZSH
-echo 'Initializing ZSH completions...'
+#echo 'Initializing ZSH completions...'
 fpath=(/usr/local/share/zsh-completions $fpath)
-echo 'Initializing Google Cloud SDK completions...'
+#echo 'Initializing Google Cloud SDK completions...'
 source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
@@ -116,22 +116,22 @@ source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.z
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-echo 'Setting up aliases...'
+#echo 'Setting up aliases...'
 alias ll='ls -lhaH --color=auto'
 alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias tre='tree -CDFfpugha'
 
-echo 'Starting powerline...'
-. /usr/local/lib/python3.6/*-packages/powerline/bindings/zsh/powerline.zsh
+#echo 'Starting powerline...'
+#. /usr/local/lib/python3.6/*-packages/powerline/bindings/zsh/powerline.zsh
 
-echo 'Setting up JumpCloud workspace...'
+#echo 'Setting up JumpCloud workspace...'
 export JUMPCLOUD_WORKSPACE='/Users/kevin/Documents/github/jumpcloud'
 export PGDATA='/var/lib/postgresql/data/pgdata'
 
-echo 'Setting git editor...'
+#echo 'Setting git editor...'
 export GIT_EDITOR='/Applications/MacVim.app/Contents/MacOS/Vim -gf '
 
-echo 'Initializing NVM...'
+#echo 'Initializing NVM...'
 nvm() { # Lazy-Loading NVM to speed up shell start
   unset -f nvm
   export NVM_DIR="$HOME/.nvm"
@@ -145,10 +145,10 @@ nvm() { # Lazy-Loading NVM to speed up shell start
 #alias vcheck="python ~/scripts/vcheck.py"
 
 # added by travis gem
-echo 'Initializing TravisCI gem completions...'
+#echo 'Initializing TravisCI gem completions...'
 [ -f /Users/kevin/.travis/travis.sh ] && source /Users/kevin/.travis/travis.sh
 
-echo 'Initializing RBENV...'
+#echo 'Initializing RBENV...'
 export RBENV_VERSION="2.4.1"
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
@@ -173,7 +173,15 @@ export XDG_CONFIG_HOME=~/.config
 # Miniconda
 #export PYTHONPATH=/usr/local/miniconda3/bin:$PYTHONPATH
 
-echo 'Finished sourcing ~/.zshrc.'
-
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 export PATH="/usr/local/opt/mongodb@3.0/bin:$PATH"
+source ~/scratch/goto/goto.bash
+source ~/.antigen/init.zsh
+
+# Antigen pkg manager
+antigen use oh-my-zsh
+antigen theme bureau
+antigen bundle desyncr/auto-ls
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions
+
+antigen apply
