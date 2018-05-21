@@ -13,6 +13,7 @@ hotkey.bind(mash, "f", function() tiling.goToLayout("fullscreen") end)
 hotkey.bind(mash, ".", function() hs.spotify.next() hs.spotify.displayCurrentTrack() end)
 hotkey.bind(mash, ",", function() hs.spotify.previous() end)
 hotkey.bind(mash, "/", function() hs.spotify.displayCurrentTrack() end)
+hotkey.bind(mash, "p", function() hs.spotify.playpause() end)
 
 -- If you want to set the layouts that are enabled
 tiling.set('layouts', {

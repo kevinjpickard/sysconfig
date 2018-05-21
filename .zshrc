@@ -116,16 +116,12 @@ source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.z
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#echo 'Setting up aliases...'
-alias ll='ls -lhaH --color=auto'
-alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-alias tre='tree -CDFfpugha'
 
 #echo 'Starting powerline...'
 #. /usr/local/lib/python3.6/*-packages/powerline/bindings/zsh/powerline.zsh
 
 #echo 'Setting up JumpCloud workspace...'
-export JUMPCLOUD_WORKSPACE='/Users/kevin/Documents/github/jumpcloud'
+export JUMPCLOUD_WORKSPACE='/Users/kevin/go/src/github.com/TheJumpCloud'
 export PGDATA='/var/lib/postgresql/data/pgdata'
 
 #echo 'Setting git editor...'
@@ -185,3 +181,8 @@ antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
 
 antigen apply
+
+#echo 'Setting up aliases...'
+alias ll='ls --color=auto -lhaH'
+alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias tre='tree -CDFfpugha'
