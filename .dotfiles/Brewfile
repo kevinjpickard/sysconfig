@@ -9,6 +9,7 @@ tap 'homebrew/homebrew-services'
 # dev stuff
 brew 'amazon-ecs-cli'
 brew 'ansible'
+brew 'antigen'
 brew 'atool'
 brew 'autoconf'
 brew 'automake'
