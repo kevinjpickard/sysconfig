@@ -87,7 +87,7 @@ antigen bundle oldratlee/hacker-quotes
 antigen apply
 
 alias ll='ls --color=auto -lhaH'
-alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias dots='/usr/bin/git --git-dir=${HOME}/.dotfiles/ --work-tree=${HOME}'
 alias tre='tree -CDFfpugha'
 # Alias to update all git repos in a directory
 alias gitsyncall='find . -maxdepth 1 -type d -exec sh -c "(cd {} && pwd && git sync)" ";"'
