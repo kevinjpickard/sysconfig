@@ -1,0 +1,3 @@
+# Diraction definitions
+code      $HOME/go/src/github.com/TheJumpCloud
+policies  $HOME/go/src/github.com/TheJumpCloud/jumpcloud-policies

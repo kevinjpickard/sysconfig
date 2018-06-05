@@ -71,7 +71,6 @@ export XDG_CONFIG_HOME=~/.config
 #export PYTHONPATH=/usr/local/miniconda3/bin:$PYTHONPATH
 
 export PATH="/usr/local/opt/mongodb@3.0/bin:$PATH"
-source ~/scratch/goto/goto.bash
 source $(brew --prefix)/share/antigen/antigen.zsh
 
 # Antigen pkg manager
@@ -83,6 +82,7 @@ antigen bundle zdharma/fast-syntax-highlighting
 antigen bundle zsh-users/zsh-autosuggestions
 antigen bundle caarlos0/zsh-git-sync
 antigen bundle oldratlee/hacker-quotes
+antigen bundle adrieankhisbe/diractions
 
 antigen apply
 
