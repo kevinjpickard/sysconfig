@@ -36597,8 +36597,10 @@
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/scratch/iTerm2-Color-Schemes/schemes</string>
+	<string>~/Downloads/nord-iterm2-0.2.0/src/xml</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
+	<string>{712, 448}</string>
+	<key>NSNavPanelExpandedSizeForSaveMode</key>
 	<string>{712, 448}</string>
 	<key>NSQuotedKeystrokeBinding</key>
 	<string></string>
@@ -36642,19 +36644,23 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>630 64 606 456 0 0 2560 1418 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>246 -721 918 512 0 -1050 1680 1050 </string>
+	<string>-1290 90 796 473 -1440 -950 1440 2538 </string>
+	<key>NSWindow Frame UKCrashReporter</key>
+	<string>230 834 592 584 0 0 2560 1418 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>-1440 -1120 1049 2538 -1440 -1120 1440 2560 </string>
+	<string>-1280 -162 1049 2538 -1440 -950 1440 2560 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
-	<string>354 293 1049 1028 0 0 2560 1440 </string>
+	<string>440 133 1049 1028 0 0 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 2</key>
-	<string>302 150 1049 1028 0 0 2560 1440 </string>
+	<string>-1371 -1120 1049 2560 -1440 -1120 1440 2560 </string>
 	<key>NSWindow Frame iTerm Window 3</key>
-	<string>0 5 1049 1173 0 0 2560 1418 </string>
+	<string>-566 -828 1049 2560 -1440 -1120 1440 2538 </string>
 	<key>NSWindow Frame iTerm Window 4</key>
-	<string>569 0 1049 1404 0 0 2560 1440 </string>
+	<string>-1406 -1120 1049 2560 -1440 -1120 1440 2560 </string>
 	<key>NSWindow Frame iTerm Window 5</key>
-	<string>733 3 1273 1404 0 0 2560 1418 </string>
+	<string>0 12 1049 1166 0 0 1920 1178 </string>
+	<key>NSWindow Frame iTerm Window 6</key>
+	<string>0 12 1049 1166 0 0 1920 1178 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -36917,6 +36923,8 @@
 			<real>0.99548192771084332</real>
 			<key>Idle Code</key>
 			<integer>0</integer>
+			<key>Initial Text</key>
+			<string>tmux</string>
 			<key>Jobs to Ignore</key>
 			<array>
 				<string>rlogin</string>
@@ -37234,6 +37242,8 @@
 			<string>DroidSansMonoSlashedForPowerline 14</string>
 			<key>Option Key Sends</key>
 			<integer>2</integer>
+			<key>Place Prompt at First Column</key>
+			<false/>
 			<key>Prevent Opening in a Tab</key>
 			<true/>
 			<key>Prompt Before Closing 2</key>
@@ -37268,6 +37278,8 @@
 			<false/>
 			<key>Shortcut</key>
 			<string></string>
+			<key>Show Mark Indicators</key>
+			<false/>
 			<key>Silence Bell</key>
 			<true/>
 			<key>Smart Cursor Color</key>
@@ -37980,6 +37992,14 @@
 	</array>
 	<key>NoSyncCommandHistoryHasEverBeenUsed</key>
 	<true/>
+	<key>NoSyncDoNotWarnBeforeMultilinePaste</key>
+	<true/>
+	<key>NoSyncDoNotWarnBeforeMultilinePaste_selection</key>
+	<integer>0</integer>
+	<key>NoSyncDoNotWarnBeforePastingOneLineEndingInNewlineAtShellPrompt</key>
+	<true/>
+	<key>NoSyncDoNotWarnBeforePastingOneLineEndingInNewlineAtShellPrompt_selection</key>
+	<integer>1</integer>
 	<key>NoSyncHaveWarnedAboutPasteConfirmationChange</key>
 	<true/>
 	<key>NoSyncInstallationId</key>
@@ -38050,7 +38070,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2017-12-11T18:49:11Z</date>
+	<date>2018-05-21T19:33:12Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -38063,6 +38083,8 @@
 	<integer>1</integer>
 	<key>TabViewType</key>
 	<integer>0</integer>
+	<key>UKCrashReporterLastCrashReportDate</key>
+	<real>1518627968</real>
 	<key>UseLionStyleFullscreen</key>
 	<true/>
 	<key>WordCharacters</key>
