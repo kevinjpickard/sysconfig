@@ -102,6 +102,11 @@ let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline_theme='molokai'
 
+" listchars to show tabs/spaces
+"   To enable   :set list
+"   To disable  :set nolist 
+set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
+
 if has("nvim")
   " Neovim changes
   set background = "molokai"
