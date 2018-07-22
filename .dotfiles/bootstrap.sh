@@ -55,9 +55,10 @@ if [[ $os == "Linux" ]]; then
   /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull -f origin arch
   echo ".dotfiles" >> .gitignore
   /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
-  /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME push --set-upstream origin master
+  /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME --set-upstream origin arch
 
 	if [[ -e /etc/arch-release ]]; then 
+    echo 'calling arch setup files...'
 		bash ~/.dotfiles/arch_setup.sh
 	else
 		bash ~/.dotfiles/linuxsetup.sh

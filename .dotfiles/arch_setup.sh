@@ -14,13 +14,13 @@ LANG=en_US.UTF-8
 LC_ALL=C" | sudo tee -a /etc/locale.conf
 
 ## Install Yaourt
+echo 'Installing Yay'
 mkdir -p ~/Documents/github.com/scratch
-git clone https://aur.archlinux.org/package-query.git ~/Documents/github.com/scratch/package-query
-git clone https://aur.archlinux.org/yaourt.git ~/Documents/github.com/scratch/yaourt
-$(cd ~/Documents/github.com/scratch/package-query; makepkg --noconfirm -si)
-$(cd ~/Documents/github.com/scratch/yaourt; makepkg --noconfirm -si)
+git clone https://aur.archlinux.org/yay.git ~/Documents/github.com/scratch/yay
+$(cd ~/Documents/github.com/scratch/yay; makepkg --noconfirm -si)
 
 ## Install Apps
+echo 'Installing apps'
 # Glances
 #curl -L https://bit.ly/glances | /bin/bash
 # Keys
@@ -37,7 +37,7 @@ echo 'Installing AUR packages...'
 packages=$(<~/.dotfiles/arch_packages_aur)
 # Now iterate and install
 for package in $packages; do
-  yaourt -Sy --devel --aur --noconfirm $package
+  yay -Sy --devel --aur --noconfirm $package
 done
 
 ## Enable Services
@@ -49,6 +49,7 @@ done
 
 ## Setting up ZSH
 # Clone oh-my-zsh
+echo 'Setting up zsh'
 git clone git://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
 # Syntax Highlighting
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting

@@ -1,0 +1,20 @@
+---
+driver:
+  name: vagrant
+  synced_folders:
+    - [".", "/tmp/kitchen"]
+
+provisioner:
+  name: shell
+  sudo: false
+
+platforms:
+  - name: archlinux
+    driver:
+      box: archlinux/archlinux
+
+suites:
+  - name: default
+    run_list:
+    attributes:
+
