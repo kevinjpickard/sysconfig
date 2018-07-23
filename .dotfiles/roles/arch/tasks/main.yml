@@ -4,7 +4,22 @@
   pacman:
     update_cache: yes
     upgrade: yes
-    
+
+- name: Install pacman scripts and tools
+  pacman:
+    name: pacman-contrib
+    state: latest
+
+- name: Backup Mirrors
+  command: mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.orig
+  become: yes
+  become_method: sudo
+
+- name: Rank Mirrors
+  shell: rankmirrors /etc/pacman.d/mirrorlist.orig > /etc/pacman.d/mirrorlist
+  become: yes
+  become_method: sudo
+
 - name: Install Kernel
   pacman:
     name: linux
@@ -95,9 +110,3 @@
     name: iputils
     state: latest
     
-- name: Install mandb
-  pacman:
-    name: mandb
-    state: latest
-    
-
