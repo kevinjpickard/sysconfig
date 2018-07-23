@@ -1,2 +1,2 @@
 sudo pacman -Sy ansible --noconfirm
-ansible-playboot --connection=local /home/vagrant/.dotfiles/arch.yml
+ansible-playbook --connection=local /tmp/kitchen/.dotfiles/arch.yml

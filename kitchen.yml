@@ -2,7 +2,7 @@
 driver:
   name: vagrant
   synced_folders:
-    - [".", "/home/vagrant"]
+    - [".", "/tmp/kitchen"]
   customize:
     cableconnected1: 'on'
 
