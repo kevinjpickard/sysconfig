@@ -2,7 +2,9 @@
 driver:
   name: vagrant
   synced_folders:
-    - [".", "/tmp/kitchen"]
+    - [".", "/home/vagrant"]
+  customize:
+    cableconnected1: 'on'
 
 provisioner:
   name: shell
