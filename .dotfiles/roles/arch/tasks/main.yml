@@ -163,3 +163,34 @@
   become_method: sudo
   when: yay.stat.exists == False
 
+- name: Install Deepin DE Main Group
+  pacman:
+    name: deepin
+    state: latest
+
+- name: Install Deepin DE Extra Group
+  pacman:
+    name: deepin-extra
+    state: latest
+
+- name: Install Network Manager
+  pacman:
+    name: networkmanager
+    state: latest
+
+- name: Update LightDM Config
+  lineinfile:
+    path: /etc/lightdm/lightdm.conf
+    regexp: '^greeter-session=*'
+    line: 'greeter-session=lightdm-deepin-greeter'
+
+- name: Enable LightDM
+  systemd:
+    name: lightdm
+    enabled: yes
+
+- name: Enable NetworkManager.service
+  systemd:
+    name: NetworkManager.service
+    enabled: yes
+
