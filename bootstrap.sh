@@ -10,4 +10,4 @@ if [[ -e /usr/lib/libnsl.so ]]; then
 fi
 
 sudo pacman -Sy --noconfirm ansible
-ansible-playbook --connection=local -vvv /tmp/kitchen/.dotfiles/arch.yml
+ansible-playbook --connection=local /tmp/kitchen/.dotfiles/arch.yml
