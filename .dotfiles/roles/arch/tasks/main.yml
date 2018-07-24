@@ -118,20 +118,48 @@
     name: iputils
     state: latest
     
-- file:
-    path: "{{home}}/Documents/github/scratch"
-    state: directory
-  become: true
-  become_method: sudo
-  become_user: "{{account}}"
+- name: Create me
+  user:
+    name: kevin
+    comment: Kevin Pickard
+    group: wheel
+    append: yes
+
+- name: Create AUR Manager
+  user:
+    name: aurman
+    comment: "AUR Manager"
+    shell: /bin/nologin
+    home: /home/aurman
+    append: yes
+
+- stat: path=/home/aurman/aur/yay
+  register: yay
 
 - name: Clone Yay
   git:
-    repo: https://github.com/Jguer/yay.git
-    dest: ~/Documents/github/scratch/yay
-    clone: yes
+    repo: https://aur.archlinux.org/yay.git
+    dest: /home/aurman/aur/yay
+    accept_hostkey: yes
+  become: yes
+  become_user: aurman
+  when: yay.stat.exists == False
 
-- name: Compile and Install Yay
-  command: makepkg -si
-  chdir: ~/Documents/github/scratch/yay
+- name: Install Build Dependencies
+  pacman:
+    name: go
+    state: latest
+  when: yay.stat.exists == False
+
+- name: Build Yay
+  command: chdir=/home/aurman/aur/yay makepkg --cleanbuild --nodeps --force
+  become: yes
+  become_user: aurman
+  when: yay.stat.exists == False
+ 
+- name: Install Yay
+  shell: chdir=/home/aurman/aur/yay pacman -U --noconfirm $(ls | grep -i -m 1 yay*.pkg.tar.xz)
+  become: yes
+  become_method: sudo
+  when: yay.stat.exists == False
 
