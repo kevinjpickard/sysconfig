@@ -10,15 +10,23 @@
     name: pacman-contrib
     state: latest
 
+- stat: path=/etc/pacman.d/mirrorlist.orig
+  register: backup
+
 - name: Backup Mirrors
   command: mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.orig
   become: yes
   become_method: sudo
+  when: backup.stat.exists == False
+
+- stat: path=/etc/pacman.d/mirrorlist
+  register: ranked
 
 - name: Rank Mirrors
   shell: rankmirrors /etc/pacman.d/mirrorlist.orig > /etc/pacman.d/mirrorlist
   become: yes
   become_method: sudo
+  when: ranked.stat.exists == False
 
 - name: Install Kernel
   pacman:
@@ -110,3 +118,20 @@
     name: iputils
     state: latest
     
+- file:
+    path: "{{home}}/Documents/github/scratch"
+    state: directory
+  become: true
+  become_method: sudo
+  become_user: "{{account}}"
+
+- name: Clone Yay
+  git:
+    repo: https://github.com/Jguer/yay.git
+    dest: ~/Documents/github/scratch/yay
+    clone: yes
+
+- name: Compile and Install Yay
+  command: makepkg -si
+  chdir: ~/Documents/github/scratch/yay
+
