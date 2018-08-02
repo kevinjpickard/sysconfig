@@ -9,5 +9,14 @@ if [[ -e /usr/lib/libnsl.so ]]; then
   sudo rm /usr/lib/libnsl.so
 fi
 
-sudo pacman -Sy --noconfirm ansible
-ansible-playbook --connection=local /tmp/kitchen/.dotfiles/arch.yml
+# Using command -v for POSIX compatibility
+if [[ !$(command -v ansible-playbook) ]]; then
+  echo 'Ansible not installed, installing now...'
+	sudo pacman -Sy --noconfirm --needed ansible
+fi
+
+if [[ -e /tmp/kitchen/.dotfiles/arch.retry ]]; then
+	ansible-playbook --connection=local /tmp/kitchen/.dotfiles/arch.yml --extra-vars "username=kevin password=test hostname=KJP-test" --limit @/tmp/kitchen/.dotfiles/arch.retry
+else
+	ansible-playbook --connection=local /tmp/kitchen/.dotfiles/arch.yml --extra-vars "username=kevin password=test hostname=KJP-test"
+fi

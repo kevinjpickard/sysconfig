@@ -5,7 +5,9 @@ driver:
     - [".", "/tmp/kitchen"]
   customize:
     cableconnected1: 'on'
-
+    memory: 3072
+    cpus: 3
+    
 provisioner:
   name: shell
   sudo: false
@@ -19,4 +21,3 @@ suites:
   - name: default
     run_list:
     attributes:
-

@@ -1,0 +1,200 @@
+---
+# Arch specific tasks
+- debug: msg="Running Arch Linux Tasks"
+
+- name: Update pacman Cache
+  pacman:
+    update_cache: yes
+    upgrade: yes
+
+- name: Install pacman scripts and tools
+  pacman:
+    name: pacman-contrib
+    state: latest
+
+- stat: path=/etc/pacman.d/mirrorlist.orig
+  register: backup
+
+- name: Backup Mirrors
+  command: mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.orig
+  become: yes
+  become_method: sudo
+  when: backup.stat.exists == False
+
+- stat: path=/etc/pacman.d/mirrorlist
+  register: ranked
+
+- name: Rank Mirrors
+  shell: rankmirrors /etc/pacman.d/mirrorlist.orig > /etc/pacman.d/mirrorlist
+  become: yes
+  become_method: sudo
+  when: ranked.stat.exists == False
+
+- name: Install Kernel
+  pacman:
+    name: linux
+    state: latest
+    
+- name: Install Kernel Headers
+  pacman:
+    name: linux-headers
+    state: latest
+    
+- name: Install Base Development Packages
+  pacman:
+    name: base-devel
+    state: latest
+    
+- name: Install Neovim
+  pacman:
+    name: neovim
+    state: latest
+    
+- name: Install git
+  pacman:
+    name: git
+    state: latest
+    
+- name: Install DHCP Tools
+  pacman:
+    name: dhcpcd
+    state: latest
+    
+- name: Install GRUB
+  pacman:
+    name: grub
+    state: latest
+    
+- name: Install Boot Manager
+  pacman:
+    name: efibootmgr
+    state: latest
+    
+- name: Install ExFAT Utilities
+  pacman:
+    name: exfat-utils
+    state: latest
+    
+- name: Install NTFS Driver
+  pacman:
+    name: ntfs-3g
+    state: latest
+    
+- name: Install OpenSSH
+  pacman:
+    name: openssh
+    state: latest
+    
+- name: Install CoreUtils
+  pacman:
+    name: coreutils
+    state: latest
+    
+- name: Install e2fsprogs
+  pacman:
+    name: e2fsprogs
+    state: latest
+    
+- name: Install lvm2
+  pacman:
+    name: lvm2
+    state: latest
+    
+- name: Install Intel Microcode
+  pacman:
+    name: intel-ucode
+    state: latest
+    
+- name: Install less
+  pacman:
+    name: less
+    state: latest
+    
+- name: Install iproute2
+  pacman:
+    name: iproute2
+    state: latest
+    
+- name: Install iputils
+  pacman:
+    name: iputils
+    state: latest
+
+- name: Install docker
+  pacman:
+    name: docker
+    state: latest
+
+- name: Create me
+  user:
+    name: "{{ username }}"
+    groups: "wheel, docker"
+    append: yes
+
+- name: Create AUR Manager
+  user:
+    name: aurman
+    comment: "AUR Manager"
+    shell: /bin/nologin
+    home: /home/aurman
+    append: yes
+
+- stat: path=/home/aurman/aur/yay
+  register: yay
+
+- name: Clone Yay
+  git:
+    repo: https://aur.archlinux.org/yay.git
+    dest: /home/aurman/aur/yay
+    accept_hostkey: yes
+  become: yes
+  become_user: aurman
+  when: yay.stat.exists == False
+
+- name: Install Build Dependencies
+  pacman:
+    name: go
+    state: latest
+
+- name: Build Yay
+  command: chdir=/home/aurman/aur/yay makepkg --cleanbuild --nodeps --force
+  become: yes
+  become_user: aurman
+  when: yay.stat.exists == False
+ 
+- name: Install Yay
+  shell: chdir=/home/aurman/aur/yay pacman -U --noconfirm $(ls | grep -i -m 1 yay*.pkg.tar.xz)
+  become: yes
+  become_method: sudo
+  when: yay.stat.exists == False
+
+- name: Install Deepin DE Main Group
+  pacman:
+    name: deepin
+    state: latest
+
+- name: Install Deepin DE Extra Group
+  pacman:
+    name: deepin-extra
+    state: latest
+
+- name: Install Network Manager
+  pacman:
+    name: networkmanager
+    state: latest
+
+- name: Update LightDM Config
+  lineinfile:
+    path: /etc/lightdm/lightdm.conf
+    regexp: '^greeter-session=*'
+    line: 'greeter-session=lightdm-deepin-greeter'
+
+- name: Enable LightDM
+  systemd:
+    name: lightdm
+    enabled: yes
+
+- name: Enable NetworkManager.service
+  systemd:
+    name: NetworkManager.service
+    enabled: yes
