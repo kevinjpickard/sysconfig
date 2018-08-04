@@ -7,6 +7,12 @@ driver:
     cableconnected1: 'on'
     memory: 3072
     cpus: 3
+    # DE needs 3D acceleration to work
+    vram: 256
+    graphicscontroller: vboxvga
+    accelerate3d: 'on'
+    usb: 'on'
+    usbehci: 'on'
     
 provisioner:
   name: shell
@@ -19,5 +25,3 @@ platforms:
 
 suites:
   - name: default
-    run_list:
-    attributes:

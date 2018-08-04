@@ -45,6 +45,11 @@
     name: base-devel
     state: latest
     
+- name: Install zsh
+  pacman:
+    name: zsh
+    state: latest
+
 - name: Install Neovim
   pacman:
     name: neovim
@@ -125,11 +130,18 @@
     name: docker
     state: latest
 
+- name: Install ClamAV
+  pacman:
+    name: clamav
+    state: latest
+
 - name: Create me
   user:
     name: "{{ username }}"
-    groups: "wheel, docker"
+    groups: "users, wheel, docker"
     append: yes
+    password: "{{ password }}"
+    shell: /usr/bin/zsh
 
 - name: Create AUR Manager
   user:
@@ -138,6 +150,13 @@
     shell: /bin/nologin
     home: /home/aurman
     append: yes
+  
+- name: Set AUR Manager permissions
+  lineinfile:
+    path: /etc/sudoers.d/11-install-aurman
+    line: 'aurman ALL=(ALL) NOPASSWD: /usr/bin/pacman'
+    create: yes
+    validate: 'visudo -cf %s'
 
 - stat: path=/home/aurman/aur/yay
   register: yay
@@ -167,6 +186,12 @@
   become: yes
   become_method: sudo
   when: yay.stat.exists == False
+
+- name: Install Ansible AUR Module
+  git:
+    repo: https://github.com/kewlfft/ansible-aur.git 
+    dest: /usr/share/ansible/plugins/modules/aur
+    accept_hostkey: yes
 
 - name: Install Deepin DE Main Group
   pacman:
@@ -198,3 +223,11 @@
   systemd:
     name: NetworkManager.service
     enabled: yes
+
+- name: Setup AUR
+  include: roles/linux/tasks/aur.yml
+
+- name: Install Gaming Software
+  include: roles/linux/tasks/gaming.yml
+  tags: 
+    - gaming
