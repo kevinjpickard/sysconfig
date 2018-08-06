@@ -20,7 +20,7 @@ else
 fi
 
 if [[ -e /tmp/kitchen/core.retry ]]; then
-	ansible-playbook --connection=local /tmp/kitchen/core.yml --extra-vars "username=kevin hostname=KJP-test" --limit @/tmp/kitchen/core.retry
+	ANSIBLE_LIBRARY="/tmp/kitchen/library/aur:$ANSIBLE_LIBRARY" ansible-playbook --connection=local /tmp/kitchen/core.yml --extra-vars "username=kevin hostname=KJP-test" --limit @/tmp/kitchen/core.retry
 else
-	ansible-playbook --connection=local /tmp/kitchen/core.yml --extra-vars "username=kevin hostname=KJP-test nvidia=true"
+	ANSIBLE_LIBRARY="/tmp/kitchen/library/aur:$ANSIBLE_LIBRARY" ansible-playbook --connection=local /tmp/kitchen/core.yml --extra-vars "username=kevin hostname=KJP-test nvidia=true"
 fi
