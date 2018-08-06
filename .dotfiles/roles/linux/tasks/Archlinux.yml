@@ -12,6 +12,21 @@
     name: pacman-contrib
     state: latest
 
+- name: Ensure a locale exists
+  locale_gen:
+    name: en_US.UTF-8
+    state: present
+
+- name: Generate Locale
+  command: locale-gen
+  become: yes
+  become_method: sudo 
+  
+- name: Set Locale
+  command: localectl set-locale LANG=en_US.UTF-8
+  become: yes
+  become_method: sudo
+
 - stat: path=/etc/pacman.d/mirrorlist.orig
   register: backup
 
@@ -49,7 +64,7 @@
   pacman:
     name: zsh
     state: latest
-
+    
 - name: Install Neovim
   pacman:
     name: neovim
@@ -60,6 +75,11 @@
     name: git
     state: latest
     
+- name: Install oh-my-zsh
+  git:
+    repo: https://github.com/robbyrussell/oh-my-zsh.git
+    dest: ~/.oh-my-zsh
+
 - name: Install DHCP Tools
   pacman:
     name: dhcpcd
@@ -99,6 +119,11 @@
   pacman:
     name: e2fsprogs
     state: latest
+
+- name: Install Kernel Utils
+  pacman:
+    name: util-linux
+    state: latest
     
 - name: Install lvm2
   pacman:
@@ -109,7 +134,15 @@
   pacman:
     name: intel-ucode
     state: latest
-    
+  when: ansible_processor is superset(["GenuineIntel"])
+  register: intel
+
+- name: Regenerate GRUB Config to enable Intel Microcode Updates
+  command: grub-mkconfig -o /boot/grub/grub.cfg
+  become: yes
+  become_method: sudo
+  when: intel is defined
+
 - name: Install less
   pacman:
     name: less
@@ -135,13 +168,10 @@
     name: clamav
     state: latest
 
-- name: Create me
-  user:
-    name: "{{ username }}"
-    groups: "users, wheel, docker"
-    append: yes
-    password: "{{ password }}"
-    shell: /usr/bin/zsh
+- name: Install Ansible AUR Module
+  git:
+    repo: https://github.com/kewlfft/ansible-aur.git 
+    dest: /usr/share/ansible/plugins/modules/aur
 
 - name: Create AUR Manager
   user:
@@ -187,11 +217,11 @@
   become_method: sudo
   when: yay.stat.exists == False
 
-- name: Install Ansible AUR Module
-  git:
-    repo: https://github.com/kewlfft/ansible-aur.git 
-    dest: /usr/share/ansible/plugins/modules/aur
-    accept_hostkey: yes
+- name: Install NVidia
+  pacman: 
+    name: nvidia
+    state: latest
+  when: nvidia is defined and nvidia == true
 
 - name: Install Deepin DE Main Group
   pacman:
@@ -224,10 +254,84 @@
     name: NetworkManager.service
     enabled: yes
 
+- name: Enable Periodic TRIM
+  systemd:
+    name: fstrim.timer
+    enabled: yes
+
+- name: Get the fuck outta here Speck/Simon (NSA Crypto)
+  kernel_blacklist:
+    name: CONFIG_CRYPTO_SPECK
+    state: present
+
+- name: Install Other Pacman Packages
+  pacman:
+    name:
+      - veracrypt
+      - terminator
+      - firefox
+      - thefuck
+      - wget
+      - curl
+      - python-pip
+      - python2-pip
+      - vagrant
+      - virtualbox-host-modules-arch
+      - virtualbox
+      - tmux
+    state: latest
+
+- name: Create {{ username }}
+  user:
+    name: "{{ username }}"
+    shell: /usr/bin/zsh
+    create_home: yes
+    state: present
+    groups: "wheel,docker"
+    append: yes
+
+- name: Install Tmux Package Manager
+  git: 
+    repo: https://github.com/tmux-plugins/tpm
+    dest: /home/{{ username }}/.tmux/plugins/tpm
+
+- name: Create Dein Folder structure
+  file:
+    path: /home/{{ username }}/.confg/nvim
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
+- name: Install Dein
+  get_url: 
+    url: https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh
+    dest: "/home/{{ username }}/installer.sh"
+    force: yes
+    mode: +x
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
+- name: Install Dein
+  command: "sh /home/{{ username }}/installer.sh /home/{{ username }}/.config/nvim/dein"
+  become: yes
+  become_user: "{{ username }}"
+
+- name: Remove Installer
+  file: 
+    path: "/home/{{ username }}/installer.sh"
+    state: absent
+
 - name: Setup AUR
   include: roles/linux/tasks/aur.yml
+  retries: 3
+  delay: 1
+  register: result
+  until: result.rc == 0
 
 - name: Install Gaming Software
   include: roles/linux/tasks/gaming.yml
   tags: 
     - gaming
+
+- name: Pull Down dotfiles
+  command: yadm clone https://github.com/kevinjpickard/dotfiles.git

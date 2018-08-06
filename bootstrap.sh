@@ -20,7 +20,7 @@ else
 fi
 
 if [[ -e /tmp/kitchen/.dotfiles/arch.retry ]]; then
-	ansible-playbook --connection=local /tmp/kitchen/.dotfiles/arch.yml --extra-vars "username=kevin password=test hostname=KJP-test" --limit @/tmp/kitchen/.dotfiles/arch.retry
+	ansible-playbook --connection=local /tmp/kitchen/.dotfiles/arch.yml --extra-vars "username=kevin hostname=KJP-test" --limit @/tmp/kitchen/.dotfiles/arch.retry
 else
-	ansible-playbook --connection=local /tmp/kitchen/.dotfiles/arch.yml --extra-vars "username=kevin password=test hostname=KJP-test"
+	ansible-playbook --connection=local /tmp/kitchen/.dotfiles/arch.yml --extra-vars "username=kevin hostname=KJP-test nvidia=true"
 fi

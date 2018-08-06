@@ -17,6 +17,7 @@
   aur:
     use: yay
     name: 
+      - antigen-git
       - spotify
       - google-chrome
       - keybase-bin
@@ -24,6 +25,9 @@
       - p7zip-gui
       - slack-desktop
       - sublime-text-dev
+      - virtualbox-ext-oracle
+      - yadm-git
+      - nvme-cli
   become: yes
   become_user: aurman
 

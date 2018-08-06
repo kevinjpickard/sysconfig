@@ -9,10 +9,10 @@ driver:
     cpus: 3
     # DE needs 3D acceleration to work
     vram: 256
-    graphicscontroller: vboxvga
     accelerate3d: 'on'
+    accelerate2dvideo: 'on'
     usb: 'on'
-    usbehci: 'on'
+    usbxhci: 'on'
     
 provisioner:
   name: shell
@@ -22,6 +22,11 @@ platforms:
   - name: archlinux
     driver:
       box: archlinux/archlinux
+  - name: windows10
+    driver:
+      box: test-win10
+      synced_folders: 
+        - [".", "C:\\Windows\\temp\\system-config"]
 
 suites:
   - name: default
