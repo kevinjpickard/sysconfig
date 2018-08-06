@@ -1,0 +1,41 @@
+---
+# Setting up Arch User Repository Tools and Install Packages
+- debug: msg="Setting up AUR"
+
+- aur: name=yay use=makepkg skip_installed=true
+  become: yes
+  become_user: aurman
+
+- name: Install Fonts
+  aur: 
+    use: yay
+    name: nerd-fonts-complete
+  become: yes
+  become_user: aurman
+
+- name: Install Core AUR Packages
+  aur:
+    use: yay
+    name: 
+      - antigen-git
+      - spotify
+      - google-chrome
+      - keybase-bin
+      - neofetch
+      - p7zip-gui
+      - slack-desktop
+      - sublime-text-dev
+      - virtualbox-ext-oracle
+      - yadm-git
+      - nvme-cli
+  become: yes
+  become_user: aurman
+
+- name: Install Dev AUR Packages
+  aur:
+    use: yay
+    name:
+      - google-cloud-sdk
+      - rbenv
+  become: yes
+  become_user: aurman

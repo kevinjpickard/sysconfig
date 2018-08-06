@@ -1,0 +1,337 @@
+---
+# Arch specific tasks
+- debug: msg="Running Arch Linux Tasks"
+
+- name: Update pacman Cache
+  pacman:
+    update_cache: yes
+    upgrade: yes
+
+- name: Install pacman scripts and tools
+  pacman:
+    name: pacman-contrib
+    state: latest
+
+- name: Ensure a locale exists
+  locale_gen:
+    name: en_US.UTF-8
+    state: present
+
+- name: Generate Locale
+  command: locale-gen
+  become: yes
+  become_method: sudo 
+  
+- name: Set Locale
+  command: localectl set-locale LANG=en_US.UTF-8
+  become: yes
+  become_method: sudo
+
+- stat: path=/etc/pacman.d/mirrorlist.orig
+  register: backup
+
+- name: Backup Mirrors
+  command: mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.orig
+  become: yes
+  become_method: sudo
+  when: backup.stat.exists == False
+
+- stat: path=/etc/pacman.d/mirrorlist
+  register: ranked
+
+- name: Rank Mirrors
+  shell: rankmirrors /etc/pacman.d/mirrorlist.orig > /etc/pacman.d/mirrorlist
+  become: yes
+  become_method: sudo
+  when: ranked.stat.exists == False
+
+- name: Install Kernel
+  pacman:
+    name: linux
+    state: latest
+    
+- name: Install Kernel Headers
+  pacman:
+    name: linux-headers
+    state: latest
+    
+- name: Install Base Development Packages
+  pacman:
+    name: base-devel
+    state: latest
+    
+- name: Install zsh
+  pacman:
+    name: zsh
+    state: latest
+    
+- name: Install Neovim
+  pacman:
+    name: neovim
+    state: latest
+    
+- name: Install git
+  pacman:
+    name: git
+    state: latest
+    
+- name: Install oh-my-zsh
+  git:
+    repo: https://github.com/robbyrussell/oh-my-zsh.git
+    dest: ~/.oh-my-zsh
+
+- name: Install DHCP Tools
+  pacman:
+    name: dhcpcd
+    state: latest
+    
+- name: Install GRUB
+  pacman:
+    name: grub
+    state: latest
+    
+- name: Install Boot Manager
+  pacman:
+    name: efibootmgr
+    state: latest
+    
+- name: Install ExFAT Utilities
+  pacman:
+    name: exfat-utils
+    state: latest
+    
+- name: Install NTFS Driver
+  pacman:
+    name: ntfs-3g
+    state: latest
+    
+- name: Install OpenSSH
+  pacman:
+    name: openssh
+    state: latest
+    
+- name: Install CoreUtils
+  pacman:
+    name: coreutils
+    state: latest
+    
+- name: Install e2fsprogs
+  pacman:
+    name: e2fsprogs
+    state: latest
+
+- name: Install Kernel Utils
+  pacman:
+    name: util-linux
+    state: latest
+    
+- name: Install lvm2
+  pacman:
+    name: lvm2
+    state: latest
+    
+- name: Install Intel Microcode
+  pacman:
+    name: intel-ucode
+    state: latest
+  when: ansible_processor is superset(["GenuineIntel"])
+  register: intel
+
+- name: Regenerate GRUB Config to enable Intel Microcode Updates
+  command: grub-mkconfig -o /boot/grub/grub.cfg
+  become: yes
+  become_method: sudo
+  when: intel is defined
+
+- name: Install less
+  pacman:
+    name: less
+    state: latest
+    
+- name: Install iproute2
+  pacman:
+    name: iproute2
+    state: latest
+    
+- name: Install iputils
+  pacman:
+    name: iputils
+    state: latest
+
+- name: Install docker
+  pacman:
+    name: docker
+    state: latest
+
+- name: Install ClamAV
+  pacman:
+    name: clamav
+    state: latest
+
+- name: Install Ansible AUR Module
+  git:
+    repo: https://github.com/kewlfft/ansible-aur.git 
+    dest: /usr/share/ansible/plugins/modules/aur
+
+- name: Create AUR Manager
+  user:
+    name: aurman
+    comment: "AUR Manager"
+    shell: /bin/nologin
+    home: /home/aurman
+    append: yes
+  
+- name: Set AUR Manager permissions
+  lineinfile:
+    path: /etc/sudoers.d/11-install-aurman
+    line: 'aurman ALL=(ALL) NOPASSWD: /usr/bin/pacman'
+    create: yes
+    validate: 'visudo -cf %s'
+
+- stat: path=/home/aurman/aur/yay
+  register: yay
+
+- name: Clone Yay
+  git:
+    repo: https://aur.archlinux.org/yay.git
+    dest: /home/aurman/aur/yay
+    accept_hostkey: yes
+  become: yes
+  become_user: aurman
+  when: yay.stat.exists == False
+
+- name: Install Build Dependencies
+  pacman:
+    name: go
+    state: latest
+
+- name: Build Yay
+  command: chdir=/home/aurman/aur/yay makepkg --cleanbuild --nodeps --force
+  become: yes
+  become_user: aurman
+  when: yay.stat.exists == False
+ 
+- name: Install Yay
+  shell: chdir=/home/aurman/aur/yay pacman -U --noconfirm $(ls | grep -i -m 1 yay*.pkg.tar.xz)
+  become: yes
+  become_method: sudo
+  when: yay.stat.exists == False
+
+- name: Install NVidia
+  pacman: 
+    name: nvidia
+    state: latest
+  when: nvidia is defined and nvidia == true
+
+- name: Install Deepin DE Main Group
+  pacman:
+    name: deepin
+    state: latest
+
+- name: Install Deepin DE Extra Group
+  pacman:
+    name: deepin-extra
+    state: latest
+
+- name: Install Network Manager
+  pacman:
+    name: networkmanager
+    state: latest
+
+- name: Update LightDM Config
+  lineinfile:
+    path: /etc/lightdm/lightdm.conf
+    regexp: '^greeter-session=*'
+    line: 'greeter-session=lightdm-deepin-greeter'
+
+- name: Enable LightDM
+  systemd:
+    name: lightdm
+    enabled: yes
+
+- name: Enable NetworkManager.service
+  systemd:
+    name: NetworkManager.service
+    enabled: yes
+
+- name: Enable Periodic TRIM
+  systemd:
+    name: fstrim.timer
+    enabled: yes
+
+- name: Get the fuck outta here Speck/Simon (NSA Crypto)
+  kernel_blacklist:
+    name: CONFIG_CRYPTO_SPECK
+    state: present
+
+- name: Install Other Pacman Packages
+  pacman:
+    name:
+      - veracrypt
+      - terminator
+      - firefox
+      - thefuck
+      - wget
+      - curl
+      - python-pip
+      - python2-pip
+      - vagrant
+      - virtualbox-host-modules-arch
+      - virtualbox
+      - tmux
+    state: latest
+
+- name: Create {{ username }}
+  user:
+    name: "{{ username }}"
+    shell: /usr/bin/zsh
+    create_home: yes
+    state: present
+    groups: "wheel,docker"
+    append: yes
+
+- name: Install Tmux Package Manager
+  git: 
+    repo: https://github.com/tmux-plugins/tpm
+    dest: /home/{{ username }}/.tmux/plugins/tpm
+
+- name: Create Dein Folder structure
+  file:
+    path: /home/{{ username }}/.confg/nvim
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
+- name: Install Dein
+  get_url: 
+    url: https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh
+    dest: "/home/{{ username }}/installer.sh"
+    force: yes
+    mode: +x
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
+- name: Install Dein
+  command: "sh /home/{{ username }}/installer.sh /home/{{ username }}/.config/nvim/dein"
+  become: yes
+  become_user: "{{ username }}"
+
+- name: Remove Installer
+  file: 
+    path: "/home/{{ username }}/installer.sh"
+    state: absent
+
+- name: Setup AUR
+  include: roles/linux/tasks/aur.yml
+  retries: 3
+  delay: 1
+  register: result
+  until: result.rc == 0
+
+- name: Install Gaming Software
+  include: roles/linux/tasks/gaming.yml
+  tags: 
+    - gaming
+
+- name: Pull Down dotfiles
+  command: yadm clone https://github.com/kevinjpickard/dotfiles.git
