@@ -168,10 +168,10 @@
     name: clamav
     state: latest
 
-- name: Install Ansible AUR Module
-  git:
-    repo: https://github.com/kewlfft/ansible-aur.git 
-    dest: /usr/share/ansible/plugins/modules
+    #- name: Install Ansible AUR Module
+    #  git:
+    #    repo: https://github.com/kewlfft/ansible-aur.git 
+    #    dest: /usr/share/ansible/plugins/modules/aur
 
 - name: Create AUR Manager
   user:
