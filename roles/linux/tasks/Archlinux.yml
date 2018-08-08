@@ -15,6 +15,8 @@
   retries: 3
   delay: 5
   until: result.failed == False
+  become: yes
+  become_method: sudo
 
 - name: Ensure a locale exists
   locale_gen:
@@ -79,11 +81,6 @@
     name: git
     state: latest
     
-- name: Install oh-my-zsh
-  git:
-    repo: https://github.com/robbyrussell/oh-my-zsh.git
-    dest: ~/.oh-my-zsh
-
 - name: Install DHCP Tools
   pacman:
     name: dhcpcd
@@ -294,10 +291,17 @@
     groups: "wheel,docker"
     append: yes
 
+- name: Install oh-my-zsh
+  git:
+    repo: https://github.com/robbyrussell/oh-my-zsh.git
+    dest: "/home/{{ username }}/.oh-my-zsh"
+
 - name: Install Tmux Package Manager
   git: 
     repo: https://github.com/tmux-plugins/tpm
     dest: /home/{{ username }}/.tmux/plugins/tpm
+  become: yes
+  become_user: "{{ username }}"
 
 - name: Create Dein Folder structure
   file:
