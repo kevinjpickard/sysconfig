@@ -1,0 +1,10 @@
+# Linux Specific Tasks
+- name: Setting hostname
+  hostname: 
+    name: "{{ hostname }}"
+  when: hostname is defined
+
+- name: Set timezone to America/Denver
+  timezone:
+    name: America/Denver
+

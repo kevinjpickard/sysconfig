@@ -11,14 +11,12 @@
 - debug: msg="Username is {{ username }}"
   when: username is defined
 
-- name: Setting hostname
-  hostname: 
-    name: "{{ hostname }}"
-  when: hostname is defined
-
 - name: Set timezone to America/Denver
   timezone:
     name: America/Denver
+
+- name: Run OS Family Tasks
+  include: "{{ ansible_system }}"
 
 - name: Run OS Specific Tasks
   include: "{{ ansible_distribution }}.yml"
