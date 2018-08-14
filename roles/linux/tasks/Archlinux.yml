@@ -2,10 +2,10 @@
 # Arch specific tasks
 - debug: msg="Running Arch Linux Tasks"
 
-- name: Update pacman Cache
-  pacman:
-    update_cache: yes
-    upgrade: yes
+#- name: Update pacman Cache
+#  pacman:
+#    update_cache: yes
+#    upgrade: yes
 
 - name: Install pacman scripts and tools
   pacman:
@@ -15,8 +15,6 @@
   retries: 3
   delay: 5
   until: result.failed == False
-  become: yes
-  become_method: sudo
 
 - name: Ensure a locale exists
   locale_gen:
@@ -224,20 +222,17 @@
     state: latest
   when: nvidia is defined and nvidia == true
 
-- name: Install Deepin DE Main Group
+- name: Install Deepin DE and NetworkManager
   pacman:
-    name: deepin
+    name: 
+      - deepin
+      - deepin-community-wallpapers
+      - networkmanager
     state: latest
-
-- name: Install Deepin DE Extra Group
-  pacman:
-    name: deepin-extra
-    state: latest
-
-- name: Install Network Manager
-  pacman:
-    name: networkmanager
-    state: latest
+  retries: 3
+  delay: 1
+  register: result
+  until: result.failed == False
 
 - name: Update LightDM Config
   lineinfile:
@@ -329,12 +324,15 @@
     path: "/home/{{ username }}/installer.sh"
     state: absent
 
+- stat: path=/home/aurman/aur/yay
+  register: yay
+
 - name: Setup AUR
   include: roles/linux/tasks/aur.yml
   retries: 3
   delay: 1
   register: result
-  until: result.rc == 0
+  until: result.failed == False
 
 - name: Install Gaming Software
   include: roles/linux/tasks/gaming.yml
@@ -345,3 +343,4 @@
   command: yadm clone https://github.com/kevinjpickard/dotfiles.git
   become: yes
   become_user: "{{ username }}"
+

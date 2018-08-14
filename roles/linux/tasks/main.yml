@@ -11,9 +11,6 @@
 - debug: msg="Username is {{ username }}"
   when: username is defined
 
-- stat: path=/home/aurman/aur/yay
-  register: yay
-
 - name: Setting hostname
   hostname: 
     name: "{{ hostname }}"
@@ -25,3 +22,4 @@
 
 - name: Run OS Specific Tasks
   include: "{{ ansible_distribution }}.yml"
+

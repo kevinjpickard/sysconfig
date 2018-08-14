@@ -28,6 +28,7 @@
       - virtualbox-ext-oracle
       - yadm-git
       - nvme-cli
+      - matcha-gtk-theme
   become: yes
   become_user: aurman
 
@@ -37,5 +38,7 @@
     name:
       - google-cloud-sdk
       - rbenv
+      - pyenv
+      - nvm
   become: yes
   become_user: aurman

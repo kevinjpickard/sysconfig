@@ -17,6 +17,7 @@ driver:
 provisioner:
   name: shell
   sudo: false
+  cleanup_sandbox: false
 
 platforms:
   - name: archlinux
