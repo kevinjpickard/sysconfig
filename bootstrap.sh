@@ -21,7 +21,7 @@ if [[ $OSTYPE == darwin* ]]; then
 
   echo "Ansible installed. Cloning files..."
   brew install git
-  git clone https://github.com/kevinjpickard/.dotfiles.git ~/.dotfiles
+  git clone -b arch https://github.com/kevinjpickard/.dotfiles.git ~/.dotfiles
 
   echo "Executing playbook..."
   ansible-playbook --connection=local ~/.dotfiles/core.yml --extra-vars "username=kevin hostname=KJP-test" -vvv
