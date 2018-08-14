@@ -5,6 +5,7 @@
   remote_user: root
   become: yes
   become_method: sudo
+  gather_facts: true
 
   roles:
     - "{{ ansible_system }}"
