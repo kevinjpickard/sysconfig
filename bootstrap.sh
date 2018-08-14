@@ -38,5 +38,6 @@ else
     ANSIBLE_LIBRARY="/tmp/kitchen/library/aur:$ANSIBLE_LIBRARY" ansible-playbook --connection=local /tmp/kitchen/core.yml --extra-vars "username=kevin hostname=KJP-test" --limit @/tmp/kitchen/core.retry -vvv
   else
     ANSIBLE_LIBRARY="/tmp/kitchen/library/aur:$ANSIBLE_LIBRARY" ansible-playbook --connection=local /tmp/kitchen/core.yml --extra-vars "username=kevin hostname=KJP-test nvidia=true" -vvv
+  fi
 fi
 
