@@ -88,6 +88,8 @@
       - zsh
       - zsh-completion
     state: latest
+  become: yes
+  become_user: "{{ username }}"
 
 - name: Install Casks
   homebrew:
@@ -132,9 +134,11 @@
       - wireshark-chmodbpf
       - font-inconsolata
     state: latest
+  become: yes
+  become_user: "{{ username }}"
 
 - name: Clone dotfiles
   command: yadm clone https://github.com/kevinjpickard/dotfiles.git
   become: yes
-  become_user: {{ username }}
+  become_user: "{{ username }}"
 

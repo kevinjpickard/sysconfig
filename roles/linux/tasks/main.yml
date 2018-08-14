@@ -16,7 +16,7 @@
     name: America/Denver
 
 - name: Run OS Family Tasks
-  include: "{{ ansible_system }}"
+  include: "{{ ansible_system }}.yml"
 
 - name: Run OS Specific Tasks
   include: "{{ ansible_distribution }}.yml"
