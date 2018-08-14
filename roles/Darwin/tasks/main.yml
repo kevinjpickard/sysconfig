@@ -1,0 +1,5 @@
+---
+# tasks file for darwin
+
+- name: MacOS Setup
+  include: "{{ ansible_distribution }}"
