@@ -1,3 +1,8 @@
+- name: Install Java cuz otherwise some brew installs fail
+  homebrew:
+    name: java
+    state: latest
+
 - name: Install all my shit
   homebrew:
     name: 
