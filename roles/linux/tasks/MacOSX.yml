@@ -3,7 +3,18 @@
     name: java
     state: latest
 
-- name: Install all my shit
+- name: Add HomeBrew Taps
+  homebrew_tap:
+    name: 
+      - caskroom/cask
+      - caskroom/fonts
+      - caskroom/versions
+      - homebrew/boneyard
+      - homebrew/brewdler
+      - homebrew/homebrew-services
+    state: present
+
+- name: Pour Kegs
   homebrew:
     name: 
       - amazon-ecs-cli
