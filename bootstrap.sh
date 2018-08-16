@@ -24,7 +24,7 @@ if [[ $OSTYPE == darwin* ]]; then
   git clone -b arch https://github.com/kevinjpickard/.dotfiles.git ~/.dotfiles
 
   echo "Executing playbook..."
-  ansible-playbook --connection=local ~/.dotfiles/core.yml --extra-vars "username=kevin hostname=KJP-test" -vvv
+  sudo ansible-playbook --connection=local ~/.dotfiles/core.yml --extra-vars "username=kevin hostname=KJP-test" -vvv
 else
   # Using command -v for POSIX compatibility
   if command -v ansible-playbook > /dev/null; then

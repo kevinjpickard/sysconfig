@@ -13,6 +13,8 @@
       - homebrew/brewdler
       - homebrew/homebrew-services
     state: present
+  become: yes
+  become_user: "{{ username }}"
 
 - name: Pour Kegs
   homebrew:
