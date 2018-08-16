@@ -2,6 +2,8 @@
   homebrew:
     name: java
     state: latest
+  become: yes
+  become_user: "{{ username }}"
 
 - name: Add HomeBrew Taps
   homebrew_tap:
