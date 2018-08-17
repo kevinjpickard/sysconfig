@@ -1,0 +1,103 @@
+{
+  "variables": {
+    "iso_url": "https://mirrors.kernel.org/archlinux/iso/2018.08.01/archlinux-2018.08.01-x86_64.iso",
+    "iso_checksum_url": "https://mirrors.kernel.org/archlinux/iso/2018.08.01/sha1sums.txt",
+    "iso_checksum_type": "sha1",
+    "ssh_timeout": "20m",
+    "country": "US",
+    "headless": "false"
+  },
+  "builders": [
+    {
+      "type": "parallels-iso",
+      "parallels_tools_flavor": "lin",
+      "parallels_tools_mode": "attach",
+      "guest_os_type": "linux-2.6",
+      "iso_url": "{{ user `iso_url` }}",
+      "iso_checksum_url": "{{ user `iso_checksum_url` }}",
+      "iso_checksum_type": "{{ user `iso_checksum_type` }}",
+      "http_directory": "srv",
+      "boot_wait": "5s",
+      "boot_command": [
+        "<enter><wait10><wait10><wait10><wait10>",
+        "/usr/bin/curl -O http://{{ .HTTPIP }}:{{ .HTTPPort }}/enable-ssh.sh<enter><wait5>",
+        "/usr/bin/curl -O http://{{ .HTTPIP }}:{{ .HTTPPort }}/poweroff.timer<enter><wait5>",
+        "/usr/bin/bash ./enable-ssh.sh<enter>"
+      ],
+      "disk_size": 20480,
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_timeout": "{{ user `ssh_timeout` }}",
+      "shutdown_command": "sudo shutdown -P -t 0"
+    },
+    {
+      "type": "virtualbox-iso",
+      "iso_url": "{{ user `iso_url` }}",
+      "iso_checksum_url": "{{ user `iso_checksum_url` }}",
+      "iso_checksum_type": "{{ user `iso_checksum_type` }}",
+      "guest_os_type": "ArchLinux_64",
+      "guest_additions_mode": "disable",
+      "http_directory": "srv",
+      "boot_wait": "5s",
+      "boot_command": [
+        "<enter><wait10><wait10><wait10><wait10>",
+        "/usr/bin/curl -O http://{{ .HTTPIP }}:{{ .HTTPPort }}/enable-ssh.sh<enter><wait5>",
+        "/usr/bin/curl -O http://{{ .HTTPIP }}:{{ .HTTPPort }}/poweroff.timer<enter><wait5>",
+        "/usr/bin/bash ./enable-ssh.sh<enter>"
+      ],
+      "disk_size": 20480,
+      "hard_drive_interface": "sata",
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_timeout": "{{ user `ssh_timeout` }}",
+      "shutdown_command": "sudo shutdown -P -t 0",
+      "headless" : "{{ user `headless`}}"
+    },
+    {
+      "type": "vmware-iso",
+      "iso_url": "{{ user `iso_url` }}",
+      "iso_checksum_url": "{{ user `iso_checksum_url` }}",
+      "iso_checksum_type": "{{ user `iso_checksum_type` }}",
+      "http_directory": "srv",
+      "boot_wait": "5s",
+      "boot_command": [
+        "<enter><wait10><wait10><wait10><wait10>",
+        "/usr/bin/curl -O http://{{ .HTTPIP }}:{{ .HTTPPort }}/enable-ssh.sh<enter><wait5>",
+        "/usr/bin/curl -O http://{{ .HTTPIP }}:{{ .HTTPPort }}/poweroff.timer<enter><wait5>",
+        "/usr/bin/bash ./enable-ssh.sh<enter>"
+      ],
+      "disk_size": 20480,
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_timeout": "{{ user `ssh_timeout` }}",
+      "shutdown_command": "sudo shutdown -P -t 0",
+      "headless" : "{{ user `headless`}}"
+    },
+    {
+      "type": "qemu",
+      "iso_url": "{{ user `iso_url` }}",
+      "iso_checksum_url": "{{ user `iso_checksum_url` }}",
+      "iso_checksum_type": "{{ user `iso_checksum_type` }}",
+      "http_directory": "srv",
+      "boot_wait": "5s",
+      "boot_command": [
+        "<enter><wait10><wait10><wait10><wait10>",
+        "/usr/bin/curl -O http://{{ .HTTPIP }}:{{ .HTTPPort }}/enable-ssh.sh<enter><wait5>",
+        "/usr/bin/curl -O http://{{ .HTTPIP }}:{{ .HTTPPort }}/poweroff.timer<enter><wait5>",
+        "/usr/bin/bash ./enable-ssh.sh<enter>"
+      ],
+      "disk_size": 20480,
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_timeout": "{{ user `ssh_timeout` }}",
+      "shutdown_command": "sudo shutdown -P -t 0",
+      "headless" : "{{ user `headless`}}"
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "inline": ["curl https://raw.githubusercontent.com/kevinjpickard/.dotfiles/arch/bootstrap_iso.sh | bash"]
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+# Stolen from https://github.com/elasticdog/packer-arch/blob/master/srv/poweroff.timer
+[Unit]
+Description=Delayed poweroff
+
+[Timer]
+OnActiveSec=1
+Unit=poweroff.target
+
