@@ -97,7 +97,7 @@
   "provisioners": [
     {
       "type": "shell",
-      "inline": ["curl https://raw.githubusercontent.com/kevinjpickard/.dotfiles/arch/bootstrap_iso.sh | bash"]
+      "inline": ["curl https://raw.githubusercontent.com/kevinjpickard/.dotfiles/arch/bootstrap_iso.sh | sudo bash"]
     }
   ]
 }
