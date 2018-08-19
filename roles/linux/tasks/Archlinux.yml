@@ -16,21 +16,6 @@
   delay: 5
   until: result.failed == False
 
-- name: Ensure a locale exists
-  locale_gen:
-    name: en_US.UTF-8
-    state: present
-
-- name: Generate Locale
-  command: locale-gen
-  become: yes
-  become_method: sudo 
-
-- name: Set Locale
-  command: localectl set-locale LANG=en_US.UTF-8
-  become: yes
-  become_method: sudo
-
 - stat: path=/etc/pacman.d/mirrorlist.orig
   register: backup
 

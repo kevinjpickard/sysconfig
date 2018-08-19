@@ -4,10 +4,6 @@
     name: "{{ hostname }}"
   when: hostname is defined
 
-- name: Set timezone to America/Denver
-  timezone:
-    name: America/Denver
-
 - name: Give wheel sudo
   lineinfile:
     path: /etc/sudoers

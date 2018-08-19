@@ -9,6 +9,9 @@
 # Computer Name
 HOSTN=KJP-Test
 
+# Username
+USERNAME=kevin
+
 # Keyboard Layout
 KEYBOARD_LAYOUT=en_US.
 
@@ -172,7 +175,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 # Changes the root password
 echo -e $ROOT_PASSWD"\n"$ROOT_PASSWD | passwd
 git clone -b arch https://github.com/kevinjpickard/.dotfiles.git
-ansible-playbook --connection=local .dotfiles/core.yml
+ansible-playbook --connection=local .dotfiles/core.yml --extra-vars "hostname=$HOSTN username=$USERNAME"
 EOF
 
 echo "Umounting partitions"
