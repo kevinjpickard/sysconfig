@@ -12,8 +12,8 @@
   when: username is defined
 
 - name: Run OS Family Tasks
-  include: "roles/linux/tasks/{{ ansible_system }}.yml"
+  include: "./roles/linux/tasks/{{ ansible_system }}.yml"
 
 - name: Run OS Specific Tasks
-  include: "roles/linux/tasks/{{ ansible_distribution }}.yml"
+  include: "./roles/linux/tasks/{{ ansible_distribution }}.yml"
 
