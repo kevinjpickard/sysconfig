@@ -4,7 +4,7 @@
     name: "{{ hostname }}"
   when: hostname is defined
 
-- name: Give wheel sudo
+- name: Give wheel sudo access
   lineinfile:
     path: /etc/sudoers
     state: present
