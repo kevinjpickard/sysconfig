@@ -1,5 +1,5 @@
 #!/usr/bin/zsh
-sudo pacman -Sy --noconfirm ansible git
+sudo pacman -Sy --noconfirm python ansible git
 git clone -b arch https://github.com/kevinjpickard/.dotfiles.git
 python --version
 /usr/bin/ansible --version
