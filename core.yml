@@ -8,5 +8,4 @@
   gather_facts: true
 
   roles:
-    - Linux
-
+    - linux
