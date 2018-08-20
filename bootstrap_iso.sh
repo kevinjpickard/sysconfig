@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 # encoding: utf-8
 
 # Most of this comes from: https://gist.github.com/magnunleno/3641682
@@ -13,7 +13,7 @@ HOSTN=KJP-Test
 USERNAME=kevin
 
 # Keyboard Layout
-KEYBOARD_LAYOUT=en_US.
+KEYBOARD_LAYOUT=US
 
 # Your language, used for localization purposes
 LANGUAGE=en_US
@@ -24,11 +24,21 @@ LOCALE=America/Denver
 # Root password for the brand new installed system
 ROOT_PASSWD=123456
 
+# Crypt Password
+CRYPT_PASSWD=123456
+
+# User Password
+USER_PASSWD=123456
+
 ########## Hard Disk Partitioning Variable
-# ANTENTION, this script erases ALL YOU HD DATA (specified bt $HD)
-HD=/dev/sda
+# ATTENTION, this script erases ALL YOU HD DATA (specified bt $HD)
+# Sizes are in MB
+BLKID=sda
+HD="/dev/$BLKID"
 # Boot Partition Size: /boot
 BOOT_SIZE=1024
+# EFI Partition Size: /boot/efi
+EFI_SIZE=1025
 # Root Partition Size: /
 ROOT_SIZE=30000
 # Swap partition size: /swap
@@ -37,6 +47,7 @@ echo "Swap: $SWAP_SIZE"
 # The /home partition will occupy the remain free space
 
 # Partitions file system
+EFI_FS=fat32
 BOOT_FS=ext4
 HOME_FS=ext4
 ROOT_FS=ext4
@@ -45,17 +56,30 @@ ROOT_FS=ext4
 EXTRA_PKGS='neovim git ansible pacman-contrib'
 
 
+# Getting Block Device Alignment parameters to solve partition 
+#   performance warnings from parted
+OPTIMAL_IO_SIZE=$(cat /sys/block/$BLKID/queue/optimal_io_size)
+MINIMUM_IO_SIZE=$(cat /sys/block/$BLKID/queue/minimum_io_size)
+if [[ -e /sys/block/$BLKID/queue/alignment_offset ]]; then
+  ALIGNMENT_OFFSET=$(cat /sys/block/$BLKID/queue/alignment_offset)
+else
+  ALIGNMENT_OFFSET=0
+fi
+PHYSICAL_BLOCK_SIZE=$(cat /sys/block/$BLKID/queue/physical_block_size)
+
+# Calculate optimal start sector
+if [[ $OPTIMAL_IO_SIZE == 0 ]]; then echo "WARNING! optimal_io_size ioctl is 0!"; fi
+START_SECTOR=$((($OPTIMAL_IO_SIZE+$ALIGNMENT_OFFSET)/$PHYSICAL_BLOCK_SIZE))
+
 ######## Auxiliary variables. THIS SHOULD NOT BE ALTERED
-BOOT_START=1
+EFI_START=$(((1024*1024)/$PHYSICAL_BLOCK_SIZE))
+EFI_END=$(($EFI_START+$EFI_SIZE))
+
+BOOT_START=$EFI_END
 BOOT_END=$(($BOOT_START+$BOOT_SIZE))
 
 SWAP_START=$BOOT_END
 SWAP_END=$(($SWAP_START+$SWAP_SIZE))
-
-ROOT_START=$SWAP_END
-ROOT_END=$(($ROOT_START+$ROOT_SIZE))
-
-HOME_START=$ROOT_END
 
 ##################################################
 #       Script       #
@@ -64,8 +88,9 @@ HOME_START=$ROOT_END
 loadkeys $KEYBOARD_LAYOUT
 
 #### Partitioning
-echo "HD Initialization"
-# Set the partition table to MS-DOS type 
+echo "HD Initialization: $HD"
+
+# Set the partition table to GPT
 parted -s $HD mklabel gpt &> /dev/null
 
 # Remove any older partitions
@@ -74,45 +99,64 @@ parted -s $HD rm 2 &> /dev/null
 parted -s $HD rm 3 &> /dev/null
 parted -s $HD rm 4 &> /dev/null
 
+# Create EFI Partition
+echo "Create EFI Partition"
+parted --align optimal -s $HD mkpart primary $EFI_FS $EFI_START $EFI_END
+parted -s $HD set 1 esp on 1>/dev/null
+
 # Create boot partition
 echo "Create boot partition"
 parted -s $HD mkpart primary $BOOT_FS $BOOT_START $BOOT_END 1>/dev/null
-parted -s $HD set 1 boot on 1>/dev/null
+parted -s $HD set 2 boot on 1>/dev/null
+
+# Create LVM
+echo "Creating LVM"
+parted -s $HD mkpart logical ext4 $BOOT_END 100%
+echo -n $CRYPT_PASSWD | cryptsetup -c aes-xts-plain64 -y --use-random luksFormat "$HD"3 -d -
+echo -n $CRYPT_PASSWD | cryptsetup luksOpen "$HD"3 luks -d -
+pvcreate /dev/mapper/luks
+vgcreate vg0 /dev/mapper/luks
 
 # Create swap partition
 echo "Create swap partition"
-parted -s $HD mkpart primary linux-swap $SWAP_START $SWAP_END 1>/dev/null
+lvcreate --size $SWAP_SIZE vg0 --name swap
 
 # Create root partition
 echo "Create root partition"
-parted -s $HD mkpart primary $ROOT_FS $ROOT_START $ROOT_END 1>/dev/null
+lvcreate --size $ROOT_SIZE vg0 --name root
 
 # Create home partition
 echo "Create home partition"
-parted -s -- $HD mkpart primary $HOME_FS $HOME_START -0 1>/dev/null
+lvcreate -l +100%FREE vg0 --name home
 
 # Formats the root, home and boot partition to the specified file system
+echo "Formating efi partition"
+mkfs.vfat -F32 "$HD"1 1>/dev/null
 echo "Formating boot partition"
-mkfs.$BOOT_FS /dev/sda1 -L Boot 1>/dev/null
+mkfs.$BOOT_FS "$HD"2 -L boot 1>/dev/null
 echo "Formating root partition"
-mkfs.$ROOT_FS /dev/sda3 -L Root 1>/dev/null
+mkfs.$ROOT_FS /dev/mapper/vg0-root  1>/dev/null
 echo "Formating home partition"
-mkfs.$HOME_FS /dev/sda4 -L Home 1>/dev/null
+mkfs.$HOME_FS /dev/mapper/vg0-home -L Home 1>/dev/null
 # Initializes the swap
 echo "Formating swap partition"
-mkswap /dev/sda2
-swapon /dev/sda2
+mkswap /dev/mapper/vg0-swap
+swapon /dev/mapper/vg0-swap
 
 
+fdisk -l
 echo "Mounting partitions"
 # mounts the root partition
-mount /dev/sda3 /mnt
+mount /dev/mapper/vg0-root /mnt
 # mounts the boot partition
 mkdir /mnt/boot
-mount /dev/sda1 /mnt/boot
+mount "$HD"2 /mnt/boot
+# mounts the EFI partition
+mkdir /mnt/boot/efi
+mount "$HD"1 /mnt/boot/efi
 # mounts the home partition
 mkdir /mnt/home
-mount /dev/sda4 /mnt/home
+mount /dev/mapper/vg0-home /mnt/home
 
 
 #### Installation
