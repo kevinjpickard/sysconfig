@@ -313,6 +313,9 @@
 - stat: path=/home/aurman/aur/yay
   register: yay
 
+- name: Check Environment Variable
+  command: echo $ANSIBLE_LIBRARY
+  
 - name: Setup AUR
   include: roles/linux/tasks/aur.yml
   retries: 3
