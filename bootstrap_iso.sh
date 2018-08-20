@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 # encoding: utf-8
 
 # Most of this comes from: https://gist.github.com/magnunleno/3641682
@@ -30,7 +30,7 @@ HD=/dev/sda
 # Boot Partition Size: /boot
 BOOT_SIZE=1024
 # Root Partition Size: /
-ROOT_SIZE=10000
+ROOT_SIZE=30000
 # Swap partition size: /swap
 SWAP_SIZE=$(($(grep MemTotal /proc/meminfo | awk '{print $2}')/1000))
 echo "Swap: $SWAP_SIZE"
@@ -175,7 +175,8 @@ grub-mkconfig -o /boot/grub/grub.cfg
 # Changes the root password
 echo -e $ROOT_PASSWD"\n"$ROOT_PASSWD | passwd
 git clone -b arch --recurse-submodules https://github.com/kevinjpickard/.dotfiles.git
-ANSIBLE_LIBRARY="$ANSIBLE_LIBRARY:/.dotfiles/library/aur" ansible-playbook --connection=local .dotfiles/core.yml --extra-vars "hostname=$HOSTN username=$USERNAME"
+git clone https://github.com/kewlfft/ansible-aur.git ~/.ansible/plugins/modules/aur
+ansible-playbook --module-path /.dotfiles/library/aur --connection=local .dotfiles/core.yml --extra-vars "hostname=$HOSTN username=$USERNAME"
 EOF
 
 echo "Umounting partitions"
