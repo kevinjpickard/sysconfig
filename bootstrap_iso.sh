@@ -42,7 +42,7 @@ HOME_FS=ext4
 ROOT_FS=ext4
 
 # Extra packages (not obligatory)
-EXTRA_PKGS='neovim git ansible'
+EXTRA_PKGS='neovim git ansible pacman-contrib'
 
 
 ######## Auxiliary variables. THIS SHOULD NOT BE ALTERED

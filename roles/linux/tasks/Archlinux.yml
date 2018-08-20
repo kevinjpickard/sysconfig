@@ -7,11 +7,6 @@
 #    update_cache: yes
 #    upgrade: yes
 
-- name: Install pacman scripts and tools
-  pacman:
-    name: pacman-contrib
-    state: latest
-
 - stat: path=/etc/pacman.d/mirrorlist.orig
   register: backup
 
