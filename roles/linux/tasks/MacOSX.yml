@@ -5,18 +5,6 @@
   become: yes
   become_user: "{{ username }}"
 
-- name: Add HomeBrew Taps
-  homebrew_tap:
-    name: 
-      - caskroom/fonts
-      - caskroom/versions
-      - homebrew/boneyard
-      - homebrew/brewdler
-      - homebrew/homebrew-services
-    state: present
-  become: yes
-  become_user: "{{ username }}"
-
 - name: Pour Kegs
   homebrew:
     name: 

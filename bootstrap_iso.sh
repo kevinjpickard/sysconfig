@@ -161,9 +161,12 @@ mount /dev/mapper/vg0-home /mnt/home
 
 #### Installation
 echo "Setting up pacman"
-cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bkp
-sed "s/^Ser/#Ser/" /etc/pacman.d/mirrorlist > /tmp/mirrors
-sed '/United States/{n;s/^#//}' /tmp/mirrors > /etc/pacman.d/mirrorlist
+mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bak
+curl -so /etc/pacman.d/mirrorlist https://www.archlinux.org/mirrorlist/?country=US&protocol=http&protocol=https&ip_version=4
+sed -i "x/^Ser/#Ser/" /etc/pacman.d/mirrorlist
+cat /etc/pacman.d/mirrorlist
+#sed "s/^Ser/#Ser/" /etc/pacman.d/mirrorlist > /tmp/mirrors
+#sed '/United States/{n;s/^#//}' /tmp/mirrors > /etc/pacman.d/mirrorlist
 
 if [ "$(uname -m)" = "amd64" ]
 then
@@ -176,7 +179,7 @@ fi
 
 echo "Running pactrap base base-devel"
 pacstrap /mnt base base-devel
-echo "Running pactrap grub-bios $EXTRA_PKGS"
+echo "Running pactrap grub $EXTRA_PKGS"
 pacstrap /mnt grub `echo $EXTRA_PKGS`
 echo "Running genfstab"
 genfstab -p /mnt >> /mnt/etc/fstab
