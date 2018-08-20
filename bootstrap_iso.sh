@@ -175,7 +175,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 # Changes the root password
 echo -e $ROOT_PASSWD"\n"$ROOT_PASSWD | passwd
 git clone -b arch --recurse-submodules https://github.com/kevinjpickard/.dotfiles.git
-ansible-playbook --connection=local .dotfiles/core.yml --extra-vars "hostname=$HOSTN username=$USERNAME"
+ANSIBLE_LIBRARY="/.dotfiles/library/aur:$ANSIBLE_LIBRARY" ansible-playbook --connection=local .dotfiles/core.yml --extra-vars "hostname=$HOSTN username=$USERNAME"
 EOF
 
 echo "Umounting partitions"
