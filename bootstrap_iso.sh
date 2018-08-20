@@ -181,4 +181,3 @@ EOF
 
 echo "Umounting partitions"
 umount /mnt/{boot,home,}
-reboot
