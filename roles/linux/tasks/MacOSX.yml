@@ -1,5 +1,5 @@
 - name: Install Java cuz otherwise some brew installs fail
-  homebrew:
+  homebrew_cask:
     name: java
     state: latest
   become: yes
