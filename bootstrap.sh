@@ -12,6 +12,8 @@ if [[ -e /usr/lib/libnsl.so ]]; then
 fi
 
 if [[ $OSTYPE == darwin* ]]; then
+  read -s SUDO_PASSWD
+  read HOST_NAME
   echo "Detected MacOS"
   echo "Installing HomeBrew..."
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -24,7 +26,7 @@ if [[ $OSTYPE == darwin* ]]; then
   git clone -b arch https://github.com/kevinjpickard/.dotfiles.git ~/.dotfiles
 
   echo "Executing playbook..."
-  sudo ansible-playbook --connection=local ~/.dotfiles/core.yml --extra-vars "username=kevin hostname=KJP-test" -vvv
+  sudo ansible-playbook --connection=local ~/.dotfiles/core.yml --extra-vars "username=$USER hostname=$HOST_NAME ansible_sudo_pass=$SUDO_PASSWD" -vvv
 else
   # Using command -v for POSIX compatibility
   if command -v ansible-playbook > /dev/null; then
