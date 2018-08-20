@@ -8,7 +8,6 @@
 - name: Add HomeBrew Taps
   homebrew_tap:
     name: 
-      - caskroom/cask
       - caskroom/fonts
       - caskroom/versions
       - homebrew/boneyard
