@@ -214,7 +214,7 @@ mv /tmp/rc.conf /etc/rc.conf
 # Setup initial ramdisk environment
 mkinitcpio -p linux
 # Installs and generates GRUB's settings
-grub-install /dev/sda
+grub-install --target=x86_64-efi --efi-directory=/boot/efi
 grub-mkconfig -o /boot/grub/grub.cfg
 # Changes the root password
 echo -e $ROOT_PASSWD"\n"$ROOT_PASSWD | passwd
@@ -224,4 +224,4 @@ ansible-playbook --module-path /.dotfiles/library/aur --connection=local .dotfil
 EOF
 
 echo "Umounting partitions"
-umount /mnt/{boot,home,}
+umount -R /mnt

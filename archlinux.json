@@ -5,7 +5,7 @@
     "iso_checksum_type": "sha1",
     "ssh_timeout": "20m",
     "country": "US",
-    "headless": "true"
+    "headless": "false"
   },
   "builders": [
     {
