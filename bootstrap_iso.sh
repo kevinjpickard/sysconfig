@@ -53,7 +53,7 @@ HOME_FS=ext4
 ROOT_FS=ext4
 
 # Extra packages (not obligatory)
-EXTRA_PKGS='neovim git ansible pacman-contrib'
+EXTRA_PKGS='ansible efibootmgr git neovim pacman-contrib'
 
 
 # Getting Block Device Alignment parameters to solve partition 
@@ -164,7 +164,6 @@ echo "Setting up pacman"
 cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.bkp
 sed "s/^Ser/#Ser/" /etc/pacman.d/mirrorlist > /tmp/mirrors
 sed '/United States/{n;s/^#//}' /tmp/mirrors > /etc/pacman.d/mirrorlist
-cat /etc/pacman.d/mirrorlist
 
 if [ "$(uname -m)" = "amd64" ]
 then

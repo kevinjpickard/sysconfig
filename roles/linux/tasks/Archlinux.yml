@@ -30,86 +30,30 @@
   become_method: sudo
   when: ranked.stat.exists == False
 
-- name: Install Kernel
+- name: Install Linux And Tools
   pacman:
-    name: linux
-    state: latest
-    
-- name: Install Kernel Headers
-  pacman:
-    name: linux-headers
-    state: latest
-    
-- name: Install Base Development Packages
-  pacman:
-    name: base-devel
-    state: latest
-    
-- name: Install zsh
-  pacman:
-    name: zsh
-    state: latest
-    
-- name: Install Neovim
-  pacman:
-    name: neovim
-    state: latest
-    
-- name: Install git
-  pacman:
-    name: git
-    state: latest
-    
-- name: Install DHCP Tools
-  pacman:
-    name: dhcpcd
-    state: latest
-    
-- name: Install GRUB
-  pacman:
-    name: grub
-    state: latest
-    
-- name: Install Boot Manager
-  pacman:
-    name: efibootmgr
-    state: latest
-    
-- name: Install ExFAT Utilities
-  pacman:
-    name: exfat-utils
-    state: latest
-    
-- name: Install NTFS Driver
-  pacman:
-    name: ntfs-3g
-    state: latest
-    
-- name: Install OpenSSH
-  pacman:
-    name: openssh
-    state: latest
-    
-- name: Install CoreUtils
-  pacman:
-    name: coreutils
-    state: latest
-    
-- name: Install e2fsprogs
-  pacman:
-    name: e2fsprogs
+    name: 
+      - linux
+      - linux-headers
+      - base-devel
+      - zsh
+      - neovim
+      - dhcpcd
+      - grub
+      - efibootmgr
+      - exfat-utils
+      - ntfs-3g
+      - openssh
+      - coreutils
+      - e2fsprogs
+      - util-linux
+      - lvm2
+      - less
+      - iproute2
+      - iputils
+      - clamav
     state: latest
 
-- name: Install Kernel Utils
-  pacman:
-    name: util-linux
-    state: latest
-    
-- name: Install lvm2
-  pacman:
-    name: lvm2
-    state: latest
-    
 - name: Install Intel Microcode
   pacman:
     name: intel-ucode
@@ -123,29 +67,24 @@
   become_method: sudo
   when: intel is defined
 
-- name: Install less
-  pacman:
-    name: less
-    state: latest
-    
-- name: Install iproute2
-  pacman:
-    name: iproute2
-    state: latest
-    
-- name: Install iputils
-  pacman:
-    name: iputils
-    state: latest
+- shell: lspci | grep -i nvidia
+  register: nvidia
 
-- name: Install docker
-  pacman:
-    name: docker
+- name: Install NVidia
+  pacman: 
+    name: nvidia
     state: latest
-
-- name: Install ClamAV
+  when: nvidia.rc == 0
+  
+- name: Install Dev Packages
   pacman:
-    name: clamav
+    name:
+      - docker
+      - go
+      - python
+      - python-pip
+      - ruby
+      - git
     state: latest
 
     #- name: Install Ansible AUR Module
@@ -182,7 +121,7 @@
 
 - name: Install Build Dependencies
   pacman:
-    name: go
+    name: 
     state: latest
 
 - name: Build Yay
@@ -197,17 +136,11 @@
   become_method: sudo
   when: yay.stat.exists == False
 
-- name: Install NVidia
-  pacman: 
-    name: nvidia
-    state: latest
-  when: nvidia is defined and nvidia == true
-
 - name: Install Deepin DE and NetworkManager
   pacman:
     name: 
       - deepin
-      - deepin-community-wallpapers
+      - deepin-extra
       - networkmanager
     state: latest
   retries: 3
