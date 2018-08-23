@@ -24,10 +24,7 @@
       - neofetch
       - nvme-cli
       - p7zip-gui
-      - powershell
-      - private-internet-access-vpn
       - slack-desktop
-      - spotify
       - sublime-text-dev
       - virtualbox-ext-oracle
       - yadm-git
@@ -43,6 +40,17 @@
       - nvm
       - pyenv
       - rbenv
+  become: yes
+  become_user: aurman
+  ignore_errors: yes
+
+- name: Install fragile AUR packages
+  aur:
+    use: yay
+    name:
+      - powershell
+      - private-internet-access-vpn
+      - spotify
   become: yes
   become_user: aurman
   ignore_errors: yes

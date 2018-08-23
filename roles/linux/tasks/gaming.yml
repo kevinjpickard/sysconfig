@@ -2,29 +2,10 @@
 # Setting up Arch Gaming Packages
 - debug: msg="Setting up Arch gaming packages"
 
-#- name: Enable MultiLib Repository Pt. 1
-#  replace:
-#    path: /etc/pacman.conf
-#    regexp: '^#[multilib]'
-#    replace: '[multilib]'
-#    backup: yes
-
-#- name: Enable MultiLib Repository Pt. 2
-#  replace:
-#    path: /etc/pacman.conf
-#    regexp: '^#Include = /etc/pacman.d/mirrorlist'
-#    replace: 'Include = /etc/pacman.d/mirrorlist'
-#    backup: yes
-
-#- name: Update pacman cache to pull in MultiLib
-#  pacman:
-#    update_cache: yes
-#    upgrade: yes
-
-#- name: Install Pacman Packages
-#  pacman:
-#    name: steam
-#    state: latest
+- name: Install Pacman Packages
+  pacman:
+    name: steam
+    state: latest
 
 - name: Install AUR Packages
   aur:

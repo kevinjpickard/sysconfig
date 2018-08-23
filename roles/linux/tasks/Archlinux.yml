@@ -69,11 +69,14 @@
     line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"'
     state: present
 
+- command: blkid -o value -s UUID /dev/sda3
+  register: uuid
+
 - name: Modify Grub
   lineinfile:
     path: /etc/default/grub
     regexp: '^GRUB_CMDLINE_LINUX='
-    line: 'GRUB_CMDLINE_LINUX="luks.name=306bf777-25dd-4c75-b829-b1bb8e7d2057=cryptroot root=/dev/vg0/root"'
+    line: 'GRUB_CMDLINE_LINUX="luks.name={{ uuid.stdout }}=cryptroot root=/dev/vg0/root"'
     state: present
 
 - name: Modify Grub
