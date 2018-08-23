@@ -5,7 +5,7 @@
     "iso_checksum_type": "sha1",
     "ssh_timeout": "20m",
     "country": "US",
-    "headless": "false"
+    "headless": "true"
   },
   "builders": [
     {
@@ -42,7 +42,6 @@
       "boot_command": [
         "<enter><wait10><wait10><wait10><wait10>",
         "/usr/bin/curl -O http://{{ .HTTPIP }}:{{ .HTTPPort }}/enable-ssh.sh<enter><wait5>",
-        "/usr/bin/curl -O http://{{ .HTTPIP }}:{{ .HTTPPort }}/poweroff.timer<enter><wait5>",
         "/usr/bin/bash ./enable-ssh.sh<enter>"
       ],
       "disk_size": 60480,

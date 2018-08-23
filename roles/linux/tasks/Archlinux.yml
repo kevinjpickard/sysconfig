@@ -61,50 +61,40 @@
   when: ansible_processor is superset(["GenuineIntel"])
   register: intel
 
-  - name: Modify Grub
-    lineinfile:
-      path: /etc/default/grub
-      regexp: "^GRUB_CMDLINE_LINUX_DEFAULT="
-      line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"'
-      state: present
-    become: yes
-    become_method: sudo
+- name: Modify Grub
+  lineinfile:
+    path: /etc/default/grub
+    regexp: '^GRUB_CMDLINE_LINUX_DEFAULT='
+    line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"'
+    state: present
 
-  - name: Modify Grub
-    lineinfile:
-      path: /etc/default/grub
-      regexp: "^GRUB_CMDLINE_LINUX="
-      line: 'GRUB_CMDLINE_LINUX="luks.name=306bf777-25dd-4c75-b829-b1bb8e7d2057=cryptroot root=/dev/vg0/root"'
-      state: present
-    become: yes
-    become_method: sudo
+- name: Modify Grub
+  lineinfile:
+    path: /etc/default/grub
+    regexp: '^GRUB_CMDLINE_LINUX='
+    line: 'GRUB_CMDLINE_LINUX="luks.name=306bf777-25dd-4c75-b829-b1bb8e7d2057=cryptroot root=/dev/vg0/root"'
+    state: present
 
-  - name: Modify Grub
-    lineinfile:
-      path: /etc/default/grub
-      regexp: "^GRUB_PRELOAD_MODULES="
-      line: 'GRUB_PRELOAD_MODULES="lvm part_gpt part_msdos"'
-      state: present
-    become: yes
-    become_method: sudo
+- name: Modify Grub
+  lineinfile:
+    path: /etc/default/grub
+    regexp: '^GRUB_PRELOAD_MODULES='
+    line: 'GRUB_PRELOAD_MODULES="lvm part_gpt part_msdos"'
+    state: present
 
-  - name: Modify mkinitcpio modules
-    lineinfile:
-      path: /etc/mkinitcpio.conf
-      regexp: "^MODULES="
-      line: 'MODULES=(ext4)'
-      state: present
-    become: yes
-    become_method: sudo
+- name: Modify mkinitcpio modules
+  lineinfile:
+    path: /etc/mkinitcpio.conf
+    regexp: '^MODULES='
+    line: 'MODULES=(ext4)'
+    state: present
 
-  - name: Modify mkinitcpio hooks
-    lineinfile:
-      path: /etc/mkinitcpio.conf
-      regexp: "^HOOKS="
-      line: 'HOOKS=(base udev autodetect modconf block systemd sd-encrypt sd-lvm2 filesystems keyboard fsck)'
-      state: present
-    become: yes
-    become_method: sudo
+- name: Modify mkinitcpio hooks
+  lineinfile:
+    path: /etc/mkinitcpio.conf
+    regexp: '^HOOKS='
+    line: 'HOOKS=(base udev autodetect modconf block systemd sd-encrypt sd-lvm2 filesystems keyboard fsck)'
+    state: present
 
 - name: mkinitcpio
   command: mkinitcpio -p linux
