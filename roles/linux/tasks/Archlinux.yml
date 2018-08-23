@@ -30,28 +30,29 @@
   become_method: sudo
   when: ranked.stat.exists == False
 
-- name: Install Linux And Tools
+- name: Install Linux and tools
   pacman:
     name: 
       - linux
       - linux-headers
       - base-devel
-      - zsh
-      - neovim
+      - clamav
+      - coreutils
       - dhcpcd
-      - grub
+      - e2fsprogs
       - efibootmgr
       - exfat-utils
-      - ntfs-3g
-      - openssh
-      - coreutils
-      - e2fsprogs
-      - util-linux
-      - lvm2
-      - less
+      - grub
       - iproute2
       - iputils
-      - clamav
+      - less
+      - lvm2
+      - neovim
+      - ntfs-3g
+      - openssh
+      - reflector
+      - util-linux
+      - zsh
     state: latest
 
 - name: Install Intel Microcode
@@ -109,6 +110,7 @@
 
 - shell: lspci | grep -i nvidia
   register: nvidia
+  ignore_errors: yes
 
 - name: Install NVidia
   pacman: 
@@ -126,11 +128,6 @@
       - ruby
       - git
     state: latest
-
-    #- name: Install Ansible AUR Module
-    #  git:
-    #    repo: https://github.com/kewlfft/ansible-aur.git 
-    #    dest: /usr/share/ansible/plugins/modules/aur
 
 - name: Create AUR Manager
   user:
