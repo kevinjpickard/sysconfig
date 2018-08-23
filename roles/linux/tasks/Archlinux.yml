@@ -156,11 +156,6 @@
   become_user: aurman
   when: yay.stat.exists == False
 
-- name: Install Build Dependencies
-  pacman:
-    name: 
-    state: latest
-
 - name: Build Yay
   command: chdir=/home/aurman/aur/yay makepkg --cleanbuild --nodeps --force
   become: yes
