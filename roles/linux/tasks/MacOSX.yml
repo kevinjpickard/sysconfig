@@ -144,6 +144,7 @@
     state: latest
   become: yes
   become_user: "{{ username }}"
+  ignore_errors: yes
 
 - name: Clone dotfiles
   command: yadm clone https://github.com/kevinjpickard/dotfiles.git
