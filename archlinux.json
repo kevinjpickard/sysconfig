@@ -51,7 +51,11 @@
       "ssh_password": "vagrant",
       "ssh_timeout": "{{ user `ssh_timeout` }}",
       "shutdown_command": "sudo shutdown -P 0",
-      "headless" : "{{ user `headless`}}"
+      "headless" : "{{ user `headless`}}",
+      "iso_interface": "sata",
+      "vboxmanage": [
+        ["modifyvm", "{{.Name}}", "--firmware", "efi"]
+      ]
     },
     {
       "type": "vmware-iso",
