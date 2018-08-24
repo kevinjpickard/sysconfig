@@ -99,49 +99,49 @@
   become: yes
   become_user: "{{ username }}"
 
-- name: Install Casks
+- name: install casks
   homebrew_cask:
     name: "{{ item }}"
-    with_items:
-      - 1password
-      - atom
-      - bartender
-      - colloquy
-      - dash
-      - docker
-      - evernote
-      - firefox
-      - flux
-      - flycut
-      - google-chrome
-      - google-cloud-sdk
-      - hammerspoon
-      - istat-menus
-      - iterm2
-      - keybase
-      - kindle
-      - kitematic
-      - logitech-options
-      - miniconda
-      - paw
-      - postgres
-      - rescuetime
-      - robo-3t
-      - screenhero
-      - sequel-pro
-      - slack
-      - spotify
-      - sublime-text
-      - transmit
-      - tunnelblick
-      - vagrant
-      - vienna
-      - visual-studio-code
-      - vlc
-      - vmware-fusion
-      - wireshark-chmodbpf
-      - font-inconsolata
     state: latest
+  with_items:
+    - 1password
+    - atom
+    - bartender
+    - colloquy
+    - dash
+    - docker
+    - evernote
+    - firefox
+    - flux
+    - flycut
+    - google-chrome
+    - google-cloud-sdk
+    - hammerspoon
+    - istat-menus
+    - iterm2
+    - keybase
+    - kindle
+    - kitematic
+    - logitech-options
+    - miniconda
+    - paw
+    - postgres
+    - rescuetime
+    - robo-3t
+    - screenhero
+    - sequel-pro
+    - slack
+    - spotify
+    - sublime-text
+    - transmit
+    - tunnelblick
+    - vagrant
+    - vienna
+    - visual-studio-code
+    - vlc
+    - vmware-fusion
+    - wireshark-chmodbpf
+    - font-inconsolata
   async: 1200
   poll: 0
   environment:

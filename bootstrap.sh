@@ -1,5 +1,7 @@
 #!/bin/bash -x
 
+read HOST_NAME
+read -s SUDO_PASSWD
 sudo -v
 
 # for some reason, when this suite is run on an Arch Linux host pacman errors out due 
@@ -14,8 +16,6 @@ if [[ -e /usr/lib/libnsl.so ]]; then
 fi
 
 if [[ $OSTYPE == darwin* ]]; then
-  read -s SUDO_PASSWD
-  read HOST_NAME
   echo "Detected MacOS"
   echo $SUDO_PASSWD
   echo "Installing updates..."
