@@ -7,13 +7,13 @@
 #       Variables        #
 ##################################################
 # Computer Name
-HOSTN=KJP-Test
+read HOSTN
 
 # Username
-USERNAME=kevin
+read USERNAME
 
 # Keyboard Layout
-KEYBOARD_LAYOUT=US
+KEYBOARD_LAYOUT=us
 
 # Your language, used for localization purposes
 LANGUAGE=en_US
@@ -22,13 +22,33 @@ LANGUAGE=en_US
 LOCALE=America/Denver
 
 # Root password for the brand new installed system
-ROOT_PASSWD=123456
+read -s ROOT_PASSWD
 
 # Crypt Password
-CRYPT_PASSWD=123456
+read -s CRYPT_PASSWD
 
 # User Password
-USER_PASSWD=123456
+read -s USER_PASSWD
+
+if [[ $HOSTN -eq $null ]]; then
+  HOSTN=KJP-Test
+fi
+
+if [[ $USERNAME -eq $null ]]; then
+  USERNAME=kevin
+fi
+
+if [[ $ROOT_PASSWD -eq $null ]]; then
+  ROOT_PASSWD=123456
+fi
+
+if [[ $CRYPT_PASSWD -eq $null ]]; then
+  CRYPT_PASSWD=123456
+fi
+
+if [[ $USER_PASSWD -eq $null ]]; then
+  USER_PASSWD=123456
+fi
 
 ########## Hard Disk Partitioning Variable
 # ATTENTION, this script erases ALL YOU HD DATA (specified bt $HD)
@@ -41,7 +61,7 @@ BOOT_SIZE=1024
 EFI_SIZE=1025
 # Root Partition Size: /
 ROOT_SIZE=30000
-# Swap partition size: /swap
+# Swap partition size: /swap (Based on RAM)
 SWAP_SIZE=$(($(grep MemTotal /proc/meminfo | awk '{print $2}')/1000))
 echo "Swap: $SWAP_SIZE"
 # The /home partition will occupy the remain free space
@@ -85,7 +105,7 @@ SWAP_END=$(($SWAP_START+$SWAP_SIZE))
 #       Script       #
 ##################################################
 # Loads the keyboard layout
-loadkeys $KEYBOARD_LAYOUT
+#loadkeys $KEYBOARD_LAYOUT
 
 #### Partitioning
 echo "HD Initialization: $HD"
@@ -171,7 +191,6 @@ then
   # Adds multilib repository
   sed '/^#\[multilib\]/{s/^#//;n;s/^#//;n;s/^#//}' /etc/pacman.conf > /tmp/pacman
   mv /tmp/pacman /etc/pacman.conf
-
 fi
 
 echo "Running pactrap base base-devel"

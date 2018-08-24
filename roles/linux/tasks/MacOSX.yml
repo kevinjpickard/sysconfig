@@ -101,7 +101,8 @@
 
 - name: Install Casks
   homebrew_cask:
-    name:
+    name: "{{ item }}"
+    with_items:
       - 1password
       - atom
       - bartender
@@ -136,15 +137,29 @@
       - vagrant
       - vienna
       - visual-studio-code
-      - virtualbox
       - vlc
       - vmware-fusion
       - wireshark-chmodbpf
       - font-inconsolata
     state: latest
+  async: 1200
+  poll: 0
+  environment:
+    SUDO_ASKPASS: "{{ ansible_sudo_pass }}"
   become: yes
   become_user: "{{ username }}"
   ignore_errors: yes
+
+- name: Install VirtualBox (Will probably report failure cuz mac always blocks the kext)
+  homebrew_cask:
+    name: virtualbox
+    state: latest
+  become: yes
+  become_user: "{{ username }}"
+  ignore_errors: yes
+
+- name: Include git repos
+  include: ./roles/linux/tasks/git.yml
 
 - name: Clone dotfiles
   command: yadm clone https://github.com/kevinjpickard/dotfiles.git

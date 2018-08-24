@@ -17,6 +17,10 @@ if [[ $OSTYPE == darwin* ]]; then
   read -s SUDO_PASSWD
   read HOST_NAME
   echo "Detected MacOS"
+  echo $SUDO_PASSWD
+  echo "Installing updates..."
+  softwareupdate -lia
+
   echo "Installing HomeBrew..."
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
