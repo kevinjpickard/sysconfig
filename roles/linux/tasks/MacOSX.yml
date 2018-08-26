@@ -99,52 +99,67 @@
   become: yes
   become_user: "{{ username }}"
 
-- name: Install Casks
+- name: install casks
   homebrew_cask:
-    name:
-      - 1password
-      - atom
-      - bartender
-      - colloquy
-      - dash
-      - docker
-      - evernote
-      - firefox
-      - flux
-      - flycut
-      - google-chrome
-      - google-cloud-sdk
-      - hammerspoon
-      - istat-menus
-      - iterm2
-      - keybase
-      - kindle
-      - kitematic
-      - logitech-options
-      - miniconda
-      - paw
-      - postgres
-      - rescuetime
-      - robo-3t
-      - screenhero
-      - sequel-pro
-      - slack
-      - spotify
-      - sublime-text
-      - transmit
-      - tunnelblick
-      - vagrant
-      - vienna
-      - visual-studio-code
-      - virtualbox
-      - vlc
-      - vmware-fusion
-      - wireshark-chmodbpf
-      - font-inconsolata
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - 1password
+    - atom
+    - bartender
+    - colloquy
+    - dash
+    - docker
+    - evernote
+    - firefox
+    - flux
+    - flycut
+    - google-chrome
+    - google-cloud-sdk
+    - hammerspoon
+    - istat-menus
+    - iterm2
+    - keybase
+    - kindle
+    - kitematic
+    - logitech-options
+    - miniconda
+    - paw
+    - postgres
+    - rescuetime
+    - robo-3t
+    - screenhero
+    - sequel-pro
+    - slack
+    - spotify
+    - sublime-text
+    - transmit
+    - tunnelblick
+    - vagrant
+    - vienna
+    - visual-studio-code
+    - vlc
+    - vmware-fusion
+    - wireshark-chmodbpf
+    - font-inconsolata
+  async: 1200
+  poll: 0
+  environment:
+    SUDO_ASKPASS: "{{ ansible_sudo_pass }}"
+  become: yes
+  become_user: "{{ username }}"
+  ignore_errors: yes
+
+- name: Install VirtualBox (Will probably report failure cuz mac always blocks the kext)
+  homebrew_cask:
+    name: virtualbox
     state: latest
   become: yes
   become_user: "{{ username }}"
   ignore_errors: yes
+
+- name: Include git repos
+  include: ./roles/linux/tasks/git.yml
 
 - name: Clone dotfiles
   command: yadm clone https://github.com/kevinjpickard/dotfiles.git
