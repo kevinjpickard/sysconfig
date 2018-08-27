@@ -18,7 +18,6 @@
     path: "/Users/{{ username }}/.confg/nvim"
     state: directory
     owner: "{{ username }}"
-    group: "{{ username }}"
 
 - name: Install Dein
   get_url: 
@@ -27,7 +26,6 @@
     force: yes
     mode: +x
     owner: "{{ username }}"
-    group: "{{ username }}"
 
 - name: Install Dein
   command: "sh /Users/{{ username }}/installer.sh /Users/{{ username }}/.config/nvim/dein"
