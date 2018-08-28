@@ -97,8 +97,6 @@
     - zookeeper
     - zsh
     - zsh-completion
-  async: 1200
-  poll: 0
   become: yes
   become_user: "{{ username }}"
   environment:
@@ -147,8 +145,6 @@
     - vmware-fusion
     - wireshark-chmodbpf
     - font-inconsolata
-  async: 1200
-  poll: 0
   environment:
     SUDO_ASKPASS: "{{ ansible_sudo_pass }}"
   become: yes
