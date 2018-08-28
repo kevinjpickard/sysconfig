@@ -101,6 +101,8 @@
   poll: 0
   become: yes
   become_user: "{{ username }}"
+  environment:
+    SUDO_ASKPASS: "{{ ansible_sudo_pass }}"
 
 - name: install casks
   homebrew_cask:
@@ -160,6 +162,8 @@
   become: yes
   become_user: "{{ username }}"
   ignore_errors: yes
+  environment:
+    SUDO_ASKPASS: "{{ ansible_sudo_pass }}"
 
 - name: Include git repos
   include: ./roles/linux/tasks/git.yml
