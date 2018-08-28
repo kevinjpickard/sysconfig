@@ -1,3 +1,10 @@
+- name: "Setup {{ username }}"
+  user:
+    name: "{{ username }}"
+    shell: /bin/zsh
+    groups: admin
+    append: yes
+
 - name: Install Java cuz otherwise some brew installs fail
   homebrew_cask:
     name: java
