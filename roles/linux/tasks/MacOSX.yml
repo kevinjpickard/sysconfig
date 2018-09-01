@@ -64,6 +64,7 @@
     - mongodb
     - mysql
     - nettle
+    - neofetch
     - neovim
     - nim
     - nmap
