@@ -18,6 +18,7 @@
     use: yay
     name: 
       - antigen-git
+      - cpufetch-git
       - google-chrome
       - keybase-bin
       - matcha-gtk-theme
@@ -27,6 +28,7 @@
       - slack-desktop
       - sublime-text-dev
       - virtualbox-ext-oracle
+      - visual-studio-code-bin
       - yadm-git
   become: yes
   become_user: aurman
@@ -47,10 +49,11 @@
 - name: Install fragile AUR packages
   aur:
     use: yay
-    name:
-      - powershell
-      - private-internet-access-vpn
-      - spotify
+    name: "{{ item }}"
+  with_items:
+    - powershell
+    - private-internet-access-vpn
+    - spotify
   become: yes
   become_user: aurman
   ignore_errors: yes

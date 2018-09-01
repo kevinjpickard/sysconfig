@@ -43,6 +43,7 @@
       - efibootmgr
       - exfat-utils
       - grub
+      - htop
       - iproute2
       - iputils
       - less
@@ -212,19 +213,21 @@
 - name: Install Other Pacman Packages
   pacman:
     name:
-      - veracrypt
-      - terminator
+      - arc-gtk-theme
+      - curl
       - firefox
       - guake
-      - thefuck
-      - wget
-      - curl
       - python-pip
       - python2-pip
-      - vagrant
-      - virtualbox-host-modules-arch
-      - virtualbox
+      - terminator
+      - thefuck
       - tmux
+      - vagrant
+      - variety
+      - veracrypt
+      - virtualbox
+      - virtualbox-host-modules-arch
+      - wget
     state: latest
 
 - name: Create {{ username }}
