@@ -36,8 +36,9 @@ echo 'Enter user password:'
 read -s USER_PASSWD
 
 # Device
-echo 'Enter block device ID:"
+echo 'Enter block device ID (omit /dev/, i.e. sda, nvme0n1, etc.):'
 read BLKID
+
 if [[ $HOSTN -eq $null ]]; then
   HOSTN=KJP-Test
 fi
@@ -59,7 +60,7 @@ if [[ $USER_PASSWD -eq $null ]]; then
 fi
 
 if [[ $BLKID -eq $null ]]; then
-  BLKID=/dev/nvme0n1
+  BLKID=nvme0n1
 fi
 
 echo "Hostanme: $HOSTN"
