@@ -39,6 +39,7 @@
       - clamav
       - coreutils
       - dhcpcd
+      - dkms
       - e2fsprogs
       - efibootmgr
       - exfat-utils
@@ -118,7 +119,10 @@
 
 - name: Install NVidia
   pacman: 
-    name: nvidia
+    name: 
+      - nvidia
+      - nvidia-utils
+      - lib32-nvidia-utils
     state: latest
   when: nvidia.rc == 0
 
@@ -214,6 +218,9 @@
   pacman:
     name:
       - arc-gtk-theme
+      - bluez
+      - bluez-firmware
+      - bluez-utils
       - curl
       - firefox
       - guake

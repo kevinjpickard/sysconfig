@@ -42,6 +42,7 @@
       - nvm
       - pyenv
       - rbenv
+      - ruby-build
   become: yes
   become_user: aurman
   ignore_errors: yes
