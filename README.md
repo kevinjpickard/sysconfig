@@ -1,11 +1,13 @@
-# .dotfiles
-My system config files
+# System Configuration
+My system config files. This includes ansible playbooks and shell scripts to automate sytem setup. 
+
+## Arch Linux
 
 ```
-curl https://raw.githubusercontent.com/kevinjpickard/.dotfiles/arch/.dotfiles/bootstrap.sh | bash
+curl https://raw.githubusercontent.com/kevinjpickard/.dotfiles/bootstrap_iso.sh -o bootrap_iso.sh && bash ./bootstrap_iso.sh
 ```
 
-## To test:
+## Testing:
 Just the ansible playbook:
 ```
 kitchen test archlinux
