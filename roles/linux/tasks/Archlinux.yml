@@ -1,0 +1,299 @@
+---
+# Arch specific tasks
+- debug: msg="Running Arch Linux Tasks"
+
+#- name: Update pacman Cache
+#  pacman:
+#    update_cache: yes
+#    upgrade: yes
+
+- name: Install pacman scripts and tools
+  pacman:
+    name: pacman-contrib
+    state: latest
+
+- stat: path=/etc/pacman.d/mirrorlist.orig
+  register: backup
+
+- name: Backup Mirrors
+  command: mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.orig
+  become: yes
+  become_method: sudo
+  when: backup.stat.exists == False
+
+- stat: path=/etc/pacman.d/mirrorlist
+  register: ranked
+
+- name: Rank Mirrors
+  shell: rankmirrors /etc/pacman.d/mirrorlist.orig > /etc/pacman.d/mirrorlist
+  become: yes
+  become_method: sudo
+  when: ranked.stat.exists == False
+
+- name: Install Linux and tools
+  pacman:
+    name: 
+      - linux
+      - linux-headers
+      - base-devel
+      - clamav
+      - coreutils
+      - dhcpcd
+      - e2fsprogs
+      - efibootmgr
+      - exfat-utils
+      - grub
+      - htop
+      - iproute2
+      - iputils
+      - less
+      - lvm2
+      - neovim
+      - ntfs-3g
+      - openssh
+      - reflector
+      - util-linux
+      - zsh
+    state: latest
+
+- name: Install Intel Microcode
+  pacman:
+    name: intel-ucode
+    state: latest
+  when: ansible_processor is superset(["GenuineIntel"])
+  register: intel
+
+- name: Modify Grub
+  lineinfile:
+    path: /etc/default/grub
+    regexp: '^GRUB_CMDLINE_LINUX_DEFAULT='
+    line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"'
+    state: present
+
+- command: blkid -o value -s UUID /dev/sda3
+  register: uuid
+
+- name: Modify Grub
+  lineinfile:
+    path: /etc/default/grub
+    regexp: '^GRUB_CMDLINE_LINUX='
+    line: 'GRUB_CMDLINE_LINUX="luks.name={{ uuid.stdout }}=cryptroot root=/dev/vg0/root"'
+    state: present
+
+- name: Modify Grub
+  lineinfile:
+    path: /etc/default/grub
+    regexp: '^GRUB_PRELOAD_MODULES='
+    line: 'GRUB_PRELOAD_MODULES="lvm part_gpt part_msdos"'
+    state: present
+
+- name: Modify mkinitcpio modules
+  lineinfile:
+    path: /etc/mkinitcpio.conf
+    regexp: '^MODULES='
+    line: 'MODULES=(ext4)'
+    state: present
+
+- name: Modify mkinitcpio hooks
+  lineinfile:
+    path: /etc/mkinitcpio.conf
+    regexp: '^HOOKS='
+    line: 'HOOKS=(base udev autodetect modconf block systemd sd-encrypt sd-lvm2 filesystems keyboard fsck)'
+    state: present
+
+- name: mkinitcpio
+  command: mkinitcpio -p linux
+  become: yes
+  become_method: sudo
+
+- name: Regenerate GRUB Config to enable Intel Microcode Updates
+  command: grub-mkconfig -o /boot/grub/grub.cfg
+  become: yes
+  become_method: sudo
+  when: intel is defined
+
+- shell: lspci | grep -i nvidia
+  register: nvidia
+  ignore_errors: yes
+
+- name: Install NVidia
+  pacman: 
+    name: nvidia
+    state: latest
+  when: nvidia.rc == 0
+
+- name: Install Dev Packages
+  pacman:
+    name:
+      - docker
+      - go
+      - python
+      - python-pip
+      - ruby
+      - git
+    state: latest
+
+- name: Create AUR Manager
+  user:
+    name: aurman
+    comment: "AUR Manager"
+    shell: /bin/nologin
+    home: /home/aurman
+    append: yes
+  
+- name: Set AUR Manager permissions
+  lineinfile:
+    path: /etc/sudoers.d/11-install-aurman
+    line: 'aurman ALL=(ALL) NOPASSWD: /usr/bin/pacman'
+    create: yes
+    validate: 'visudo -cf %s'
+
+- stat: path=/home/aurman/aur/yay
+  register: yay
+
+- name: Clone Yay
+  git:
+    repo: https://aur.archlinux.org/yay.git
+    dest: /home/aurman/aur/yay
+    accept_hostkey: yes
+  become: yes
+  become_user: aurman
+  when: yay.stat.exists == False
+
+- name: Build Yay
+  command: chdir=/home/aurman/aur/yay makepkg --cleanbuild --nodeps --force
+  become: yes
+  become_user: aurman
+  when: yay.stat.exists == False
+ 
+- name: Install Yay
+  shell: chdir=/home/aurman/aur/yay pacman -U --noconfirm $(ls | grep -i -m 1 yay*.pkg.tar.xz)
+  become: yes
+  become_method: sudo
+  when: yay.stat.exists == False
+
+- name: Install Deepin DE and NetworkManager
+  pacman:
+    name: 
+      - deepin
+      - deepin-extra
+      - networkmanager
+    state: latest
+  retries: 3
+  delay: 1
+  register: result
+  until: result.failed == False
+
+- name: Update LightDM Config
+  lineinfile:
+    path: /etc/lightdm/lightdm.conf
+    regexp: '^greeter-session=*'
+    line: 'greeter-session=lightdm-deepin-greeter'
+
+- name: Enable LightDM
+  systemd:
+    name: lightdm
+    enabled: yes
+
+- name: Enable NetworkManager.service
+  systemd:
+    name: NetworkManager.service
+    enabled: yes
+
+- name: Enable Periodic TRIM
+  systemd:
+    name: fstrim.timer
+    enabled: yes
+
+- name: Get the fuck outta here Speck/Simon (NSA Crypto)
+  kernel_blacklist:
+    name: CONFIG_CRYPTO_SPECK
+    state: present
+
+- name: Install Other Pacman Packages
+  pacman:
+    name:
+      - arc-gtk-theme
+      - curl
+      - firefox
+      - guake
+      - python-pip
+      - python2-pip
+      - terminator
+      - thefuck
+      - tmux
+      - vagrant
+      - variety
+      - veracrypt
+      - virtualbox
+      - virtualbox-host-modules-arch
+      - wget
+    state: latest
+
+- name: Create {{ username }}
+  user:
+    name: "{{ username }}"
+    shell: /usr/bin/zsh
+    create_home: yes
+    state: present
+    groups: "wheel,docker"
+    append: yes
+
+- name: Install oh-my-zsh
+  git:
+    repo: https://github.com/robbyrussell/oh-my-zsh.git
+    dest: "/home/{{ username }}/.oh-my-zsh"
+
+- name: Install Tmux Package Manager
+  git: 
+    repo: https://github.com/tmux-plugins/tpm
+    dest: /home/{{ username }}/.tmux/plugins/tpm
+  become: yes
+  become_user: "{{ username }}"
+
+- name: Create Dein Folder structure
+  file:
+    path: /home/{{ username }}/.confg/nvim
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
+- name: Install Dein
+  get_url: 
+    url: https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh
+    dest: "/home/{{ username }}/installer.sh"
+    force: yes
+    mode: +x
+    owner: "{{ username }}"
+    group: "{{ username }}"
+
+- name: Install Dein
+  command: "sh /home/{{ username }}/installer.sh /home/{{ username }}/.config/nvim/dein"
+  become: yes
+  become_user: "{{ username }}"
+
+- name: Remove Installer
+  file: 
+    path: "/home/{{ username }}/installer.sh"
+    state: absent
+
+- stat: path=/home/aurman/aur/yay
+  register: yay
+
+- name: Setup AUR
+  include: roles/linux/tasks/aur.yml
+  retries: 3
+  delay: 1
+  register: result
+  until: result.failed == False
+
+- name: Install Gaming Software
+  include: roles/linux/tasks/gaming.yml
+  tags: 
+    - gaming
+
+- name: Pull Down dotfiles
+  command: yadm clone https://github.com/kevinjpickard/dotfiles.git
+  become: yes
+  become_user: "{{ username }}"
+

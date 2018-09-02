@@ -1,0 +1,179 @@
+- name: "Setup {{ username }}"
+  user:
+    name: "{{ username }}"
+    shell: /bin/zsh
+    groups: admin
+    append: yes
+
+- name: Install Java cuz otherwise some brew installs fail
+  homebrew_cask:
+    name: java
+    state: latest
+  become: yes
+  become_user: "{{ username }}"
+
+- name: Pour Kegs
+  homebrew:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - amazon-ecs-cli
+    - antigen
+    - atool
+    - autoconf
+    - automake
+    - avrdude
+    - awscli
+    - bash-completion
+    - boost
+    - c-ares
+    - cookiecutter
+    - coreutils
+    - dbus
+    - fzf
+    - gdbm
+    - geoip
+    - gettext
+    - git
+    - glib
+    - gmp
+    - gnutls
+    - go
+    - hiredis
+    - hub
+    - iproute2mac
+    - libelf
+    - libevent
+    - libffi
+    - libftdi0
+    - libgcrypt
+    - libgpg-error
+    - libksba
+    - libtasn1
+    - libtool
+    - libusb
+    - libusb-compat
+    - libxml2
+    - libxslt
+    - libyaml
+    - lua
+    - makedepend
+    - maven
+    - memcached
+    - mercurial
+    - mongodb
+    - mysql
+    - nettle
+    - neofetch
+    - neovim
+    - nim
+    - nmap
+    - node
+    - nvm
+    - openssl
+    - ossp-uuid
+    - packer
+    - pcre
+    - pkg-config
+    - postgresql
+    - pyenv
+    - pyenv-virtualenv
+    - pyenv-virtualenvwrapper
+    - python
+    - python3
+    - qt5
+    - ragel
+    - rbenv
+    - readline
+    - redis
+    - ruby-build
+    - sqlite
+    - subversion
+    - task
+    - terminal-notifier
+    - thefuck
+    - tree
+    - v8
+    - vim
+    - watch
+    - watchman
+    - wget
+    - wireshark
+    - xz
+    - yadm
+    - z
+    - zookeeper
+    - zsh
+    - zsh-completion
+  become: yes
+  become_user: "{{ username }}"
+  environment:
+    SUDO_ASKPASS: "{{ ansible_sudo_pass }}"
+
+- name: install casks
+  homebrew_cask:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - 1password
+    - atom
+    - bartender
+    - colloquy
+    - dash
+    - docker
+    - evernote
+    - firefox
+    - flux
+    - flycut
+    - google-chrome
+    - google-cloud-sdk
+    - hammerspoon
+    - istat-menus
+    - iterm2
+    - keybase
+    - kindle
+    - kitematic
+    - logitech-options
+    - miniconda
+    - paw
+    - postgres
+    - rescuetime
+    - robo-3t
+    - screenhero
+    - sequel-pro
+    - slack
+    - spotify
+    - sublime-text
+    - transmit
+    - tunnelblick
+    - vagrant
+    - vienna
+    - visual-studio-code
+    - vlc
+    - vmware-fusion
+    - wireshark-chmodbpf
+    - font-inconsolata
+  environment:
+    SUDO_ASKPASS: "{{ ansible_sudo_pass }}"
+  become: yes
+  become_user: "{{ username }}"
+  ignore_errors: yes
+
+- name: Install VirtualBox (Will probably report failure cuz mac always blocks the kext)
+  homebrew_cask:
+    name: virtualbox
+    state: latest
+  become: yes
+  become_user: "{{ username }}"
+  ignore_errors: yes
+  environment:
+    SUDO_ASKPASS: "{{ ansible_sudo_pass }}"
+
+- name: Include git repos
+  include: ./roles/linux/tasks/git.yml
+
+- name: Clone dotfiles
+  command: yadm clone https://github.com/kevinjpickard/dotfiles.git
+  become: yes
+  become_user: "{{ username }}"
+

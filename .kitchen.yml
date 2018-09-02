@@ -1,0 +1,33 @@
+---
+driver:
+  name: vagrant
+  synced_folders:
+    - [".", "/tmp/kitchen"]
+  customize:
+    cableconnected1: 'on'
+    memory: 3072
+    cpus: 3
+    # DE needs 3D acceleration to work
+    vram: 256
+    accelerate3d: 'on'
+    accelerate2dvideo: 'on'
+    usb: 'on'
+    usbxhci: 'on'
+    
+provisioner:
+  name: shell
+  sudo: false
+  cleanup_sandbox: false
+
+platforms:
+  - name: archlinux
+    driver:
+      box: archlinux/archlinux
+  - name: windows10
+    driver:
+      box: test-win10
+      synced_folders: 
+        - [".", "C:\\Windows\\temp\\system-config"]
+
+suites:
+  - name: default

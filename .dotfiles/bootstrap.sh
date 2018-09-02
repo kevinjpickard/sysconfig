@@ -35,9 +35,15 @@ if [[ $os == "Darwin" ]]; then
 fi
 
 if [[ $os == "Linux" ]]; then
-  # Linux setup
-  echo "linux detected, calling Linux setup scripts..."
-  sudo apt-get install git -y
+  # Arch
+	if [[ -e /etc/arch-release ]]; then
+		echo "Detected Arch Linux"
+		sudo pacman -Syyu --noconfirm --needed base base-devel linux linux-headers git 
+	else
+		# Other Linux setup
+		echo "Detected Linux"
+		sudo apt-get install git -y
+	fi
 
   ## Clone github .dotfiles repo
   echo "Pulling down system configuration files..."
@@ -45,12 +51,16 @@ if [[ $os == "Linux" ]]; then
   rm -rf ~/.dotfiles
   git clone --bare https://github.com/kevinjpickard/.dotfiles.git $HOME/.dotfiles
   /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME fetch
-  /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout master
-  /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull origin master
+  /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout -f arch
+  /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull -f origin arch
   echo ".dotfiles" >> .gitignore
   /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
-  alias dots='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-  dots push --set-upstream origin master
+  /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME --set-upstream origin arch
 
-  ~/.dotfiles/linuxsetup.sh
+	if [[ -e /etc/arch-release ]]; then 
+    echo 'calling arch setup files...'
+		bash ~/.dotfiles/arch_setup.sh
+	else
+		bash ~/.dotfiles/linuxsetup.sh
+	fi
 fi

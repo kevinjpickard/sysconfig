@@ -1,0 +1,19 @@
+---
+# Tasks for all Hosts
+- debug: msg="Running on Windows"
+  when: ansible_kernel is search('Microsoft')
+
+- debug: msg="Detected OS as {{ ansible_distribution }}"
+
+- fail: msg="Username not defined"
+  when: username is not defined
+
+- debug: msg="Username is {{ username }}"
+  when: username is defined
+
+- name: Run OS Family Tasks
+  include: "./roles/linux/tasks/{{ ansible_system }}.yml"
+
+- name: Run OS Specific Tasks
+  include: "./roles/linux/tasks/{{ ansible_distribution }}.yml"
+
