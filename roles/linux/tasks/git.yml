@@ -36,4 +36,3 @@
   file: 
     path: "/Users/{{ username }}/installer.sh"
     state: absent
-

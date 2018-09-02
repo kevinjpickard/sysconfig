@@ -1,0 +1,95 @@
+---
+# Arch Linux bootstrap tasks
+- debug: msg="Running Arch Linux bootstrap tasks"
+
+- name: Install Intel Microcode
+  pacman:
+    name: intel-ucode
+    state: latest
+  when: ansible_processor is superset(["GenuineIntel"])
+  register: intel
+
+- name: Modify Grub
+  lineinfile:
+    path: /etc/default/grub
+    regexp: '^GRUB_CMDLINE_LINUX_DEFAULT='
+    line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"'
+    state: present
+
+- command: blkid -o value -s UUID /dev/sda3
+  register: uuid
+
+- name: Modify Grub
+  lineinfile:
+    path: /etc/default/grub
+    regexp: '^GRUB_CMDLINE_LINUX='
+    line: 'GRUB_CMDLINE_LINUX="luks.name={{ uuid.stdout }}=cryptroot root=/dev/vg0/root"'
+    state: present
+
+- name: Modify Grub
+  lineinfile:
+    path: /etc/default/grub
+    regexp: '^GRUB_PRELOAD_MODULES='
+    line: 'GRUB_PRELOAD_MODULES="lvm part_gpt part_msdos"'
+    state: present
+
+- name: Modify mkinitcpio modules
+  lineinfile:
+    path: /etc/mkinitcpio.conf
+    regexp: '^MODULES='
+    line: 'MODULES=(ext4)'
+    state: present
+
+- name: Modify mkinitcpio hooks
+  lineinfile:
+    path: /etc/mkinitcpio.conf
+    regexp: '^HOOKS='
+    line: 'HOOKS=(base udev autodetect modconf block systemd sd-encrypt sd-lvm2 filesystems keyboard fsck)'
+    state: present
+
+- name: mkinitcpio
+  command: mkinitcpio -p linux
+  become: yes
+  become_method: sudo
+
+- name: Regenerate GRUB Config to enable Intel Microcode Updates
+  command: grub-mkconfig -o /boot/grub/grub.cfg
+  become: yes
+  become_method: sudo
+  when: intel is defined
+
+- shell: lspci | grep -i nvidia
+  register: nvidia
+  ignore_errors: yes
+
+- name: Install NVidia
+  pacman: 
+    name: 
+      - nvidia
+      - nvidia-utils
+      - lib32-nvidia-utils
+      - nvidia-settings
+    state: latest
+  when: nvidia.rc == 0
+- name: Pacman hook to regenerate initramfs on Nvidia update
+  copy:
+    dest: /etc/pacman.d/hooks/nvidia.hook
+    owner: root
+    group: root
+    mode: 0644
+    content: "[Trigger]
+Operation=Install
+Operation=Upgrade
+Operation=Remove
+Type=Package
+Target=nvidia
+Target=linux
+# Change the linux part above and in the Exec line if a different kernel is used
+
+[Action]
+Description=Update Nvidia module in initcpio
+Depends=mkinitcpio
+When=PostTransaction
+NeedsTargets
+Exec=/bin/sh -c 'while read -r trg; do case $trg in linux) exit 0; esac; done; /usr/bin/mkinitcpio -P'"
+  when: nvidia.rc == 0

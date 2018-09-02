@@ -2,34 +2,6 @@
 # Arch specific tasks
 - debug: msg="Running Arch Linux Tasks"
 
-#- name: Update pacman Cache
-#  pacman:
-#    update_cache: yes
-#    upgrade: yes
-
-- name: Install pacman scripts and tools
-  pacman:
-    name: pacman-contrib
-    state: latest
-
-- stat: path=/etc/pacman.d/mirrorlist.orig
-  register: backup
-
-- name: Backup Mirrors
-  command: mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.orig
-  become: yes
-  become_method: sudo
-  when: backup.stat.exists == False
-
-- stat: path=/etc/pacman.d/mirrorlist
-  register: ranked
-
-- name: Rank Mirrors
-  shell: rankmirrors /etc/pacman.d/mirrorlist.orig > /etc/pacman.d/mirrorlist
-  become: yes
-  become_method: sudo
-  when: ranked.stat.exists == False
-
 - name: Install Linux and tools
   pacman:
     name: 
@@ -52,6 +24,7 @@
       - neovim
       - ntfs-3g
       - openssh
+      - pacman-contrib
       - reflector
       - util-linux
       - zsh

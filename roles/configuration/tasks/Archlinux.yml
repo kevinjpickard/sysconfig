@@ -1,0 +1,28 @@
+---
+# Arch Linux configuration tasks
+- debug: msg="Running Arch Linux configuration tasks"
+
+# systemd units
+- name: Create systemd unit to run Reflector update on boot
+  copy:
+    dest: /etc/systemd/system/reflector.service
+    owner: root
+    group: root
+    mode: 0644
+    src: reflector.service
+
+- name: Enable Reflector update unit
+  systemd:
+    name: reflector.service
+    enabled: yes
+  
+# pacman hooks
+
+# Kernel Module Configs
+- name: Disable ERTM on bluetooth
+  copy:
+    dest: /etc/modprobe.d/xbox_bt.conf
+    owner: root
+    group: root
+    mode: 0644
+    content: 'options bluetooth disable_ertm=1'
