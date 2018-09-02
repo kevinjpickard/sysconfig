@@ -7,9 +7,11 @@
 #       Variables        #
 ##################################################
 # Computer Name
+echo 'Enter Hostname:'
 read HOSTN
 
 # Username
+echo 'Enter username:'
 read USERNAME
 
 # Keyboard Layout
@@ -22,14 +24,20 @@ LANGUAGE=en_US
 LOCALE=America/Denver
 
 # Root password for the brand new installed system
+echo 'Enter root password:'
 read -s ROOT_PASSWD
 
 # Crypt Password
+echo 'Enter crypt password:'
 read -s CRYPT_PASSWD
 
 # User Password
+echo 'Enter user password:'
 read -s USER_PASSWD
 
+# Device
+echo 'Enter block device ID:"
+read BLKID
 if [[ $HOSTN -eq $null ]]; then
   HOSTN=KJP-Test
 fi
@@ -50,17 +58,27 @@ if [[ $USER_PASSWD -eq $null ]]; then
   USER_PASSWD=123456
 fi
 
+if [[ $BLKID -eq $null ]]; then
+  BLKID=/dev/nvme0n1
+fi
+
+echo "Hostanme: $HOSTN"
+echo "Username: $USERNAME"
+echo "Root Password: $ROOT_PASSWD"
+echo "Crypt Password: $CRYPT_PASSWD"
+echo "User Password: $USER_PASSWD"
+echo "Block Device ID: $BLKID"
+
 ########## Hard Disk Partitioning Variable
 # ATTENTION, this script erases ALL YOU HD DATA (specified bt $HD)
 # Sizes are in MB
-BLKID=sda
 HD="/dev/$BLKID"
 # Boot Partition Size: /boot
 BOOT_SIZE=1024
 # EFI Partition Size: /boot/efi
-EFI_SIZE=1025
+EFI_SIZE=1024
 # Root Partition Size: /
-ROOT_SIZE=30000
+ROOT_SIZE=30720
 # Swap partition size: /swap (Based on RAM)
 SWAP_SIZE=$(($(grep MemTotal /proc/meminfo | awk '{print $2}')/1000))
 echo "Swap: $SWAP_SIZE"
@@ -75,24 +93,8 @@ ROOT_FS=ext4
 # Extra packages (not obligatory)
 EXTRA_PKGS='ansible efibootmgr git neovim pacman-contrib'
 
-
-# Getting Block Device Alignment parameters to solve partition 
-#   performance warnings from parted
-OPTIMAL_IO_SIZE=$(cat /sys/block/$BLKID/queue/optimal_io_size)
-MINIMUM_IO_SIZE=$(cat /sys/block/$BLKID/queue/minimum_io_size)
-if [[ -e /sys/block/$BLKID/queue/alignment_offset ]]; then
-  ALIGNMENT_OFFSET=$(cat /sys/block/$BLKID/queue/alignment_offset)
-else
-  ALIGNMENT_OFFSET=0
-fi
-PHYSICAL_BLOCK_SIZE=$(cat /sys/block/$BLKID/queue/physical_block_size)
-
-# Calculate optimal start sector
-if [[ $OPTIMAL_IO_SIZE == 0 ]]; then echo "WARNING! optimal_io_size ioctl is 0!"; fi
-START_SECTOR=$((($OPTIMAL_IO_SIZE+$ALIGNMENT_OFFSET)/$PHYSICAL_BLOCK_SIZE))
-
 ######## Auxiliary variables. THIS SHOULD NOT BE ALTERED
-EFI_START=$(((1024*1024)/$PHYSICAL_BLOCK_SIZE))
+EFI_START=2048
 EFI_END=$(($EFI_START+$EFI_SIZE))
 
 BOOT_START=$EFI_END
@@ -132,8 +134,8 @@ parted -s $HD set 2 boot on 1>/dev/null
 # Create LVM
 echo "Creating LVM"
 parted -s $HD mkpart logical ext4 $BOOT_END 100%
-echo -n $CRYPT_PASSWD | cryptsetup -c aes-xts-plain64 -y --use-random luksFormat "$HD"3 -d -
-echo -n $CRYPT_PASSWD | cryptsetup luksOpen "$HD"3 luks -d -
+echo -n $CRYPT_PASSWD | cryptsetup -c aes-xts-plain64 -y --use-random luksFormat "$HD"p3 -d -
+echo -n $CRYPT_PASSWD | cryptsetup luksOpen "$HD"p3 luks -d -
 pvcreate /dev/mapper/luks
 vgcreate vg0 /dev/mapper/luks
 
@@ -151,9 +153,9 @@ lvcreate -l +100%FREE vg0 --name home
 
 # Formats the root, home and boot partition to the specified file system
 echo "Formating efi partition"
-mkfs.vfat -F32 "$HD"1 1>/dev/null
+mkfs.vfat -F32 "$HD"p1 1>/dev/null
 echo "Formating boot partition"
-mkfs.$BOOT_FS "$HD"2 -L boot 1>/dev/null
+mkfs.$BOOT_FS "$HD"p2 -L boot 1>/dev/null
 echo "Formating root partition"
 mkfs.$ROOT_FS /dev/mapper/vg0-root  1>/dev/null
 echo "Formating home partition"
@@ -170,10 +172,10 @@ echo "Mounting partitions"
 mount /dev/mapper/vg0-root /mnt
 # mounts the boot partition
 mkdir /mnt/boot
-mount "$HD"2 /mnt/boot
+mount "$HD"p2 /mnt/boot
 # mounts the EFI partition
 mkdir /mnt/boot/efi
-mount "$HD"1 /mnt/boot/efi
+mount "$HD"p1 /mnt/boot/efi
 # mounts the home partition
 mkdir /mnt/home
 mount /dev/mapper/vg0-home /mnt/home
