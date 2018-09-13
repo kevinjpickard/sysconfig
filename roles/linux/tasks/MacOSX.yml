@@ -40,8 +40,10 @@
     - gnutls
     - go
     - hiredis
+    - htop
     - hub
     - iproute2mac
+    - jq
     - libelf
     - libevent
     - libffi
@@ -92,6 +94,7 @@
     - task
     - terminal-notifier
     - thefuck
+    - tmux
     - tree
     - v8
     - vim
@@ -121,6 +124,7 @@
     - colloquy
     - dash
     - docker
+    - dotnet-sdk
     - evernote
     - firefox
     - flux
