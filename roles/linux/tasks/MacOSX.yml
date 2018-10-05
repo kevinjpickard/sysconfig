@@ -151,6 +151,7 @@
     - transmit
     - tunnelblick
     - vagrant
+    - vagrant-vmware-utility
     - vienna
     - visual-studio-code
     - vlc
