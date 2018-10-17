@@ -172,23 +172,34 @@
   become_method: sudo
   when: yay.stat.exists == False
 
-- name: Install Deepin DE and NetworkManager
+- name: Install i3
   pacman:
-    name: 
-      - deepin
-      - deepin-extra
-      - networkmanager
+    name: i3
     state: latest
-  retries: 3
-  delay: 1
-  register: result
-  until: result.failed == False
 
-- name: Update LightDM Config
+  #- name: Install Deepin DE and NetworkManager
+  #  pacman:
+  #    name: 
+  #      - deepin
+  #      - deepin-extra
+  #      - networkmanager
+  #    state: latest
+  #  retries: 3
+  #  delay: 1
+  #  register: result
+  #  until: result.failed == False
+
+  #- name: Update LightDM Config
+  #  lineinfile:
+  #    path: /etc/lightdm/lightdm.conf
+  #    regexp: '^greeter-session=*'
+  #    line: 'greeter-session=lightdm-deepin-greeter'
+
+- name: Make i3 Default
   lineinfile:
     path: /etc/lightdm/lightdm.conf
-    regexp: '^greeter-session=*'
-    line: 'greeter-session=lightdm-deepin-greeter'
+    regexp: '^user-session=*'
+    line: 'user-session=i3'
 
 - name: Enable LightDM
   systemd:
