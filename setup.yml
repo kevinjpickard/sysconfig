@@ -11,4 +11,4 @@
 
   roles:
     - initial-config
-    - linux
+    - sync-config
