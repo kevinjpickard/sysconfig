@@ -174,7 +174,9 @@
 
 - name: Install i3
   pacman:
-    name: i3
+    name: 
+      - i3
+      - lightdm
     state: latest
 
   #- name: Install Deepin DE and NetworkManager
