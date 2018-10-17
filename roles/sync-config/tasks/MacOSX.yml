@@ -175,7 +175,7 @@
     SUDO_ASKPASS: "{{ ansible_sudo_pass }}"
 
 - name: Include git repos
-  include: ./roles/linux/tasks/git.yml
+  include: ./roles/sync-config/tasks/git.yml
 
 - name: Clone dotfiles
   command: yadm clone https://github.com/kevinjpickard/dotfiles.git

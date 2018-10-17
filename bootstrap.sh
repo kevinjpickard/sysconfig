@@ -33,7 +33,7 @@ if [[ $OSTYPE == darwin* ]]; then
   git clone -b arch https://github.com/kevinjpickard/.dotfiles.git ~/.dotfiles
 
   echo "Executing playbook..."
-  sudo ansible-playbook --connection=local ~/.dotfiles/core.yml --extra-vars "username=$USER hostname=$HOST_NAME ansible_sudo_pass=$SUDO_PASSWD" -vvv
+  sudo ansible-playbook --connection=local ~/.dotfiles/sync.yml --extra-vars "username=$USER hostname=$HOST_NAME ansible_sudo_pass=$SUDO_PASSWD" -vvv
 else
   # Using command -v for POSIX compatibility
   if command -v ansible-playbook > /dev/null; then
@@ -44,9 +44,9 @@ else
   fi
 
   if [[ -e /tmp/kitchen/core.retry ]]; then
-    ANSIBLE_LIBRARY="/tmp/kitchen/library/aur:$ANSIBLE_LIBRARY" ansible-playbook --connection=local /tmp/kitchen/core.yml --extra-vars "username=kevin hostname=KJP-test" --limit @/tmp/kitchen/core.retry -vvv
+    ANSIBLE_LIBRARY="/tmp/kitchen/library/aur:$ANSIBLE_LIBRARY" ansible-playbook --connection=local /tmp/kitchen/sync.yml --extra-vars "username=kevin hostname=KJP-test" --limit @/tmp/kitchen/core.retry -vvv
   else
-    ANSIBLE_LIBRARY="/tmp/kitchen/library/aur:$ANSIBLE_LIBRARY" ansible-playbook --connection=local /tmp/kitchen/core.yml --extra-vars "username=kevin hostname=KJP-test nvidia=true" -vvv
+    ANSIBLE_LIBRARY="/tmp/kitchen/library/aur:$ANSIBLE_LIBRARY" ansible-playbook --connection=local /tmp/kitchen/sync.yml --extra-vars "username=kevin hostname=KJP-test nvidia=true" -vvv
   fi
 fi
 

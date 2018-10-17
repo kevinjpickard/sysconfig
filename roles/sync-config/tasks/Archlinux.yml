@@ -7,16 +7,16 @@
     update_cache: yes
     upgrade: yes
 
-- name: Install pacman scripts and tools
-  pacman:
-    name: pacman-contrib
-    state: latest
+    #- name: Install pacman scripts and tools
+    #  pacman:
+    #    name: pacman-contrib
+    #    state: latest
 
 - stat: path=/etc/pacman.d/mirrorlist.orig
   register: backup
 
 - name: Backup Mirrors
-  command: mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.orig
+  command: cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.orig
   become: yes
   become_method: sudo
   when: backup.stat.exists == False
@@ -257,14 +257,14 @@
   register: yay
 
 - name: Setup AUR
-  include: roles/linux/tasks/aur.yml
+  include: roles/sync-config/tasks/aur.yml
   retries: 3
   delay: 1
   register: result
   until: result.failed == False
 
 - name: Install Gaming Software
-  include: roles/linux/tasks/gaming.yml
+  include: roles/sync-config/tasks/gaming.yml
   tags: 
     - gaming
 
