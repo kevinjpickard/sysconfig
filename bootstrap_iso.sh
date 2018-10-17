@@ -242,7 +242,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 echo -e $ROOT_PASSWD"\n"$ROOT_PASSWD | passwd
 git clone -b arch --recurse-submodules https://github.com/kevinjpickard/.dotfiles.git
 git clone https://github.com/kewlfft/ansible-aur.git ~/.ansible/plugins/modules/aur
-ansible-playbook --module-path /.dotfiles/library/aur --connection=local .dotfiles/core.yml --extra-vars "hostname=$HOSTN username=$USERNAME"
+ansible-playbook --module-path /.dotfiles/library/aur --connection=local .dotfiles/setup.yml --extra-vars "hostname=$HOSTN username=$USERNAME"
 EOF
 
 echo "Umounting partitions"
