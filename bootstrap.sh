@@ -1,9 +1,5 @@
 #!/bin/bash -x
 
-read HOST_NAME
-read -s SUDO_PASSWD
-sudo -v
-
 # for some reason, when this suite is run on an Arch Linux host pacman errors out due 
 # to some conflicting files and I don't feel like finding a proper fix right now so
 # TODO: Do better.
@@ -17,6 +13,11 @@ fi
 
 if [[ $OSTYPE == darwin* ]]; then
   echo "Detected MacOS"
+
+  read HOST_NAME
+  read -s SUDO_PASSWD
+  sudo -v
+
   echo $SUDO_PASSWD
   echo "Installing updates..."
   softwareupdate -lia

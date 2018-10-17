@@ -60,7 +60,7 @@ if [[ $USER_PASSWD -eq $null ]]; then
 fi
 
 if [[ $BLKID -eq $null ]]; then
-  BLKID=nvme0n1
+  BLKID=sda
 fi
 
 echo "Hostanme: $HOSTN"
@@ -135,8 +135,8 @@ parted -s $HD set 2 boot on 1>/dev/null
 # Create LVM
 echo "Creating LVM"
 parted -s $HD mkpart logical ext4 $BOOT_END 100%
-echo -n $CRYPT_PASSWD | cryptsetup -c aes-xts-plain64 -y --use-random luksFormat "$HD"p3 -d -
-echo -n $CRYPT_PASSWD | cryptsetup luksOpen "$HD"p3 luks -d -
+echo -n $CRYPT_PASSWD | cryptsetup -c aes-xts-plain64 -y --use-random luksFormat "$HD"3 -d -
+echo -n $CRYPT_PASSWD | cryptsetup luksOpen "$HD"3 luks -d -
 pvcreate /dev/mapper/luks
 vgcreate vg0 /dev/mapper/luks
 
@@ -154,9 +154,9 @@ lvcreate -l +100%FREE vg0 --name home
 
 # Formats the root, home and boot partition to the specified file system
 echo "Formating efi partition"
-mkfs.vfat -F32 "$HD"p1 1>/dev/null
+mkfs.vfat -F32 "$HD"1 1>/dev/null
 echo "Formating boot partition"
-mkfs.$BOOT_FS "$HD"p2 -L boot 1>/dev/null
+mkfs.$BOOT_FS "$HD"2 -L boot 1>/dev/null
 echo "Formating root partition"
 mkfs.$ROOT_FS /dev/mapper/vg0-root  1>/dev/null
 echo "Formating home partition"
@@ -173,10 +173,10 @@ echo "Mounting partitions"
 mount /dev/mapper/vg0-root /mnt
 # mounts the boot partition
 mkdir /mnt/boot
-mount "$HD"p2 /mnt/boot
+mount "$HD"2 /mnt/boot
 # mounts the EFI partition
 mkdir /mnt/boot/efi
-mount "$HD"p1 /mnt/boot/efi
+mount "$HD"1 /mnt/boot/efi
 # mounts the home partition
 mkdir /mnt/home
 mount /dev/mapper/vg0-home /mnt/home

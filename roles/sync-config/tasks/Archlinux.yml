@@ -2,10 +2,10 @@
 # Arch specific tasks
 - debug: msg="Running Arch Linux Tasks"
 
-#- name: Update pacman Cache
-#  pacman:
-#    update_cache: yes
-#    upgrade: yes
+- name: Update pacman Cache
+  pacman:
+    update_cache: yes
+    upgrade: yes
 
 - name: Install pacman scripts and tools
   pacman:
@@ -62,44 +62,6 @@
     state: latest
   when: ansible_processor is superset(["GenuineIntel"])
   register: intel
-
-- name: Modify Grub
-  lineinfile:
-    path: /etc/default/grub
-    regexp: '^GRUB_CMDLINE_LINUX_DEFAULT='
-    line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"'
-    state: present
-
-- command: blkid -o value -s UUID /dev/sda3
-  register: uuid
-
-- name: Modify Grub
-  lineinfile:
-    path: /etc/default/grub
-    regexp: '^GRUB_CMDLINE_LINUX='
-    line: 'GRUB_CMDLINE_LINUX="luks.name={{ uuid.stdout }}=cryptroot root=/dev/vg0/root"'
-    state: present
-
-- name: Modify Grub
-  lineinfile:
-    path: /etc/default/grub
-    regexp: '^GRUB_PRELOAD_MODULES='
-    line: 'GRUB_PRELOAD_MODULES="lvm part_gpt part_msdos"'
-    state: present
-
-- name: Modify mkinitcpio modules
-  lineinfile:
-    path: /etc/mkinitcpio.conf
-    regexp: '^MODULES='
-    line: 'MODULES=(ext4)'
-    state: present
-
-- name: Modify mkinitcpio hooks
-  lineinfile:
-    path: /etc/mkinitcpio.conf
-    regexp: '^HOOKS='
-    line: 'HOOKS=(base udev autodetect modconf block systemd sd-encrypt sd-lvm2 filesystems keyboard fsck)'
-    state: present
 
 - name: mkinitcpio
   command: mkinitcpio -p linux
@@ -177,6 +139,7 @@
     name: 
       - i3
       - lightdm
+      - networkmanager
     state: latest
 
   #- name: Install Deepin DE and NetworkManager

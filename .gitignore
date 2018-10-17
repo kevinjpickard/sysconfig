@@ -1,2 +1,5 @@
 .kitchen/
 .kitchen.local.yml
+*.retry
+packer_cache/
+output-vmware-iso/

@@ -5,7 +5,7 @@
     "iso_checksum_type": "sha1",
     "ssh_timeout": "20m",
     "country": "US",
-    "headless": "false"
+    "headless": "true"
   },
   "builders": [
     {
@@ -18,6 +18,7 @@
       "iso_checksum_type": "{{ user `iso_checksum_type` }}",
       "http_directory": "srv",
       "boot_wait": "5s",
+      "version": "16",
       "boot_command": [
         "<enter><wait10><wait10><wait10><wait10>",
         "/usr/bin/curl -O http://{{ .HTTPIP }}:{{ .HTTPPort }}/enable-ssh.sh<enter><wait5>",
