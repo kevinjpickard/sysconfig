@@ -140,6 +140,8 @@
       - i3
       - lightdm
       - networkmanager
+      - dmenu
+      - xoorg
     state: latest
 
   #- name: Install Deepin DE and NetworkManager
@@ -163,7 +165,7 @@
 - name: Make i3 Default
   lineinfile:
     path: /etc/lightdm/lightdm.conf
-    regexp: '^user-session=*'
+    regexp: '^#user-session=*'
     line: 'user-session=i3'
 
 - name: Enable LightDM
