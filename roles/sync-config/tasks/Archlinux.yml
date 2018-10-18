@@ -141,7 +141,7 @@
       - lightdm
       - networkmanager
       - dmenu
-      - xoorg
+      - xorg
     state: latest
 
   #- name: Install Deepin DE and NetworkManager
