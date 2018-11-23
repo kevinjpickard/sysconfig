@@ -1,34 +1,21 @@
 ---
 # Arch specific tasks
-- debug: msg="Running Arch Linux Tasks"
+- debug: msg="Running Arch Linux System Configuration Setup"
 
 #- name: Update pacman Cache
 #  pacman:
 #    update_cache: yes
 #    upgrade: yes
 
-- name: Install pacman scripts and tools
+- name: Install reflector
   pacman:
-    name: pacman-contrib
+    name: reflector
     state: latest
 
-- stat: path=/etc/pacman.d/mirrorlist.orig
-  register: backup
-
-- name: Backup Mirrors
-  command: mv /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.orig
+- name: Run reflector
+  command: reflector --latest 200 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist
   become: yes
   become_method: sudo
-  when: backup.stat.exists == False
-
-- stat: path=/etc/pacman.d/mirrorlist
-  register: ranked
-
-- name: Rank Mirrors
-  shell: rankmirrors /etc/pacman.d/mirrorlist.orig > /etc/pacman.d/mirrorlist
-  become: yes
-  become_method: sudo
-  when: ranked.stat.exists == False
 
 - name: Install Linux and tools
   pacman:

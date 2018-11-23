@@ -10,5 +10,5 @@
     ANSIBLE_LIBRARY: /.dotfiles/library
 
   roles:
-    - initial-config
-    - sync-config
+    - System Configuration Setup
+    - System Configuration Sync

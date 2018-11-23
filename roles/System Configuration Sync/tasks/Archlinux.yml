@@ -1,88 +1,21 @@
 ---
 # Arch specific tasks
-- debug: msg="Running Arch Linux Tasks"
+- debug: msg="Running Arch Linux System Configuration Synchronization"
 
 - name: Update pacman Cache
   pacman:
     update_cache: yes
     upgrade: yes
 
-    #- name: Install pacman scripts and tools
-    #  pacman:
-    #    name: pacman-contrib
-    #    state: latest
-
-- stat: path=/etc/pacman.d/mirrorlist.orig
-  register: backup
-
-- name: Backup Mirrors
-  command: cp /etc/pacman.d/mirrorlist /etc/pacman.d/mirrorlist.orig
-  become: yes
-  become_method: sudo
-  when: backup.stat.exists == False
-
-- stat: path=/etc/pacman.d/mirrorlist
-  register: ranked
-
-- name: Rank Mirrors
-  shell: rankmirrors /etc/pacman.d/mirrorlist.orig > /etc/pacman.d/mirrorlist
-  become: yes
-  become_method: sudo
-  when: ranked.stat.exists == False
-
-- name: Install Linux and tools
+- name: Install reflector
   pacman:
-    name: 
-      - linux
-      - linux-headers
-      - base-devel
-      - clamav
-      - coreutils
-      - dhcpcd
-      - e2fsprogs
-      - efibootmgr
-      - exfat-utils
-      - grub
-      - htop
-      - iproute2
-      - iputils
-      - less
-      - lvm2
-      - neovim
-      - ntfs-3g
-      - openssh
-      - reflector
-      - util-linux
-      - zsh
+    name: reflector
     state: latest
 
-- name: Install Intel Microcode
-  pacman:
-    name: intel-ucode
-    state: latest
-  when: ansible_processor is superset(["GenuineIntel"])
-  register: intel
-
-- name: mkinitcpio
-  command: mkinitcpio -p linux
+- name: Run reflector
+  command: reflector --latest 200 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist
   become: yes
   become_method: sudo
-
-- name: Regenerate GRUB Config to enable Intel Microcode Updates
-  command: grub-mkconfig -o /boot/grub/grub.cfg
-  become: yes
-  become_method: sudo
-  when: intel is defined
-
-- shell: lspci | grep -i nvidia
-  register: nvidia
-  ignore_errors: yes
-
-- name: Install NVidia
-  pacman: 
-    name: nvidia
-    state: latest
-  when: nvidia.rc == 0
 
 - name: Install Dev Packages
   pacman:
@@ -183,7 +116,7 @@
     name: fstrim.timer
     enabled: yes
 
-- name: Get the fuck outta here Speck/Simon (NSA Crypto)
+- name: Don't load Speck/Simon (NSA Crypto)
   kernel_blacklist:
     name: CONFIG_CRYPTO_SPECK
     state: present
@@ -259,14 +192,14 @@
   register: yay
 
 - name: Setup AUR
-  include: roles/sync-config/tasks/aur.yml
+  include: roles/System Configuration Sync/tasks/aur.yml
   retries: 3
   delay: 1
   register: result
   until: result.failed == False
 
 - name: Install Gaming Software
-  include: roles/sync-config/tasks/gaming.yml
+  include: roles/System Configuration Sync/tasks/gaming.yml
   tags: 
     - gaming
 
