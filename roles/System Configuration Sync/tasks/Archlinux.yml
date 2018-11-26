@@ -67,15 +67,15 @@
   become_method: sudo
   when: yay.stat.exists == False
 
-- name: Install i3
-  pacman:
-    name: 
-      - i3
-      - lightdm
-      - networkmanager
-      - dmenu
-      - xorg
-    state: latest
+  #- name: Install i3
+  #  pacman:
+  #    name: 
+  #      - i3
+  #      - lightdm
+  #      - networkmanager
+  #      - dmenu
+  #      - xorg
+  #    state: latest
 
   #- name: Install Deepin DE and NetworkManager
   #  pacman:
@@ -95,21 +95,21 @@
   #    regexp: '^greeter-session=*'
   #    line: 'greeter-session=lightdm-deepin-greeter'
 
-- name: Make i3 Default
-  lineinfile:
-    path: /etc/lightdm/lightdm.conf
-    regexp: '^#user-session=*'
-    line: 'user-session=i3'
-
-- name: Enable LightDM
-  systemd:
-    name: lightdm
-    enabled: yes
-
-- name: Enable NetworkManager.service
-  systemd:
-    name: NetworkManager.service
-    enabled: yes
+  #- name: Make i3 Default
+  #  lineinfile:
+  #    path: /etc/lightdm/lightdm.conf
+  #    regexp: '^#user-session=*'
+  #    line: 'user-session=i3'
+  #
+  #- name: Enable LightDM
+  #  systemd:
+  #    name: lightdm
+  #    enabled: yes
+  #
+  #- name: Enable NetworkManager.service
+  #  systemd:
+  #    name: NetworkManager.service
+  #    enabled: yes
 
 - name: Enable Periodic TRIM
   systemd:

@@ -99,3 +99,14 @@
   become_method: sudo
   when: intel is defined
 
+- name: Install Desktop Environment
+  pacman:
+    name:
+      - plasma
+      - plasma-extra
+      - sddm
+      - i3
+      - networkmanager
+      - xorg
+    state: latest
+
