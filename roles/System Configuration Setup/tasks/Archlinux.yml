@@ -103,7 +103,7 @@
   pacman:
     name:
       - plasma
-      - plasma-applications
+      - kde-applications
       - sddm
       - i3
       - networkmanager
