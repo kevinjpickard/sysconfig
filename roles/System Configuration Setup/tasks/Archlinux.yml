@@ -57,7 +57,7 @@
     line: 'GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"'
     state: present
 
-- command: blkid -o value -s UUID /dev/sda3
+- command: blkid -o value -s UUID /dev/nvme0n1p3
   register: uuid
 
 - name: Modify Grub
@@ -109,4 +109,3 @@
       - networkmanager
       - xorg
     state: latest
-
