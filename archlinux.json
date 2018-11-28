@@ -110,5 +110,10 @@
       "script": "./bootstrap_iso.sh",
       "execute_command": "sudo sh -c '{{ .Vars }} {{ .Path }}'"
     }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant"
+    }
   ]
 }
