@@ -17,6 +17,32 @@
   become: yes
   become_method: sudo
 
+- name: Install Linux and tools
+  pacman:
+    name: 
+      - linux
+      - linux-headers
+      - base-devel
+      - clamav
+      - coreutils
+      - dhcpcd
+      - e2fsprogs
+      - efibootmgr
+      - exfat-utils
+      - grub
+      - htop
+      - iproute2
+      - iputils
+      - less
+      - lvm2
+      - neovim
+      - ntfs-3g
+      - openssh
+      - reflector
+      - util-linux
+      - zsh
+    state: latest
+
 - name: Install Dev Packages
   pacman:
     name:
