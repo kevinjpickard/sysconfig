@@ -44,9 +44,9 @@ else
   fi
 
   if [[ -e /tmp/kitchen/core.retry ]]; then
-    ANSIBLE_LIBRARY="/tmp/kitchen/library/aur:$ANSIBLE_LIBRARY" ansible-playbook --connection=local /tmp/kitchen/setup.yml --extra-vars "username=kevin hostname=KJP-test" --limit @/tmp/kitchen/setup.retry -vvv
+    ANSIBLE_LIBRARY="/tmp/kitchen/library/aur:$ANSIBLE_LIBRARY" ansible-playbook --connection=local /tmp/kitchen/sync.yml --extra-vars "username=kevin hostname=KJP-test" --limit @/tmp/kitchen/sync.retry -vvv
   else
-    ANSIBLE_LIBRARY="/tmp/kitchen/library/aur:$ANSIBLE_LIBRARY" ansible-playbook --connection=local /tmp/kitchen/setup.yml --extra-vars "username=kevin hostname=KJP-test" -vvv
+    ANSIBLE_LIBRARY="/tmp/kitchen/library/aur:$ANSIBLE_LIBRARY" ansible-playbook --connection=local /tmp/kitchen/sync.yml --extra-vars "username=kevin hostname=KJP-test" -vvv
   fi
 fi
 
