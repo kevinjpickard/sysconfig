@@ -102,10 +102,10 @@
 - name: Install Desktop Environment
   pacman:
     name:
-      - plasma
-      - kde-applications
-      - sddm
       - i3
       - networkmanager
+      - plasma
+      - rofi
+      - sddm
       - xorg
     state: latest

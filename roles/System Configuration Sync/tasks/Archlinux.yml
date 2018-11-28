@@ -127,10 +127,12 @@
       - arc-gtk-theme
       - curl
       - firefox
-      - guake
+      - kvantum-qt5
+      - kvantum-theme-arc
       - python-pip
+      - python-pywal
       - python2-pip
-      - terminator
+      - termite
       - thefuck
       - tmux
       - vagrant
@@ -139,6 +141,7 @@
       - virtualbox
       - virtualbox-host-modules-arch
       - wget
+      - yakuake
     state: latest
 
 - name: Create {{ username }}
