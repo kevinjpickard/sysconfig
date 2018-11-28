@@ -79,10 +79,7 @@
       "cdrom_adapter_type": "sata",
       "version": 16,
       "guest_os_type": "other4xlinux-64",
-      "vmx_template_path": "./archlinux_vmx_template.vmx",
-      "vmx_data": {
-        "firmware": "efi"
-      }
+      "vmx_template_path": "./archlinux_vmx_template.vmx"
     },
     {
       "type": "qemu",
@@ -114,7 +111,8 @@
   ],
   "post-processors": [
     {
-      "type": "vagrant"
+      "type": "vagrant",
+      "keep_input_artifact": "true"
     }
   ]
 }
