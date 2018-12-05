@@ -5,6 +5,8 @@
   git:
     repo: https://github.com/robbyrussell/oh-my-zsh.git
     dest: "/Users/{{ username }}/.oh-my-zsh"
+  become: yes
+  become_user: "{{ username }}"
 
 - name: Install Tmux Package Manager
   git: 
@@ -36,4 +38,3 @@
   file: 
     path: "/Users/{{ username }}/installer.sh"
     state: absent
-

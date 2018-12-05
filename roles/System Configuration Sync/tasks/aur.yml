@@ -26,7 +26,7 @@
       - nvme-cli
       - p7zip-gui
       - polybar
-      - rofi-demu
+      - rofi-dmenu
       - slack-desktop
       - sublime-text-dev
       - virtualbox-ext-oracle

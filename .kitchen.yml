@@ -2,7 +2,7 @@
 driver:
   name: vagrant
   synced_folders:
-    - [".", "/tmp/kitchen"]
+    - [".", "/kitchen"]
   customize:
     cableconnected1: 'on'
     memory: 3072
@@ -23,6 +23,7 @@ platforms:
   - name: archlinux
     driver:
       box: archlinux/archlinux
+      provider: virtualbox
   - name: windows10
     driver:
       box: test-win10

@@ -70,7 +70,7 @@
         "/usr/bin/curl -O http://{{ .HTTPIP }}:{{ .HTTPPort }}/poweroff.timer<enter><wait5>",
         "/usr/bin/bash ./enable-ssh.sh<enter>"
       ],
-      "disk_size": 60480,
+      "disk_size": 64576,
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
       "ssh_timeout": "{{ user `ssh_timeout` }}",
@@ -107,12 +107,6 @@
       "type": "shell",
       "script": "./bootstrap_iso.sh",
       "execute_command": "sudo sh -c '{{ .Vars }} {{ .Path }}'"
-    }
-  ],
-  "post-processors": [
-    {
-      "type": "vagrant",
-      "keep_input_artifact": "true"
     }
   ]
 }
