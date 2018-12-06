@@ -6,12 +6,12 @@
   become: yes
   become_user: aurman
 
-- name: Install Fonts
-  aur: 
-    use: yay
-    name: nerd-fonts-complete
-  become: yes
-  become_user: aurman
+  #- name: Install Fonts
+  #  aur: 
+  #    use: yay
+  #    name: nerd-fonts-complete
+  #  become: yes
+  #  become_user: aurman
 
 - name: Install Core AUR Packages
   aur:

@@ -43,9 +43,9 @@ else
     sudo pacman -Syyu --noconfirm --needed ansible
   fi
 
-  if [[ -e /tmp/kitchen/core.retry ]]; then
-    ANSIBLE_LIBRARY="/kitchen/library/aur:$ANSIBLE_LIBRARY" ansible-playbook --connection=local /kitchen/setup.yml --extra-vars "username=kevin hostname=KJP-test" --limit @/tmp/kitchen/setup.retry -vvv
+  if [[ -e /kitchen/sync.retry ]]; then
+    ANSIBLE_LIBRARY="/kitchen/library/aur:$ANSIBLE_LIBRARY" ansible-playbook --connection=local /kitchen/sync.yml --extra-vars "username=kevin hostname=KJP-test" --limit @/kitchen/sync.retry -vvv
   else
-    ANSIBLE_LIBRARY="/kitchen/library/aur:$ANSIBLE_LIBRARY" ansible-playbook --connection=local /kitchen/setup.yml --extra-vars "username=kevin hostname=KJP-test" -vvv
+    ANSIBLE_LIBRARY="/kitchen/library/aur:$ANSIBLE_LIBRARY" ansible-playbook --connection=local /kitchen/sync.yml --extra-vars "username=kevin hostname=KJP-test" -vvv
   fi
 fi

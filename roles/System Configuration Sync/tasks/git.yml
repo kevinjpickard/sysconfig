@@ -4,37 +4,39 @@
 - name: Install oh-my-zsh
   git:
     repo: https://github.com/robbyrussell/oh-my-zsh.git
-    dest: "/Users/{{ username }}/.oh-my-zsh"
+    dest: "{{ homedir }}/.oh-my-zsh"
   become: yes
   become_user: "{{ username }}"
 
 - name: Install Tmux Package Manager
   git: 
-    repo: https://github.com/tmux-plugins/tpm
-    dest: "/Users/{{ username }}/.tmux/plugins/tpm"
+    repo: https://github.com/tmux-plugins/tpm.git
+    dest: "{{ homedir }}/.tmux/plugins/tpm"
+    force: yes
   become: yes
   become_user: "{{ username }}"
 
 - name: Create Dein Folder structure
   file:
-    path: "/Users/{{ username }}/.confg/nvim"
+    path: "{{ homedir }}/.confg/nvim"
     state: directory
     owner: "{{ username }}"
 
 - name: Install Dein
   get_url: 
     url: https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh
-    dest: "/Users/{{ username }}/installer.sh"
+    dest: "{{ homedir }}/installer.sh"
     force: yes
     mode: +x
     owner: "{{ username }}"
 
 - name: Install Dein
-  command: "sh /Users/{{ username }}/installer.sh /Users/{{ username }}/.config/nvim/dein"
+  command: "sh {{ homedir }}/installer.sh {{ homedir }}/.config/nvim/dein"
   become: yes
   become_user: "{{ username }}"
 
 - name: Remove Installer
   file: 
-    path: "/Users/{{ username }}/installer.sh"
+    path: "{{ homedir }}/installer.sh"
     state: absent
+
