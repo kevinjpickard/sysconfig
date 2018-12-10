@@ -18,6 +18,8 @@
     use: yay
     name: 
       - antigen-git
+      - capitaine-cursors
+      - capitaine-cursors-hidpi
       - cpufetch-git
       - google-chrome
       - keybase-bin

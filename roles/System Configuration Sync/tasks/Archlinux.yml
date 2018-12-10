@@ -161,10 +161,13 @@
   pacman:
     name:
       - arc-gtk-theme
+      - arc-kde
       - curl
       - firefox
       - kvantum-qt5
       - kvantum-theme-arc
+      - latte-dock
+      - papirus-icon-theme
       - python-pip
       - python-pywal
       - python2-pip
@@ -189,6 +192,11 @@
     groups: "wheel,docker"
     append: yes
 
+- name: Install Midnight KDE Theme
+  command: wget -qO- https://raw.githubusercontent.com/Rokin05/midnight-kde/master/install.sh | sh
+  become: yes
+  become_user: "{{ username }}"
+
 - name: Install Git dependencies
   include: roles/System Configuration Sync/tasks/git.yml
 
@@ -211,4 +219,3 @@
   command: yadm clone https://github.com/kevinjpickard/dotfiles.git
   become: yes
   become_user: "{{ username }}"
-
