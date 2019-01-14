@@ -196,6 +196,7 @@
   command: wget -qO- https://raw.githubusercontent.com/Rokin05/midnight-kde/master/install.sh | sh
   become: yes
   become_user: "{{ username }}"
+  ignore_errors: yes
 
 - name: Install Git dependencies
   include: roles/System Configuration Sync/tasks/git.yml

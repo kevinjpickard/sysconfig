@@ -203,9 +203,14 @@ pacstrap /mnt grub `echo $EXTRA_PKGS`
 echo "Running genfstab"
 genfstab -p /mnt >> /mnt/etc/fstab
 
+# Due to https://bbs.archlinux.org/viewtopic.php?id=242594
+mkdir /mnt/hostlvm
+mount --bind /run/lvm /mnt/hostlvm
 
 #### Enters in the new system (chroot)
 arch-chroot /mnt << EOF
+# To Fix some LVM changes breaking GRUB
+ln -s /hostlvm /run/lvm
 # Sets hostname
 echo $HOSTN > /etc/hostname
 cp /etc/hosts /etc/hosts.bkp
