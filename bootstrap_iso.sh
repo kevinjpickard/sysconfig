@@ -181,6 +181,9 @@ mount "$HD"p1 /mnt/boot/efi
 mkdir /mnt/home
 mount /dev/mapper/vg0-home /mnt/home
 
+# LVM/GRUB Issue
+mkdir /mnt/hostlvm
+mount --bind /run/lvm /mnt/hostlvm
 
 #### Installation
 echo "Setting up pacman"
@@ -206,6 +209,9 @@ genfstab -p /mnt >> /mnt/etc/fstab
 
 #### Enters in the new system (chroot)
 arch-chroot /mnt << EOF
+# Step 2 for LVM/GRUB Issue
+arch-chroot /mnt
+ln -s /hostlvm /run/lvm
 # Sets hostname
 echo $HOSTN > /etc/hostname
 cp /etc/hosts /etc/hosts.bkp
