@@ -7,19 +7,19 @@
     update_cache: yes
     upgrade: yes
 
-- name: Install reflector
-  pacman:
-    name: reflector
-    state: latest
+# - name: Install reflector
+#   pacman:
+#     name: reflector
+#     state: latest
 
-- name: Run reflector
-  command: reflector --latest 200 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist
-  become: yes
-  become_method: sudo
+# - name: Run reflector
+#   command: reflector --latest 200 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+#   become: yes
+#   become_method: sudo
 
 - name: Install Linux and tools
   pacman:
-    name: 
+    name:
       - linux
       - linux-headers
       - base-devel
@@ -61,7 +61,7 @@
     shell: /bin/nologin
     home: /home/aurman
     append: yes
-  
+
 - name: Set AUR Manager permissions
   lineinfile:
     path: /etc/sudoers.d/11-install-aurman
@@ -86,66 +86,12 @@
   become: yes
   become_user: aurman
   when: yay.stat.exists == False
- 
+
 - name: Install Yay
   shell: chdir=/home/aurman/aur/yay pacman -U --noconfirm $(ls | grep -i -m 1 yay*.pkg.tar.xz)
   become: yes
   become_method: sudo
   when: yay.stat.exists == False
-
-  #- name: Install i3
-  #  pacman:
-  #    name: 
-  #      - i3
-  #      - lightdm
-  #      - networkmanager
-  #      - dmenu
-  #      - xorg
-  #    state: latest
-
-  #- name: Install Deepin DE and NetworkManager
-  #  pacman:
-  #    name: 
-  #      - deepin
-  #      - deepin-extra
-  #      - networkmanager
-  #    state: latest
-  #  retries: 3
-  #  delay: 1
-  #  register: result
-  #  until: result.failed == False
-
-  #- name: Update LightDM Config
-  #  lineinfile:
-  #    path: /etc/lightdm/lightdm.conf
-  #    regexp: '^greeter-session=*'
-  #    line: 'greeter-session=lightdm-deepin-greeter'
-
-  #- name: Make i3 Default
-  #  lineinfile:
-  #    path: /etc/lightdm/lightdm.conf
-  #    regexp: '^#user-session=*'
-  #    line: 'user-session=i3'
-  #
-  #- name: Enable LightDM
-  #  systemd:
-  #    name: lightdm
-  #    enabled: yes
-  #
-  #- name: Enable NetworkManager.service
-  #  systemd:
-  #    name: NetworkManager.service
-  #    enabled: yes
-
-- name: Install Desktop Environment and Other Graphical Software
-  pacman:
-    name:
-      - plasma
-      - sddm
-      - i3
-      - networkmanager
-      - rofi
-    state: latest
 
 - name: Enable Periodic TRIM
   systemd:
@@ -192,12 +138,6 @@
     groups: "wheel,docker"
     append: yes
 
-- name: Install Midnight KDE Theme
-  command: wget -qO- https://raw.githubusercontent.com/Rokin05/midnight-kde/master/install.sh | sh
-  become: yes
-  become_user: "{{ username }}"
-  ignore_errors: yes
-
 - name: Install Git dependencies
   include: roles/System Configuration Sync/tasks/git.yml
 
@@ -213,10 +153,19 @@
 
 - name: Install Gaming Software
   include: roles/System Configuration Sync/tasks/gaming.yml
-  tags: 
+  tags:
     - gaming
+
+- stat: "path=/home/{{ username }}/.yadm/repo.git"
+  register: dotfiles
 
 - name: Pull Down dotfiles
   command: yadm clone https://github.com/kevinjpickard/dotfiles.git
   become: yes
   become_user: "{{ username }}"
+  when: dotfiles.stat.exists == False
+
+- name: Enable vmware-networks service
+  systemd:
+    name: vmware-networks
+    enabled: yes
