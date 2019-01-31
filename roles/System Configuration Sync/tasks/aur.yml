@@ -7,7 +7,7 @@
   become_user: aurman
 
   #- name: Install Fonts
-  #  aur: 
+  #  aur:
   #    use: yay
   #    name: nerd-fonts-complete
   #  become: yes
@@ -16,11 +16,14 @@
 - name: Install Core AUR Packages
   aur:
     use: yay
-    name: 
+    name:
       - antigen-git
+      - capitaine-cursors
+      - capitaine-cursors-hidpi
       - cpufetch-git
       - google-chrome
       - keybase-bin
+      - kwin-scripts-tiling-git
       - matcha-gtk-theme
       - neofetch
       - nvme-cli
@@ -32,6 +35,7 @@
       - sublime-text-dev
       - virtualbox-ext-oracle
       - visual-studio-code-bin
+      - vmware-workstation
       - yadm-git
   become: yes
   become_user: aurman
@@ -60,4 +64,3 @@
   become: yes
   become_user: aurman
   ignore_errors: yes
-

@@ -1,7 +1,7 @@
 {
   "variables": {
-    "iso_url": "https://mirrors.kernel.org/archlinux/iso/2018.11.01/archlinux-2018.11.01-x86_64.iso",
-    "iso_checksum_url": "https://mirrors.kernel.org/archlinux/iso/2018.11.01/sha1sums.txt",
+    "iso_url": "https://mirrors.kernel.org/archlinux/iso/2019.01.01/archlinux-2019.01.01-x86_64.iso",
+    "iso_checksum_url": "https://mirrors.kernel.org/archlinux/iso/2019.01.01/sha1sums.txt",
     "iso_checksum_type": "sha1",
     "ssh_timeout": "20m",
     "country": "US",
@@ -51,10 +51,15 @@
       "ssh_password": "vagrant",
       "ssh_timeout": "{{ user `ssh_timeout` }}",
       "shutdown_command": "sudo shutdown -P 0",
-      "headless" : "{{ user `headless`}}",
+      "headless": "{{ user `headless`}}",
       "iso_interface": "sata",
       "vboxmanage": [
-        ["modifyvm", "{{.Name}}", "--firmware", "efi"]
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--firmware",
+          "efi"
+        ]
       ]
     },
     {
@@ -75,7 +80,7 @@
       "ssh_password": "vagrant",
       "ssh_timeout": "{{ user `ssh_timeout` }}",
       "shutdown_command": "sudo shutdown -P 0",
-      "headless" : "{{ user `headless`}}",
+      "headless": "{{ user `headless`}}",
       "cdrom_adapter_type": "sata",
       "version": 16,
       "guest_os_type": "other4xlinux-64",
@@ -99,7 +104,7 @@
       "ssh_password": "vagrant",
       "ssh_timeout": "{{ user `ssh_timeout` }}",
       "shutdown_command": "sudo shutdown -P 0",
-      "headless" : "{{ user `headless`}}"
+      "headless": "{{ user `headless`}}"
     }
   ],
   "provisioners": [
@@ -107,6 +112,11 @@
       "type": "shell",
       "script": "./bootstrap_iso.sh",
       "execute_command": "sudo sh -c '{{ .Vars }} {{ .Path }}'"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant"
     }
   ]
 }
