@@ -73,6 +73,7 @@
     - node
     - nvm
     - openssl
+    - osquery
     - ossp-uuid
     - packer
     - pcre

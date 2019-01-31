@@ -26,6 +26,7 @@
       - nvme-cli
       - p7zip-gui
       - polybar
+      - osquery-git
       - rofi-dmenu
       - slack-desktop
       - sublime-text-dev
