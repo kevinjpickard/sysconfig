@@ -16,7 +16,7 @@ driver:
     
 provisioner:
   name: shell
-  sudo: false
+  sudo: true
   cleanup_sandbox: false
 
 platforms:
@@ -29,6 +29,19 @@ platforms:
       box: test-win10
       synced_folders: 
         - [".", "C:\\Windows\\temp\\system-config"]
+  - name: ubuntu
+    driver:
+      box: ubuntu/bionic64
+      provider: virtualbox
+    provisioner:
+      name: ansible_playbook
+      roles_path: roles
+      ansible_verbose: true
+      ansible_verbosity: 3
+      ansible_version: latest
+      hosts: media-servers
+      playbook: media-server.yml
+      sudo: true
 
 suites:
   - name: default
