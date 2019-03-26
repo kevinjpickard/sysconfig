@@ -12,6 +12,12 @@
   become: yes
   become_user: "{{ username }}"
 
+- name: HomeBrew Taps
+  homebrew_tap:
+    name: "{{ item }}"
+  with_items:
+    - cjbassi/gotop
+
 - name: Pour Kegs
   homebrew:
     name: "{{ item }}"
@@ -39,6 +45,7 @@
     - gmp
     - gnutls
     - go
+    - gotop
     - hiredis
     - htop
     - hub
