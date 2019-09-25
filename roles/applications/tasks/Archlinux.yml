@@ -1,0 +1,7 @@
+---
+# Arch Linux applications tasks
+- debug: msg="Running Arch Linux applications tasks"
+
+- include: roles/applications/tasks/pacman.yml
+
+- include: roles/applications/tasks/aur.yml

@@ -1,7 +1,7 @@
 {
   "variables": {
-    "iso_url": "https://mirrors.kernel.org/archlinux/iso/2019.06.01/archlinux-2019.06.01-x86_64.iso",
-    "iso_checksum_url": "https://mirrors.kernel.org/archlinux/iso/2019.06.01/sha1sums.txt",
+    "iso_url": "https://mirrors.kernel.org/archlinux/iso/2019.09.01/archlinux-2019.09.01-x86_64.iso",
+    "iso_checksum_url": "https://mirrors.kernel.org/archlinux/iso/2019.09.01/sha1sums.txt",
     "iso_checksum_type": "sha1",
     "ssh_timeout": "20m",
     "country": "US",
@@ -112,6 +112,21 @@
       "type": "shell",
       "script": "./bootstrap_iso.sh",
       "execute_command": "sudo sh -c '{{ .Vars }} {{ .Path }}'"
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "setup.yml",
+      "playbook_dir": ".",
+      "extra_arguments": [
+        "--connection chroot --extra-vars 'chroot_exe=arch-chroot chroot_executable=/bin/bash'"
+      ],
+      "staging_directory": "/mnt/sysconfig"
+    },
+    {
+      "type": "shell-local",
+      "inline": [
+        "umount -R /mnt"
+      ]
     }
   ],
   "post-processors": [
