@@ -115,6 +115,12 @@
       "execute_command": "sudo sh -c '{{ .Vars }} {{ .Path }}'"
     },
     {
+      "type": "shell-local",
+      "inline": [
+        "mount -o remount,size=1G,noatime /tmp"
+      ]
+    },
+    {
       "type": "ansible-local",
       "playbook_file": "setup.yml",
       "playbook_dir": ".",
