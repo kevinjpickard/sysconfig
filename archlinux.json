@@ -76,6 +76,7 @@
         "/usr/bin/bash ./enable-ssh.sh<enter>"
       ],
       "disk_size": 64576,
+      "memory": 2048,
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
       "ssh_timeout": "{{ user `ssh_timeout` }}",
@@ -119,8 +120,7 @@
       "playbook_dir": ".",
       "extra_arguments": [
         "--connection chroot --extra-vars 'chroot_exe=arch-chroot chroot_executable=/bin/bash'"
-      ],
-      "staging_directory": "/mnt/sysconfig"
+      ]
     },
     {
       "type": "shell-local",
