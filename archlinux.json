@@ -115,17 +115,11 @@
       "execute_command": "sudo sh -c '{{ .Vars }} {{ .Path }}'"
     },
     {
-      "type": "shell-local",
-      "inline": [
-        "mount -o remount,size=1G,noatime /tmp"
-      ]
-    },
-    {
       "type": "ansible-local",
-      "playbook_file": "setup.yml",
-      "playbook_dir": ".",
+      "playbook_file": "./ansible/setup.yml",
+      "playbook_dir": "./ansible",
       "extra_arguments": [
-        "--connection chroot --extra-vars 'chroot_exe=arch-chroot chroot_executable=/bin/bash'"
+        "--connection chroot --extra-vars 'chroot_exe=arch-chroot chroot_executable=/bin/bash username=kevin password=test'"
       ]
     },
     {

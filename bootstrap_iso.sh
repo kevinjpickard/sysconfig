@@ -252,3 +252,4 @@ grub-mkconfig -o /boot/grub/grub.cfg
 # Changes the root password
 echo -e $ROOT_PASSWD"\n"$ROOT_PASSWD | passwd
 EOF
+pacman -Sy --noconfirm --needed ansible
