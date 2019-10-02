@@ -12,31 +12,30 @@
   #    name: nerd-fonts-complete
   #  become: yes
   #  become_user: aurman
-
 - name: Install Core AUR Packages
   aur:
     use: yay
-    name:
-      - antigen-git
-      - capitaine-cursors
-      - capitaine-cursors-hidpi
-      - cpufetch-git
-      - google-chrome
-      - keybase-bin
-      - kwin-scripts-tiling-git
-      - matcha-gtk-theme
-      - neofetch
-      - nvme-cli
-      - p7zip-gui
-      - polybar
-      - osquery-git
-      - rofi-dmenu
-      - slack-desktop
-      - sublime-text-dev
-      - virtualbox-ext-oracle
-      - visual-studio-code-bin
-      - vmware-workstation
-      - yadm-git
+    name: "{{ item }}"
+  with_items:
+    - antigen-git
+    - capitaine-cursors
+    - capitaine-cursors-hidpi
+    - cpufetch-git
+    - google-chrome
+    - keybase-bin
+    - kwin-scripts-tiling-git
+    - matcha-gtk-theme
+    - neofetch
+    - nvme-cli
+    - p7zip-gui
+    - polybar
+    - rofi-dmenu
+    - slack-desktop
+    - sublime-text-dev
+    - virtualbox-ext-oracle
+    - visual-studio-code-bin
+    - vmware-workstation
+    - yadm-git
   become: yes
   become_user: aurman
   ignore_errors: yes
@@ -44,12 +43,13 @@
 - name: Install Dev AUR Packages
   aur:
     use: yay
-    name:
-      - google-cloud-sdk
-      - nvm
-      - pyenv
-      - rbenv
-      - ruby-build
+    name: "{{ item }}"
+  with_items:
+    - google-cloud-sdk
+    - nvm
+    - pyenv
+    - rbenv
+    - ruby-build
   become: yes
   become_user: aurman
   ignore_errors: yes

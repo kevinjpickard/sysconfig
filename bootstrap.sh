@@ -1,6 +1,6 @@
 #!/bin/bash -x
 
-# for some reason, when this suite is run on an Arch Linux host pacman errors out due 
+# for some reason, when this suite is run on an Arch Linux host pacman errors out due
 # to some conflicting files and I don't feel like finding a proper fix right now so
 # TODO: Do better.
 if [[ -d /usr/include/rpcsvc ]]; then
@@ -43,9 +43,9 @@ else
     sudo pacman -Syyu --noconfirm --needed ansible
   fi
 
-  if [[ -e /kitchen/sync.retry ]]; then
-    ANSIBLE_LIBRARY="/kitchen/library/aur:$ANSIBLE_LIBRARY" ansible-playbook --connection=local /kitchen/sync.yml --extra-vars "username=kevin hostname=KJP-test" --limit @/kitchen/sync.retry -vvv
+  if [[ -e /kitchen/ansible/sync.retry ]]; then
+    ANSIBLE_LIBRARY="/kitchen/library/aur:$ANSIBLE_LIBRARY" ansible-playbook --connection=local /kitchen/ansisble/sync.yml --extra-vars "username=kevin hostname=KJP-test" --limit @/kitchen/ansible/sync.retry -vvv
   else
-    ANSIBLE_LIBRARY="/kitchen/library/aur:$ANSIBLE_LIBRARY" ansible-playbook --connection=local /kitchen/sync.yml --extra-vars "username=kevin hostname=KJP-test" -vvv
+    ANSIBLE_LIBRARY="/kitchen/library/aur:$ANSIBLE_LIBRARY" ansible-playbook --connection=local /kitchen/ansible/sync.yml --extra-vars "username=kevin hostname=KJP-test" -vvv
   fi
 fi

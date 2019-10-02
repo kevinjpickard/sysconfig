@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ---
 # System Configuration
 
@@ -12,19 +11,3 @@
 
   roles:
     - System Configuration Sync
-||||||| merged common ancestors
-=======
----
-# System Configuration
-
-- hosts: localhost
-  remote_user: root
-  become: yes
-  become_method: sudo
-  gather_facts: true
-  environment:
-    ANSIBLE_LIBRARY: ~/sysconfig/library/aur
-  roles:
-    - applications
-    - configuration
->>>>>>> master
