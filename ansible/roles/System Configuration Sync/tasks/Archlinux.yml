@@ -93,7 +93,6 @@
   become_method: sudo
   when: yay.stat.exists == False
 
-
   #- name: Install i3
   #  pacman:
   #    name:
@@ -225,6 +224,17 @@
   become: yes
   become_user: "{{ username }}"
   when: dotfiles.stat.exists == False
+
+- name: Install Droid Sans Mono Slashed Complete Nerd Font
+  copy:
+    src: ../'Droid Sans Mono Slashed Nerd Font Complete.ttf'
+    dest: /usr/share/fonts
+    mode: 444
+
+- name: Refresh Font Cache
+  command: fc-cache
+  become: yes
+  become_method: sudo
 
 - name: Enable vmware-networks service
   systemd:
