@@ -227,7 +227,7 @@
 
 - name: Install Droid Sans Mono Slashed Complete Nerd Font
   copy:
-    src: ../'Droid Sans Mono Slashed Nerd Font Complete.ttf'
+    src: 'Droid Sans Mono Slashed Nerd Font Complete.ttf'
     dest: /usr/share/fonts
     mode: 444
 
