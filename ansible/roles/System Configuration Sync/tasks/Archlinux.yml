@@ -170,6 +170,7 @@
       - papirus-icon-theme
       - python-pip
       - python-pywal
+      - python-pipenv
       - python2-pip
       - termite
       - thefuck
