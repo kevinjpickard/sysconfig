@@ -218,16 +218,16 @@
 
 - name: Install PIA
   get_url:
-    url: https://www.privateinternetaccess.com/installer/x/download_installer_linux
-    dest: /tmp/pia-linux-1.4-03180.run
+    url: https://installers.privateinternetaccess.com/download/pia-linux-1.5-03584.run
+    dest: /tmp/pia.run
 
 - name: Install PIA
-  command: sh /tmp/pia-linux-1.4-03180.run
+  command: sh /tmp/pia.run
   become: yes
   become_method: sudo
 
 - name: Install PIA
-  command: rm /tmp/pia-linux-1.4-03180.run
+  command: rm /tmp/pia.run
   become: yes
   become_method: sudo
 
