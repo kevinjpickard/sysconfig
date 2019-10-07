@@ -216,6 +216,21 @@
   tags:
     - gaming
 
+- name: Install PIA
+  get_url:
+    url: https://www.privateinternetaccess.com/installer/x/download_installer_linux
+    dest: /tmp/pia-linux-1.4-03180.run
+
+- name: Install PIA
+  command: sh /tmp/pia-linux-1.4-03180.run
+  become: yes
+  become_method: sudo
+
+- name: Install PIA
+  command: rm /tmp/pia-linux-1.4-03180.run
+  become: yes
+  become_method: sudo
+
 - stat: "path=/home/{{ username }}/.yadm/repo.git"
   register: dotfiles
 
