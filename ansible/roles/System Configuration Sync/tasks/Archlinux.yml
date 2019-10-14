@@ -222,14 +222,14 @@
     dest: /tmp/pia.run
 
 - name: Install PIA
-  command: sh /tmp/pia.run
+  command: bash /tmp/pia.run
   become: yes
-  become_method: sudo
+  become_user: "{{ username }}"
 
 - name: Install PIA
-  command: rm /tmp/pia.run
-  become: yes
-  become_method: sudo
+  file:
+    path: /tmp/pia.run
+    state: absent
 
 - stat: "path=/home/{{ username }}/.yadm/repo.git"
   register: dotfiles
@@ -250,6 +250,15 @@
   command: fc-cache
   become: yes
   become_method: sudo
+
+- name: Setup vim
+  file:
+    path: "/home/{{ username }}/backups/vim/{{ item }}"
+    state: directory
+  with_items:
+    - swap
+    - undo
+    - backups
 
 - name: Enable vmware-networks service
   systemd:
