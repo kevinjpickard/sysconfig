@@ -1,0 +1,12 @@
+---
+# Sets up Ubuntu Server to be a docker host
+
+- hosts: media-servers
+  remote_user: root
+  become: yes
+  become_method: sudo
+
+  roles:
+    - docker
+    - unattended_upgrades
+

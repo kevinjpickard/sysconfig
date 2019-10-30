@@ -1,0 +1,7 @@
+[media-servers]
+kjp-server
+kjp-server-test
+kitchen-sysconfig-default-ubuntu
+
+[localhost]
+127.0.0.1

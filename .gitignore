@@ -1,3 +1,10 @@
 .kitchen/
 .kitchen.local.yml
+<<<<<<< HEAD
 *.retry
+packer_cache/
+output-vmware-iso/
+||||||| merged common ancestors
+=======
+*.retry
+>>>>>>> master

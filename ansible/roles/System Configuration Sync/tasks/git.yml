@@ -1,0 +1,53 @@
+# Common tools from github repos
+- debug: msg="Installing FOSS tools"
+
+- stat: path="/home/{{ username }}/.oh-my-zsh"
+  register: ohmyzsh
+
+- name: Install oh-my-zsh
+  git:
+    repo: https://github.com/robbyrussell/oh-my-zsh.git
+    dest: "{{ homedir }}/.oh-my-zsh"
+  become_user: "{{ username }}"
+  when: ohmyzsh.stat.exists == False
+
+- stat: path="/home/{{ username }}/.tmux/plugins/tpm"
+  register: tpm
+
+- name: Install Tmux Package Manager
+  git:
+    repo: https://github.com/tmux-plugins/tpm.git
+    dest: "{{ homedir }}/.tmux/plugins/tpm"
+  become_user: "{{ username }}"
+  when: tpm.stat.exists == False
+
+- stat: path="/home/{{ username }}/.config/nvim/dein"
+  register: dein
+
+- name: Create Dein Folder structure
+  file:
+    path: "{{ homedir }}/.confg/nvim"
+    state: directory
+    owner: "{{ username }}"
+  when: dein.stat.exists == False
+
+- name: Install Dein
+  get_url:
+    url: https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh
+    dest: "{{ homedir }}/installer.sh"
+    force: yes
+    mode: +x
+    owner: "{{ username }}"
+  when: dein.stat.exists == False
+
+- name: Install Dein
+  command: "sh {{ homedir }}/installer.sh {{ homedir }}/.config/nvim/dein"
+  become: yes
+  become_user: "{{ username }}"
+  when: dein.stat.exists == False
+
+- name: Remove Installer
+  file:
+    path: "{{ homedir }}/installer.sh"
+    state: absent
+  when: dein.stat.exists == False

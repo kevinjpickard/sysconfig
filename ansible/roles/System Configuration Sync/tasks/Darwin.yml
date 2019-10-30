@@ -1,0 +1,7 @@
+# Darwin specific tasks
+- debug: msg="Running on Darwin"
+
+- name: Set Home Directory
+  set_fact:
+    homedir: "/Users/{{ username }}"
+

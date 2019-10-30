@@ -206,9 +206,14 @@ pacstrap /mnt grub `echo $EXTRA_PKGS`
 echo "Running genfstab"
 genfstab -p /mnt >> /mnt/etc/fstab
 
+# Due to https://bbs.archlinux.org/viewtopic.php?id=242594
+mkdir /mnt/hostlvm
+mount --bind /run/lvm /mnt/hostlvm
 
 #### Enters in the new system (chroot)
 arch-chroot /mnt << EOF
+# To Fix some LVM changes breaking GRUB
+ln -s /hostlvm /run/lvm
 # Step 2 for LVM/GRUB Issue
 arch-chroot /mnt
 ln -s /hostlvm /run/lvm
@@ -246,10 +251,5 @@ grub-install --target=x86_64-efi --efi-directory=/boot/efi
 grub-mkconfig -o /boot/grub/grub.cfg
 # Changes the root password
 echo -e $ROOT_PASSWD"\n"$ROOT_PASSWD | passwd
-git clone -b arch --recurse-submodules https://github.com/kevinjpickard/.dotfiles.git
-git clone https://github.com/kewlfft/ansible-aur.git ~/.ansible/plugins/modules/aur
-ansible-playbook --module-path /.dotfiles/library/aur --connection=local .dotfiles/core.yml --extra-vars "hostname=$HOSTN username=$USERNAME"
 EOF
-
-echo "Umounting partitions"
-umount -R /mnt
+pacman -Sy --noconfirm --needed ansible
