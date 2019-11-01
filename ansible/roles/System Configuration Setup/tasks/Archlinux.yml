@@ -13,7 +13,7 @@
     state: latest
 
 - name: Run reflector
-  command: reflector --latest 200 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+  command: reflector --latest 50 --protocol http --protocol https --sort rate --save /etc/pacman.d/mirrorlist
   become: yes
   become_method: sudo
 
@@ -115,10 +115,3 @@
     name: sddm
     enabled: yes
 
-- name: Download PIA
-  get_url:
-    url: https://www.privateinternetaccess.com/installer/x/download_installer_linux
-    dest: "/home/{{ username }}/install_pia.run"
-
-- name: Install PIA
-  shell: "/home/{{ username }}/install_pia.run"
