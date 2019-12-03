@@ -17,105 +17,77 @@
     name: "{{ item }}"
   with_items:
     - cjbassi/gotop
+    - mongodb/brew
+  ignore_errors: yes
 
 - name: Pour Kegs
   homebrew:
-    name: "{{ item }}"
-    state: latest
-  with_items:
-    - amazon-ecs-cli
-    - antigen
-    - atool
-    - autoconf
-    - automake
-    - avrdude
-    - awscli
-    - bash-completion
-    - boost
-    - c-ares
-    - cookiecutter
-    - coreutils
-    - dbus
-    - fzf
-    - gdbm
-    - geoip
-    - gettext
-    - git
-    - glib
-    - gmp
-    - gnutls
-    - go
-    - gotop
-    - hiredis
-    - htop
-    - hub
-    - iproute2mac
-    - jq
-    - libelf
-    - libevent
-    - libffi
-    - libftdi0
-    - libgcrypt
-    - libgpg-error
-    - libksba
-    - libtasn1
-    - libtool
-    - libusb
-    - libusb-compat
-    - libxml2
-    - libxslt
-    - libyaml
-    - lua
-    - makedepend
-    - maven
-    - memcached
-    - mercurial
-    - mongodb
-    - mysql
-    - nettle
-    - neofetch
-    - neovim
-    - nim
-    - nmap
-    - node
-    - nvm
-    - openssl
-    - osquery
-    - ossp-uuid
-    - packer
-    - pcre
-    - pkg-config
-    - postgresql
-    - pyenv
-    - pyenv-virtualenv
-    - pyenv-virtualenvwrapper
-    - python
-    - python3
-    - qt5
-    - ragel
-    - rbenv
-    - readline
-    - redis
-    - ruby-build
-    - sqlite
-    - subversion
-    - task
-    - terminal-notifier
-    - thefuck
-    - tmux
-    - tree
-    - v8
-    - vim
-    - watch
-    - watchman
-    - wget
-    - wireshark
-    - xz
-    - yadm
-    - z
-    - zookeeper
-    - zsh
-    - zsh-completion
+    name: ['amazon-ecs-cli',
+          'antigen',
+          'awscli',
+          'bash-completion',
+          'coreutils',
+          'git',
+          'glib',
+          'gmp',
+          'gnutls',
+          'go',
+          'gotop',
+          'htop',
+          'iproute2mac',
+          'jq',
+          'libelf',
+          'libevent',
+          'libffi',
+          'libftdi0',
+          'libgcrypt',
+          'libgpg-error',
+          'libksba',
+          'libtasn1',
+          'libtool',
+          'libusb',
+          'libusb-compat',
+          'libxml2',
+          'libxslt',
+          'libyaml',
+          'lua',
+          'makedepend',
+          'memcached',
+          'mercurial',
+          'mongodb',
+          'mysql',
+          'neofetch',
+          'neovim',
+          'nmap',
+          'node',
+          'nvm',
+          'openssl',
+          'osquery',
+          'packer',
+          'pkg-config',
+          'postgresql',
+          'pyenv',
+          'pyenv-virtualenv',
+          'pyenv-virtualenvwrapper',
+          'python',
+          'python3',
+          'qt5',
+          'rbenv',
+          'readline',
+          'redis',
+          'ruby-build',
+          'sqlite',
+          'subversion',
+          'terminal-notifier',
+          'thefuck',
+          'tmux',
+          'tree',
+          'watch',
+          'wget',
+          'wireshark',
+          'yadm',
+          'zsh',
+          'zsh-completion']
   become: yes
   become_user: "{{ username }}"
   environment:

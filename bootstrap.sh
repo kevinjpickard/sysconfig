@@ -30,10 +30,10 @@ if [[ $OSTYPE == darwin* ]]; then
 
   echo "Ansible installed. Cloning files..."
   brew install git
-  git clone -b arch https://github.com/kevinjpickard/.dotfiles.git ~/.dotfiles
+  git clone https://github.com/kevinjpickard/sysconfig.git
 
   echo "Executing playbook..."
-  sudo ansible-playbook --connection=local ~/.dotfiles/sync.yml --extra-vars "username=$USER hostname=$HOST_NAME ansible_sudo_pass=$SUDO_PASSWD" -vvv
+  sudo ansible-playbook --connection=local ~/sysconfig/ansible/sync.yml --extra-vars "username=$USER hostname=$HOST_NAME ansible_sudo_pass=$SUDO_PASSWD" -vvv
 else
   # Using command -v for POSIX compatibility
   if command -v ansible-playbook > /dev/null; then
