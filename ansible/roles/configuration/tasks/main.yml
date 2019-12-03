@@ -1,0 +1,12 @@
+---
+# tasks file for configuration
+- debug: msg="Running on Windows"
+  when: ansible_kernel is search('Microsoft')
+
+- debug: msg="Detected OS as {{ ansible_distribution }}"
+
+- name: Run OS Family Tasks
+  include: "./roles/configuration/tasks/{{ ansible_system }}.yml"
+
+- name: Run OS Specific Tasks
+  include: "./roles/configuration/tasks/{{ ansible_distribution }}.yml"

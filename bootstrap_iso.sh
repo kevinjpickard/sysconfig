@@ -181,6 +181,9 @@ mount "$HD"p1 /mnt/boot/efi
 mkdir /mnt/home
 mount /dev/mapper/vg0-home /mnt/home
 
+# LVM/GRUB Issue
+mkdir /mnt/hostlvm
+mount --bind /run/lvm /mnt/hostlvm
 
 #### Installation
 echo "Setting up pacman"
@@ -210,6 +213,9 @@ mount --bind /run/lvm /mnt/hostlvm
 #### Enters in the new system (chroot)
 arch-chroot /mnt << EOF
 # To Fix some LVM changes breaking GRUB
+ln -s /hostlvm /run/lvm
+# Step 2 for LVM/GRUB Issue
+arch-chroot /mnt
 ln -s /hostlvm /run/lvm
 # Sets hostname
 echo $HOSTN > /etc/hostname
@@ -245,10 +251,5 @@ grub-install --target=x86_64-efi --efi-directory=/boot/efi
 grub-mkconfig -o /boot/grub/grub.cfg
 # Changes the root password
 echo -e $ROOT_PASSWD"\n"$ROOT_PASSWD | passwd
-git clone -b arch --recurse-submodules https://github.com/kevinjpickard/.dotfiles.git
-git clone https://github.com/kewlfft/ansible-aur.git ~/.ansible/plugins/modules/aur
-ansible-playbook --module-path /.dotfiles/library/aur --connection=local .dotfiles/setup.yml --extra-vars "hostname=$HOSTN username=$USERNAME"
 EOF
-
-echo "Umounting partitions"
-umount -R /mnt
+pacman -Sy --noconfirm --needed ansible

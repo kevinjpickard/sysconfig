@@ -1,7 +1,7 @@
 {
   "variables": {
-    "iso_url": "https://mirrors.kernel.org/archlinux/iso/2019.06.01/archlinux-2019.06.01-x86_64.iso",
-    "iso_checksum_url": "https://mirrors.kernel.org/archlinux/iso/2019.06.01/sha1sums.txt",
+    "iso_url": "https://mirrors.kernel.org/archlinux/iso/2019.09.01/archlinux-2019.09.01-x86_64.iso",
+    "iso_checksum_url": "https://mirrors.kernel.org/archlinux/iso/2019.09.01/sha1sums.txt",
     "iso_checksum_type": "sha1",
     "ssh_timeout": "20m",
     "country": "US",
@@ -76,6 +76,7 @@
         "/usr/bin/bash ./enable-ssh.sh<enter>"
       ],
       "disk_size": 64576,
+      "memory": 2048,
       "ssh_username": "vagrant",
       "ssh_password": "vagrant",
       "ssh_timeout": "{{ user `ssh_timeout` }}",
@@ -112,6 +113,20 @@
       "type": "shell",
       "script": "./bootstrap_iso.sh",
       "execute_command": "sudo sh -c '{{ .Vars }} {{ .Path }}'"
+    },
+    {
+      "type": "ansible-local",
+      "playbook_file": "./ansible/setup.yml",
+      "playbook_dir": "./ansible",
+      "extra_arguments": [
+        "--connection chroot --extra-vars 'chroot_exe=arch-chroot chroot_executable=/bin/bash username=kevin password=test'"
+      ]
+    },
+    {
+      "type": "shell-local",
+      "inline": [
+        "umount -R /mnt"
+      ]
     }
   ],
   "post-processors": [

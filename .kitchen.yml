@@ -1,6 +1,7 @@
 ---
 driver:
   name: vagrant
+  communicator: ssh
   synced_folders:
     - [".", "/kitchen"]
   customize:
@@ -13,11 +14,10 @@ driver:
     accelerate2dvideo: 'on'
     usb: 'on'
     usbxhci: 'on'
-    
+
 provisioner:
   name: shell
-  sudo: true
-  cleanup_sandbox: false
+  command: "/bin/bash /kitchen/bootstrap.sh"
 
 platforms:
   - name: archlinux
@@ -27,7 +27,7 @@ platforms:
   - name: windows10
     driver:
       box: test-win10
-      synced_folders: 
+      synced_folders:
         - [".", "C:\\Windows\\temp\\system-config"]
   - name: ubuntu
     driver:
