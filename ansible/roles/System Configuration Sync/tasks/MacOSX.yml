@@ -54,7 +54,7 @@
           'makedepend',
           'memcached',
           'mercurial',
-          'mongodb-community-shell',
+          'mongodb-community',
           'mysql',
           'neofetch',
           'neovim',
