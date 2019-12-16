@@ -12,11 +12,12 @@
   become: yes
   become_user: "{{ username }}"
 
-- name: HomeBrew Taps
+- name: HomeBrew Taps # Not currently working on Catalina
   homebrew_tap:
     name: "{{ item }}"
   with_items:
     - cjbassi/gotop
+    - homebrew/cask-drivers
     - mongodb/brew
   ignore_errors: yes
 
@@ -161,4 +162,15 @@
   command: yadm clone https://github.com/kevinjpickard/dotfiles.git
   become: yes
   become_user: "{{ username }}"
+  ignore_errors: yes
 
+- name: Setup vim
+  file:
+    path: "/home/{{ username }}/backups/vim/{{ item }}"
+    state: directory
+    owner: "{{ username }}"
+    group: "{{ username }}"
+  with_items:
+    - swap
+    - undo
+    - backups
