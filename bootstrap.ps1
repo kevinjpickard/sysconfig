@@ -1,14 +1,12 @@
-# Install Chocolatey
-Set-ExecutionPolicy Bypass -Scope Process -Force; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+# Enable and configure WinRM
+Set-WSManQuickConfig -Force | Out-Null
+winrm set winrm/config '@{MaxEnvelopeSizekb="2563000"}' | Out-Null # VS Pro Installer is 2.3 GB
 
-# Install and setup docker
-choco install -y docker-toolbox
-docker-machine create default
-docker-machine start default
-docker-machine env | Invoke-Expression
+# Install Chocolatey DSC Resource
+Install-Module cchoco -Force
 
-# Build Ansible Docker image
-docker build .
+# Compile DSC Resources
+. .\Windows\Configurations\Sysconfig.ps1 | Out-Null
 
-# Run Ansible playbook
-
+# Apply Configuration
+Start-DscConfiguration -Path .\WindowsDevConfiguration\ -Wait -Force # -Verbose
