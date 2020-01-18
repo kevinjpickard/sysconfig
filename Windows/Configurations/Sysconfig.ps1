@@ -28,6 +28,7 @@ Configuration Sysconfig
         "geforce-experience",
         "git",
         "golang",
+        "GoogleChrome",
         "jq",
         "pia",
         "python",
