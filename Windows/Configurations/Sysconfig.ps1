@@ -42,7 +42,6 @@ Configuration Sysconfig
         "vscode"
       )
       DependsOn = "[cChocoInstaller]installChoco"
-      AutoUpgrade = $True
     }
   }
 }

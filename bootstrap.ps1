@@ -1,12 +1,23 @@
 # Enable and configure WinRM
 Set-WSManQuickConfig -Force | Out-Null
-winrm set winrm/config '@{MaxEnvelopeSizekb="2563000"}' | Out-Null # VS Pro Installer is 2.3 GB
+# Envelope needs to be big enough for package installers from choco [~2.5GB]
+winrm set winrm/config '@{MaxEnvelopeSizekb="2563000"}' | Out-Null
 
-# Install Chocolatey DSC Resource
+# Install Chocolatey DSC Resources/PackageProviders
+Install-PackageProvider -Name NuGet -Force
 Install-Module cchoco -Force
 
-# Compile DSC Resources
-. .\Windows\Configurations\Sysconfig.ps1 | Out-Null
+Try {
+  $startDir = Get-Location
+  Set-Location .\Windows
 
-# Apply Configuration
-Start-DscConfiguration -Path .\WindowsDevConfiguration\ -Wait -Force # -Verbose
+  # Compile DSC Resources
+  . .\Configurations\Sysconfig.ps1
+
+  # Apply Configuration
+  Start-DscConfiguration -Path .\Sysconfig\ -Wait -Force -Verbose
+}
+Catch { }
+Finally {
+  Set-Location $startDir
+}
