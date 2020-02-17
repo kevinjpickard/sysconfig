@@ -99,19 +99,3 @@
   become_method: sudo
   when: intel is defined
 
-- name: Install Desktop Environment
-  pacman:
-    name:
-      - i3
-      - networkmanager
-      - plasma
-      - rofi
-      - sddm
-      - xorg
-    state: latest
-
-- name: Enable SDDM
-  systemd:
-    name: sddm
-    enabled: yes
-

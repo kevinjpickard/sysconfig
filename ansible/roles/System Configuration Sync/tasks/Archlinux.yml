@@ -136,16 +136,28 @@
   #  systemd:
   #    name: NetworkManager.service
   #    enabled: yes
-- name: Install Desktop Environment and Other Graphical Software
+- name: Install Plasma Desktop Environment
   pacman:
     name:
       - plasma
       - sddm
-      - i3
       - networkmanager
-      - rofi
     state: latest
+  ignore_errors: yes
 
+- name: Install Material Awesome Deps
+  pacman:
+    name:
+      - awesome
+      - ttf-roboto
+      - rofi
+      - picom
+      - materia-gtk-theme
+      - papirus-icon-theme
+      - lxappearance
+    state: latest
+  ignore_errors: yes
+  
 - name: Enable Periodic TRIM
   systemd:
     name: fstrim.timer
