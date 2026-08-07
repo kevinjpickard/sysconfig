@@ -1,0 +1,26 @@
+---
+# Setting up Arch Gaming Packages
+- debug: msg="Setting up Arch gaming packages"
+
+- name: Update pacman Cache
+  pacman:
+   update_cache: yes
+   upgrade: yes
+  ignore_errors: yes
+
+- name: Install Pacman Packages
+  pacman:
+    name: steam
+    state: latest
+  ignore_errors: yes
+
+- name: Install AUR Packages
+  aur:
+    use: yay
+    name:
+      # broken - discord
+      - steam-fonts
+      - xpad-dkms-git
+  become: yes
+  become_user: aurman
+  ignore_errors: yes

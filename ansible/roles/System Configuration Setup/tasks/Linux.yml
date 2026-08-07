@@ -1,0 +1,8 @@
+# Linux Specific Tasks
+- name: Give wheel sudo access
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: '^%wheel\s'
+    line: '%wheel ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'

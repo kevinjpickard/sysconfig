@@ -1,0 +1,67 @@
+- name: Install Linux and tools
+  pacman:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - linux
+    - linux-headers
+    - base-devel
+    - clamav
+    - coreutils
+    - deepin
+    - deepin-extra
+    - networkmanager
+    - dhcpcd
+    - dkms
+    - e2fsprogs
+    - efibootmgr
+    - exfat-utils
+    - grub
+    - htop
+    - iproute2
+    - iputils
+    - less
+    - lvm2
+    - neovim
+    - ntfs-3g
+    - openssh
+    - pacman-contrib
+    - reflector
+    - util-linux
+    - zsh
+
+- name: Install Other Pacman Packages
+  pacman:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - arc-gtk-theme
+    - bluez
+    - bluez-firmware
+    - bluez-utils
+    - curl
+    - firefox
+    - guake
+    - python-pip
+    - python2-pip
+    - terminator
+    - thefuck
+    - tmux
+    - vagrant
+    - variety
+    - veracrypt
+    - virtualbox
+    - virtualbox-host-modules-arch
+    - wget
+
+- name: Install Dev Packages
+  pacman:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - docker
+    - go
+    - python
+    - python-pip
+    - ruby
+    - git
