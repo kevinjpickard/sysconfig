@@ -157,7 +157,7 @@
       - lxappearance
     state: latest
   ignore_errors: yes
-  
+
 - name: Enable Periodic TRIM
   systemd:
     name: fstrim.timer

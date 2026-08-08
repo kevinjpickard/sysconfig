@@ -7,7 +7,7 @@
   become_user: aurman
 
 - name: Install Fonts
-  aur: 
+  aur:
     use: yay
     name: nerd-fonts-complete
   become: yes
@@ -16,7 +16,7 @@
 - name: Install Core AUR Packages
   aur:
     use: yay
-    name: 
+    name:
       - antigen-git
       - cpufetch-git
       - google-chrome

@@ -63,8 +63,8 @@
   ignore_errors: yes
 
 - name: Install NVidia
-  pacman: 
-    name: 
+  pacman:
+    name:
       - nvidia
       - nvidia-utils
       - lib32-nvidia-utils

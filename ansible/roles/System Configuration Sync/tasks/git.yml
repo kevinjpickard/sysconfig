@@ -20,4 +20,3 @@
     dest: "{{ homedir }}/.tmux/plugins/tpm"
   become_user: "{{ username }}"
   when: tpm.stat.exists == False
-

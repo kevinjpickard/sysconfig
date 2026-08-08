@@ -4,4 +4,3 @@
 - name: Set Home Directory
   set_fact:
     homedir: "/Users/{{ username }}"
-

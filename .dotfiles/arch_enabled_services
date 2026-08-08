@@ -1,9 +1,9 @@
-autovt@.service        
-ckb-daemon.service        
-getty@.service       
-lm_sensors.service      
+autovt@.service
+ckb-daemon.service
+getty@.service
+lm_sensors.service
 openvpn-client@US_Midwest.service
-sddm.service       
+sddm.service
 systemd-fsck-root.service
-systemd-timesyncd.service     
-remote-fs.target        
+systemd-timesyncd.service
+remote-fs.target

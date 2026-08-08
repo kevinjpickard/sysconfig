@@ -41,4 +41,3 @@ _pip_install_docker: "{{ not pip_install_docker_compose and pip_install_docker }
 # Compute the `docker-compose` Python package's version to use.
 _pip_version_docker_compose: >-
   {{ '1.9.0' if (_ansible_version_latest and _pip_version_docker_compose_latest) else pip_version_docker_compose }}
-

@@ -37,4 +37,3 @@
         name: busybox
         state: absent
 when: container_creation.changed
-

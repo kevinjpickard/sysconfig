@@ -4,7 +4,7 @@
 
 - name: Install Linux and tools
   pacman:
-    name: 
+    name:
       - linux
       - linux-headers
       - base-devel
@@ -91,8 +91,8 @@
   ignore_errors: yes
 
 - name: Install NVidia
-  pacman: 
-    name: 
+  pacman:
+    name:
       - nvidia
       - nvidia-utils
       - lib32-nvidia-utils
@@ -117,7 +117,7 @@
     shell: /bin/nologin
     home: /home/aurman
     append: yes
-  
+
 - name: Set AUR Manager permissions
   lineinfile:
     path: /etc/sudoers.d/11-install-aurman
@@ -142,7 +142,7 @@
   become: yes
   become_user: aurman
   when: yay.stat.exists == False
- 
+
 - name: Install Yay
   shell: chdir=/home/aurman/aur/yay pacman -U --noconfirm $(ls | grep -i -m 1 yay*.pkg.tar.xz)
   become: yes
@@ -151,7 +151,7 @@
 
 - name: Install Deepin DE and NetworkManager
   pacman:
-    name: 
+    name:
       - deepin
       - deepin-extra
       - networkmanager
@@ -225,7 +225,7 @@
     dest: "/home/{{ username }}/.oh-my-zsh"
 
 - name: Install Tmux Package Manager
-  git: 
+  git:
     repo: https://github.com/tmux-plugins/tpm
     dest: /home/{{ username }}/.tmux/plugins/tpm
   become: yes
@@ -239,7 +239,7 @@
     group: "{{ username }}"
 
 - name: Install Dein
-  get_url: 
+  get_url:
     url: https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh
     dest: "/home/{{ username }}/installer.sh"
     force: yes
@@ -253,7 +253,7 @@
   become_user: "{{ username }}"
 
 - name: Remove Installer
-  file: 
+  file:
     path: "/home/{{ username }}/installer.sh"
     state: absent
 
@@ -269,11 +269,10 @@
 
 - name: Install Gaming Software
   include: roles/linux/tasks/gaming.yml
-  tags: 
+  tags:
     - gaming
 
 - name: Pull Down dotfiles
   command: yadm clone https://github.com/kevinjpickard/dotfiles.git
   become: yes
   become_user: "{{ username }}"
-

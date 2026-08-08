@@ -11,4 +11,3 @@ docker-machine env | Invoke-Expression
 docker build .
 
 # Run Ansible playbook
-

@@ -5,7 +5,7 @@ os=$(uname)
 if [[ $os == "Darwin" ]]; then
   echo "Detected macOS, calling Darwin setup scripts..."
 
-  # Update, if needed. Doesn't seem to install xcode anymore. 
+  # Update, if needed. Doesn't seem to install xcode anymore.
   echo "Checking for updates..."
   PROD=$(softwareupdate -l |
     grep "\*.*Command Line" |
@@ -38,7 +38,7 @@ if [[ $os == "Linux" ]]; then
   # Arch
 	if [[ -e /etc/arch-release ]]; then
 		echo "Detected Arch Linux"
-		sudo pacman -Syyu --noconfirm --needed base base-devel linux linux-headers git 
+		sudo pacman -Syyu --noconfirm --needed base base-devel linux linux-headers git
 	else
 		# Other Linux setup
 		echo "Detected Linux"
@@ -57,7 +57,7 @@ if [[ $os == "Linux" ]]; then
   /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
   /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME --set-upstream origin arch
 
-	if [[ -e /etc/arch-release ]]; then 
+	if [[ -e /etc/arch-release ]]; then
     echo 'calling arch setup files...'
 		bash ~/.dotfiles/arch_setup.sh
 	else

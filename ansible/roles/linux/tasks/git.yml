@@ -7,7 +7,7 @@
     dest: "/Users/{{ username }}/.oh-my-zsh"
 
 - name: Install Tmux Package Manager
-  git: 
+  git:
     repo: https://github.com/tmux-plugins/tpm
     dest: "/Users/{{ username }}/.tmux/plugins/tpm"
   become: yes
@@ -20,7 +20,7 @@
     owner: "{{ username }}"
 
 - name: Install Dein
-  get_url: 
+  get_url:
     url: https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh
     dest: "/Users/{{ username }}/installer.sh"
     force: yes
@@ -33,6 +33,6 @@
   become_user: "{{ username }}"
 
 - name: Remove Installer
-  file: 
+  file:
     path: "/Users/{{ username }}/installer.sh"
     state: absent

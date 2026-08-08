@@ -1,10 +1,10 @@
 #/bin/bash -xe
 
-# Script to setup a new macOS system. 
+# Script to setup a new macOS system.
 # 	Author: Kevin Pickard
 #		Date: 10/13/16
 #			This script will install requirements for a macOS system (Tested on 10.12)
-#			Installs Xcode CLI Tools, Homebrew, Fish, and vim. 
+#			Installs Xcode CLI Tools, Homebrew, Fish, and vim.
 
 ## Install a lot of shit
 echo "Installing a lot of shit..."
@@ -28,7 +28,7 @@ git clone git://github.com/robbyrussell/oh-my-zsh.git $HOME/.oh-my-zsh
 ## ZSH Syntax Highlighting
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
-## ZSH Completion Suggestions 
+## ZSH Completion Suggestions
 git clone git://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 ## Install dein

@@ -15,7 +15,7 @@
   systemd:
     name: reflector.service
     enabled: yes
-  
+
 # pacman hooks
 
 # Kernel Module Configs

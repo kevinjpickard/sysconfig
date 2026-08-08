@@ -70,4 +70,3 @@ echo "Setting up neovim..."
 # molokai color scheme
 mkdir ~/.vim/colors
 curl https://raw.githubusercontent.com/tamelion/neovim-molokai/master/colors/molokai.vim -o ~/.vim/colors/molokai.vim
-

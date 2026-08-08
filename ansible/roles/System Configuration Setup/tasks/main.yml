@@ -16,4 +16,3 @@
 
 - name: Run OS Specific Tasks
   include: "./roles/System Configuration Setup/tasks/{{ ansible_distribution }}.yml"
-

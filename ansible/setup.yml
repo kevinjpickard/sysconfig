@@ -1,14 +1,5 @@
 ---
-# Initial Setup and System Configuration
-
-- hosts: localhost
-  remote_user: root
+- hosts: all
   become: yes
-  become_method: sudo
-  gather_facts: true
-  environment:
-    ANSIBLE_LIBRARY: /.dotfiles/library
-
   roles:
-    - System Configuration Setup
-    - System Configuration Sync
+    - role: kde

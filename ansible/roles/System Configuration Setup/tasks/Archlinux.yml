@@ -98,4 +98,3 @@
   become: yes
   become_method: sudo
   when: intel is defined
-

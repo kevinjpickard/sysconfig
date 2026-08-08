@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Copied and modified from various sources, including: 
+# Copied and modified from various sources, including:
 # github.com/pbdeuchler/dotfiles and github.com/mathiasbynens/dotfiles/
 
 # Menu bar: hide the Time Machine, Volume, and User icons

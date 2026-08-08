@@ -49,7 +49,7 @@ apt_repository: "deb [arch={{ apt_repository_arch }}] https://download.docker.co
 daemon_json:
 
 # List of users to be added to 'docker' system group (disabled by default)
-# SECURITY WARNING: 
+# SECURITY WARNING:
 # Be aware that granted users can easily get full root access on the docker host system!
 docker_group_members: []
 
