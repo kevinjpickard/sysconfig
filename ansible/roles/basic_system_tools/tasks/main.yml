@@ -21,3 +21,11 @@
     name: flathub
     state: present
     flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+
+- name: Install zplug
+  ansible.builtin.git:
+    repo: https://github.com/zplug/zplug.git
+    dest: "/home/{{ username | default('kevin') }}/.zplug"
+    version: master
+  become: true
+  become_user: "{{ username | default('kevin') }}"

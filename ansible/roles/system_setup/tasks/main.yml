@@ -27,6 +27,7 @@
       - sudo
       - util-linux
       - wget
+      - yadm
       - zsh
     state: present
   when: ansible_facts['distribution'] == 'Archlinux'
@@ -43,6 +44,22 @@
     name: fstrim.timer
     enabled: true
   when: ansible_facts['distribution'] == 'Archlinux'
+
+- name: Install Virtual Machine Guest Agents
+  community.general.pacman:
+    name:
+      - qemu-guest-agent
+      - spice-vdagent
+    state: present
+  when: ansible_facts['distribution'] == 'Archlinux' and ansible_facts['virtualization_role'] == 'guest'
+
+- name: Enable QEMU Guest Agent service
+  ansible.builtin.systemd:
+    name: qemu-guest-agent.service
+    enabled: true
+    state: started
+  ignore_errors: true
+  when: ansible_facts['distribution'] == 'Archlinux' and ansible_facts['virtualization_role'] == 'guest'
 
 - name: Ensure target user exists
   ansible.builtin.user:
