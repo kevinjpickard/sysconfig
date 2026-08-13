@@ -62,7 +62,7 @@
     validate: '/usr/sbin/visudo -cf %s'
 
 - name: Check if yay is installed
-  ansible.builtin.command: command -v yay
+  ansible.builtin.shell: command -v yay
   register: yay_check
   ignore_errors: true
   changed_when: false
@@ -85,7 +85,7 @@
   when: ansible_facts['distribution'] == 'Archlinux' and yay_check.rc != 0
 
 - name: Install yay package
-  ansible.builtin.shell: pacman -U --noconfirm $(ls | grep -i -m 1 yay*.pkg.tar.zst)
+  ansible.builtin.shell: pacman -U --noconfirm *.pkg.tar.zst
   args:
     chdir: /tmp/yay-bin
   become: true
