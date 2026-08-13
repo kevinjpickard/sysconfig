@@ -60,3 +60,33 @@
     regexp: '^%wheel ALL=\(ALL:ALL\) ALL'
     line: '%wheel ALL=(ALL:ALL) ALL'
     validate: '/usr/sbin/visudo -cf %s'
+
+- name: Check if yay is installed
+  ansible.builtin.command: command -v yay
+  register: yay_check
+  ignore_errors: true
+  changed_when: false
+  when: ansible_facts['distribution'] == 'Archlinux'
+
+- name: Clone yay-bin repository
+  ansible.builtin.git:
+    repo: https://aur.archlinux.org/yay-bin.git
+    dest: /tmp/yay-bin
+  become: true
+  become_user: "{{ username | default('kevin') }}"
+  when: ansible_facts['distribution'] == 'Archlinux' and yay_check.rc != 0
+
+- name: Build yay
+  ansible.builtin.command: makepkg --cleanbuild --nodeps --force
+  args:
+    chdir: /tmp/yay-bin
+  become: true
+  become_user: "{{ username | default('kevin') }}"
+  when: ansible_facts['distribution'] == 'Archlinux' and yay_check.rc != 0
+
+- name: Install yay package
+  ansible.builtin.shell: pacman -U --noconfirm $(ls | grep -i -m 1 yay*.pkg.tar.zst)
+  args:
+    chdir: /tmp/yay-bin
+  become: true
+  when: ansible_facts['distribution'] == 'Archlinux' and yay_check.rc != 0
