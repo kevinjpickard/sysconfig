@@ -8,7 +8,7 @@
       - htop
       - vim
       - wget
-      - neofetch
+      - fastfetch
     state: present
 
 - name: Install Flatpak
