@@ -1,0 +1,12 @@
+---
+- name: Converge
+  hosts: all
+  become: true
+  tasks:
+    - name: Include system_setup role
+      ansible.builtin.include_role:
+        name: system_setup
+
+    - name: Include plasma_desktop role
+      ansible.builtin.include_role:
+        name: plasma_desktop

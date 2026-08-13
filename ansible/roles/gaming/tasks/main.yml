@@ -1,0 +1,10 @@
+---
+# tasks file for gaming
+- name: Install gaming tools (pacman)
+  ansible.builtin.package:
+    name:
+      - steam
+      - lutris
+      - gamemode
+      - mangohud
+    state: present

@@ -1,0 +1,8 @@
+---
+# Copy this file to local_vars.yml (which is gitignored) to customize your installation for a specific machine.
+# These variables toggle which roles are executed in setup.yml.
+
+enable_basic_tools: true
+enable_dev_tools: false
+enable_gaming: false
+enable_media: false

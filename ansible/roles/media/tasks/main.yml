@@ -1,0 +1,8 @@
+---
+# tasks file for media
+- name: Install media tools
+  ansible.builtin.package:
+    name:
+      - vlc
+      - obs-studio
+    state: present

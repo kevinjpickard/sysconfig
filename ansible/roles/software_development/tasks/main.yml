@@ -1,0 +1,18 @@
+---
+# tasks file for software_development
+- name: Install software development tools
+  ansible.builtin.package:
+    name:
+      - base-devel
+      - make
+      - cmake
+      - gcc
+      - python
+      - python-pip
+    state: present
+
+- name: Install IDEs via Flatpak
+  community.general.flatpak:
+    name:
+      - com.visualstudio.code
+    state: present

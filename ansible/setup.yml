@@ -1,14 +1,27 @@
 ---
-# Initial Setup and System Configuration
+# Initial Setup and Base System Configuration
 
-- hosts: localhost
-  remote_user: root
-  become: yes
-  become_method: sudo
+- name: Initial Setup and Base System Configuration
+  hosts: localhost
+  connection: local
+  become: true
+  become_method: ansible.builtin.sudo
   gather_facts: true
-  environment:
-    ANSIBLE_LIBRARY: /.dotfiles/library
+
+  pre_tasks:
+    - name: Load local variables
+      ansible.builtin.include_vars:
+        file: local_vars.yml
+      ignore_errors: yes
 
   roles:
-    - System Configuration Setup
-    - System Configuration Sync
+    - system_setup
+    - plasma_desktop
+    - role: basic_system_tools
+      when: enable_basic_tools | default(true) | bool
+    - role: software_development
+      when: enable_dev_tools | default(false) | bool
+    - role: gaming
+      when: enable_gaming | default(false) | bool
+    - role: media
+      when: enable_media | default(false) | bool

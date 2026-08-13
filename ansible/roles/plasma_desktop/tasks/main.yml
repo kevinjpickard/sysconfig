@@ -1,0 +1,16 @@
+---
+- name: Install KDE Plasma and SDDM
+  community.general.pacman:
+    name:
+      - plasma-meta
+      - sddm
+      - konsole
+      - dolphin
+    state: present
+  when: ansible_facts['distribution'] == 'Archlinux'
+
+- name: Enable SDDM service
+  ansible.builtin.systemd:
+    name: sddm.service
+    enabled: true
+  when: ansible_facts['distribution'] == 'Archlinux'

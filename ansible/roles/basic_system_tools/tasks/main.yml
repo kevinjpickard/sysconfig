@@ -1,0 +1,23 @@
+---
+# tasks file for basic_system_tools
+- name: Install basic system utilities
+  ansible.builtin.package:
+    name:
+      - curl
+      - git
+      - htop
+      - vim
+      - wget
+      - neofetch
+    state: present
+
+- name: Install Flatpak
+  ansible.builtin.package:
+    name: flatpak
+    state: present
+
+- name: Add Flathub repository
+  community.general.flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo

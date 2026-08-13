@@ -1,0 +1,140 @@
+{
+  "bootloader": "EFISTUB",
+  "disk_config": {
+    "config_type": "default_layout",
+    "device_modifications": [
+      {
+        "device": "/dev/vda",
+        "wipe": true,
+        "partitions": [
+          {
+            "dev_path": null,
+            "flags": [
+              "boot",
+              "esp"
+            ],
+            "fs_type": "fat32",
+            "mountpoint": "/boot",
+            "mount_options": [],
+            "obj_id": null,
+            "size": {
+              "sector_size": {
+                "unit": "B",
+                "value": 512
+              },
+              "unit": "MiB",
+              "value": 1024
+            },
+            "start": {
+              "sector_size": {
+                "unit": "B",
+                "value": 512
+              },
+              "unit": "MiB",
+              "value": 1
+            },
+            "status": "create",
+            "type": "primary"
+          },
+          {
+            "btrfs": [
+              {
+                "mountpoint": "/",
+                "name": "@"
+              },
+              {
+                "mountpoint": "/home",
+                "name": "@home"
+              },
+              {
+                "mountpoint": "/.snapshots",
+                "name": "@snapshots"
+              },
+              {
+                "mountpoint": "/var/log",
+                "name": "@log"
+              },
+              {
+                "mountpoint": "/var/cache/pacman/pkg",
+                "name": "@pkg"
+              }
+            ],
+            "dev_path": null,
+            "flags": [],
+            "fs_type": "btrfs",
+            "mountpoint": "/",
+            "mount_options": [],
+            "obj_id": null,
+            "size": {
+              "sector_size": {
+                "unit": "B",
+                "value": 512
+              },
+              "unit": "MiB",
+              "value": 39900
+            },
+            "start": {
+              "sector_size": {
+                "unit": "B",
+                "value": 512
+              },
+              "unit": "MiB",
+              "value": 1025
+            },
+            "status": "create",
+            "type": "primary"
+          }
+        ]
+      }
+    ],
+    "disk_encryption": {
+      "encryption_password": "testpassword",
+      "encryption_type": "luks",
+      "partitions": [
+        "/dev/vda2"
+      ]
+    }
+  },
+  "audio": "pipewire",
+  "profile_config": {
+    "profile": {
+      "details": [
+        "kde"
+      ],
+      "name": "desktop"
+    }
+  },
+  "display_manager": "sddm",
+  "services": [
+    "sshd",
+    "NetworkManager",
+    "sddm"
+  ],
+  "nic": {
+    "type": "nm"
+  },
+  "packages": [
+    "ansible",
+    "base-devel",
+    "btrfs-progs",
+    "efibootmgr",
+    "git",
+    "htop",
+    "linux",
+    "linux-firmware",
+    "linux-headers",
+    "neovim",
+    "networkmanager",
+    "openssh",
+    "sddm",
+    "sudo",
+    "zsh"
+  ],
+  "locale_config": {
+    "kb_layout": "us",
+    "sys_enc": "UTF-8",
+    "sys_lang": "en_US.UTF-8"
+  },
+  "timezone": "America/Denver",
+  "archinstall-language": "English"
+}

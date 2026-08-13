@@ -6,7 +6,7 @@
 if [[ -d /usr/include/rpcsvc ]]; then
   sudo rm -rf /usr/include/rpcsvc
 fi
-
+jjjjjjjjjjjju
 if [[ -e /usr/lib/libnsl.so ]]; then
   sudo rm /usr/lib/libnsl.so
 fi

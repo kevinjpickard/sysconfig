@@ -1,0 +1,62 @@
+---
+- name: Ensure reflector is installed
+  community.general.pacman:
+    name: reflector
+    state: present
+  when: ansible_facts['distribution'] == 'Archlinux'
+
+- name: Configure pacman mirrors with reflector
+  ansible.builtin.command:
+    cmd: reflector --latest 20 --protocol https --sort rate --save /etc/pacman.d/mirrorlist
+  changed_when: false
+  when: ansible_facts['distribution'] == 'Archlinux'
+
+- name: Install essential system packages
+  community.general.pacman:
+    name:
+      - base-devel
+      - btrfs-progs
+      - curl
+      - efibootmgr
+      - git
+      - htop
+      - linux-headers
+      - neovim
+      - networkmanager
+      - openssh
+      - sudo
+      - util-linux
+      - wget
+      - zsh
+    state: present
+  when: ansible_facts['distribution'] == 'Archlinux'
+
+- name: Enable NetworkManager service
+  ansible.builtin.systemd:
+    name: NetworkManager.service
+    enabled: true
+    state: started
+  when: ansible_facts['distribution'] == 'Archlinux'
+
+- name: Enable Periodic TRIM for SSDs
+  ansible.builtin.systemd:
+    name: fstrim.timer
+    enabled: true
+  when: ansible_facts['distribution'] == 'Archlinux'
+
+- name: Ensure target user exists
+  ansible.builtin.user:
+    name: "{{ username | default('kevin') }}"
+    shell: /usr/bin/zsh
+    create_home: true
+    groups: wheel
+    append: true
+    state: present
+
+- name: Ensure wheel group has sudo access
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: '^%wheel ALL=\(ALL:ALL\) ALL'
+    line: '%wheel ALL=(ALL:ALL) ALL'
+    validate: '/usr/sbin/visudo -cf %s'

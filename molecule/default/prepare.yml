@@ -1,0 +1,8 @@
+---
+- name: Prepare
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Install prerequisites missing from base archlinux image
+      ansible.builtin.raw: pacman -Sy --noconfirm sudo python
+      changed_when: true

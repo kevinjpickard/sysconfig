@@ -5,13 +5,13 @@
 
 - name: Fail if not a supported release of Ubuntu
   fail:
-    msg: "{{ ansible_distribution_version }} is not an acceptable version of Ubuntu for this role"
-  when: ansible_lsb.id|lower == "ubuntu" and ansible_distribution_version is version_compare('14.04', '<')
+    msg: "{{ ansible_facts['distribution_version'] }} is not an acceptable version of Ubuntu for this role"
+  when: ansible_facts['lsb']['id']|lower == "ubuntu" and ansible_facts['distribution_version'] is version_compare('14.04', '<')
 
 - name: Fail if not a new release of Debian
   fail:
-    msg: "{{ ansible_distribution_version }} is not an acceptable version of Debian for this role"
-  when: ansible_lsb.id|lower == "debian" and ansible_distribution_version is version_compare('8.5', '<')
+    msg: "{{ ansible_facts['distribution_version'] }} is not an acceptable version of Debian for this role"
+  when: ansible_facts['lsb']['id']|lower == "debian" and ansible_facts['distribution_version'] is version_compare('8.5', '<')
 
 - name: Fail if using python3 with Ansible<2.3
   fail:
@@ -34,20 +34,20 @@
 - name: Install linux-image-extra-* packages to enable AuFS driver
   apt:
     pkg:
-      - linux-image-extra-{{ ansible_kernel }}
+      - linux-image-extra-{{ ansible_facts['kernel'] }}
       - linux-image-extra-virtual
     state: present
     update_cache: yes
     cache_valid_time: "{{ docker_apt_cache_valid_time }}"
   environment: "{{proxy_env if proxy_env is defined else {}}}"
-  when: docker_aufs_enabled and ansible_distribution_version is version_compare('14.04', '==') and ansible_kernel is version_compare('4.4', '<')
+  when: docker_aufs_enabled and ansible_facts['distribution_version'] is version_compare('14.04', '==') and ansible_facts['kernel'] is version_compare('4.4', '<')
 
   register: linux_image_extra_install
   ignore_errors: yes
 
 - name: Try again to install linux-image-extra if previous attempt failed
   apt:
-    pkg: "linux-image-extra-{{ ansible_kernel.split('-')[:-1]|join('-') }}*"
+    pkg: "linux-image-extra-{{ ansible_facts['kernel'].split('-')[:-1]|join('-') }}*"
     state: present
     update_cache: yes
     cache_valid_time: "{{ docker_apt_cache_valid_time }}"
@@ -107,7 +107,7 @@
 - name: Set systemd playbook var
   set_fact:
     is_systemd: true
-  when: ( ansible_distribution == "Ubuntu" and ansible_distribution_version is version_compare('15.04', '>=') or ansible_distribution == "Debian" )
+  when: ( ansible_facts['distribution'] == "Ubuntu" and ansible_facts['distribution_version'] is version_compare('15.04', '>=') or ansible_facts['distribution'] == "Debian" )
   tags: always
 
 - name: Set docker_http_proxy_defined flag

@@ -1,13 +1,13 @@
 ---
-# System Configuration
+# Ongoing System Configuration Sync
 
-- hosts: localhost
-  remote_user: root
-  become: yes
-  become_method: sudo
+- name: System Configuration Sync
+  hosts: localhost
+  connection: local
+  become: true
+  become_method: ansible.builtin.sudo
   gather_facts: true
-  environment:
-    ANSIBLE_LIBRARY: ~/sysconfig/library
 
   roles:
-    - System Configuration Sync
+    - system_setup
+    - plasma_desktop
