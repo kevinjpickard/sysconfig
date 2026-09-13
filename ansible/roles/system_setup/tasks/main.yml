@@ -67,7 +67,7 @@
     state: started
   loop:
     - qemu-guest-agent.service
-    - spice-vdagentd.service
+    - spice-vdagentd.socket
   ignore_errors: true
   when: ansible_facts['distribution'] == 'Archlinux' and ansible_facts['virtualization_role'] == 'guest'
 
