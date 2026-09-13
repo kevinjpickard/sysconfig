@@ -3,12 +3,24 @@
 - name: Install basic system utilities
   ansible.builtin.package:
     name:
+      - 7zip
+      - bashtop
+      - bat
       - curl
+      - fastfetch
+      - fzf
+      - ghostty
       - git
+      - glow
       - htop
+      - nvtop
+      - rsync
+      - tmux
+      - unrar
+      - unzip
       - vim
       - wget
-      - fastfetch
+      - yakuake
     state: present
 
 - name: Install Flatpak

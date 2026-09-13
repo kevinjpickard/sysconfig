@@ -25,3 +25,7 @@
       when: enable_gaming | default(false) | bool
     - role: media
       when: enable_media | default(false) | bool
+    - role: virtualization
+      when: enable_virtualization | default(false) | bool
+    - role: 3d_printing
+      when: enable_3d_printing | default(false) | bool

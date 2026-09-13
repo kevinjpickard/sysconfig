@@ -1,0 +1,14 @@
+---
+# tasks file for 3d_printing
+- name: Install 3D printing and CAD software
+  community.general.pacman:
+    name:
+      - freecad
+    state: present
+  when: ansible_facts['distribution'] == 'Archlinux'
+
+- name: Install STL thumbnailers from AUR
+  ansible.builtin.shell: yay -S --noconfirm --needed stl-thumb stl-thumb-kde
+  become: false
+  changed_when: false
+  when: ansible_facts['distribution'] == 'Archlinux'

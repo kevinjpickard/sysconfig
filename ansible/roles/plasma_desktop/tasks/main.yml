@@ -3,9 +3,11 @@
   community.general.pacman:
     name:
       - plasma-meta
+      - kde-applications-meta
       - sddm
       - konsole
       - dolphin
+      - kvantum
     state: present
   when: ansible_facts['distribution'] == 'Archlinux'
 

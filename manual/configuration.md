@@ -27,4 +27,6 @@ enable_basic_tools: true
 enable_dev_tools: true
 enable_gaming: true
 enable_media: true
+enable_virtualization: true
+enable_3d_printing: true
 ```

@@ -38,7 +38,7 @@ To provision or sync an existing system using the playbooks, first configure you
 
 ```bash
 cp ansible/local_vars.template.yml ansible/local_vars.yml
-# Edit ansible/local_vars.yml to enable/disable specific roles (gaming, dev, etc.)
+# Edit ansible/local_vars.yml to enable/disable specific roles (gaming, dev, virtualization, 3d_printing, etc.)
 ```
 
 Then apply the playbook:

@@ -1,0 +1,26 @@
+---
+# tasks file for virtualization
+- name: Install virtualization tools
+  community.general.pacman:
+    name:
+      - dnsmasq
+      - libvirt
+      - packer
+      - qemu-full
+      - swtpm
+      - virt-manager
+    state: present
+  when: ansible_facts['distribution'] == 'Archlinux'
+
+- name: Enable libvirtd service
+  ansible.builtin.systemd:
+    name: libvirtd.service
+    enabled: true
+    state: started
+  when: ansible_facts['distribution'] == 'Archlinux'
+
+- name: Add user to libvirt group
+  ansible.builtin.user:
+    name: "{{ username | default('kevin') }}"
+    groups: libvirt
+    append: true

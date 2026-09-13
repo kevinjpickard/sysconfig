@@ -11,11 +11,13 @@ These roles form the foundation of the system and are always applied during prov
 ## Optional Roles
 These roles are conditionally triggered based on the variables defined in `ansible/local_vars.yml`.
 
-*   **`basic_system_tools`**: Installs everyday CLI utilities and necessities (e.g., git, vim, top, network tools).
+*   **`basic_system_tools`**: Installs everyday CLI utilities and helpers (e.g., git, vim, htop, nvtop, tmux, fzf, bat, glow, ghostty, yakuake).
 *   **`software_development`**: Configures the system for programming. This typically includes compilers, IDEs, programming languages, and development environments.
 *   **`docker`**: Installs the Docker daemon, enables the service, and adds your user to the `docker` group so you can manage containers without sudo.
 *   **`gaming`**: Configures the system for gaming, typically installing Steam, Lutris, graphics drivers, and gaming optimizations.
 *   **`media`**: Installs media consumption and production applications (e.g., VLC, Spotify, OBS).
+*   **`virtualization`**: Installs hypervisor and VM tools including qemu, virt-manager, packer, and libvirt.
+*   **`3d_printing`**: Installs CAD software and slicers including FreeCAD and STL thumbnail generators.
 
 ## Maintenance & Base Roles
 *   **`unattended_upgrades`**: Configures automatic system updates for Arch Linux, ensuring your packages stay secure and up-to-date without manual intervention.

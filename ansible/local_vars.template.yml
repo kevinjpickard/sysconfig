@@ -6,3 +6,5 @@ enable_basic_tools: true
 enable_dev_tools: false
 enable_gaming: false
 enable_media: false
+enable_virtualization: false
+enable_3d_printing: false
