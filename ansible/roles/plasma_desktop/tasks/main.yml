@@ -32,20 +32,24 @@
     - konsole
     - icons
 
-- name: Copy Dracula theme files
-  ansible.builtin.copy:
-    src: "dracula_theme/{{ item.src }}"
-    dest: "/home/{{ username | default('kevin') }}/.local/share/{{ item.dest }}"
+- name: Extract Dracula theme tarball
+  ansible.builtin.unarchive:
+    src: "dracula_theme.tar.gz"
+    dest: "/tmp/"
     owner: "{{ username | default('kevin') }}"
     group: "{{ username | default('kevin') }}"
-  loop:
-    - { src: "look-and-feel/", dest: "plasma/look-and-feel/" }
-    - { src: "desktoptheme/", dest: "plasma/desktoptheme/" }
-    - { src: "color-schemes/", dest: "color-schemes/" }
-    - { src: "aurorae/themes/", dest: "aurorae/themes/" }
-    - { src: "wallpapers/", dest: "wallpapers/" }
-    - { src: "konsole/", dest: "konsole/" }
-    - { src: "icons/", dest: "icons/" }
+
+- name: Move Dracula theme files into place
+  ansible.builtin.shell: |
+    cp -r /tmp/dracula_theme/look-and-feel/* /home/{{ username | default('kevin') }}/.local/share/plasma/look-and-feel/
+    cp -r /tmp/dracula_theme/desktoptheme/* /home/{{ username | default('kevin') }}/.local/share/plasma/desktoptheme/
+    cp -r /tmp/dracula_theme/color-schemes/* /home/{{ username | default('kevin') }}/.local/share/color-schemes/
+    cp -r /tmp/dracula_theme/aurorae/themes/* /home/{{ username | default('kevin') }}/.local/share/aurorae/themes/
+    cp -r /tmp/dracula_theme/wallpapers/* /home/{{ username | default('kevin') }}/.local/share/wallpapers/
+    cp -r /tmp/dracula_theme/konsole/* /home/{{ username | default('kevin') }}/.local/share/konsole/
+    cp -r /tmp/dracula_theme/icons/* /home/{{ username | default('kevin') }}/.local/share/icons/
+  become_user: "{{ username | default('kevin') }}"
+  changed_when: false
 
 - name: Ensure KDE config directory exists
   ansible.builtin.file:
