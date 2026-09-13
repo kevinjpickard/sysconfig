@@ -58,7 +58,7 @@
       - qemu-guest-agent
       - spice-vdagent
     state: present
-  when: ansible_facts['distribution'] == 'Archlinux'
+  when: ansible_facts['distribution'] == 'Archlinux' and ansible_facts['virtualization_role'] == 'guest'
 
 - name: Enable QEMU Guest Agent service
   ansible.builtin.systemd:
@@ -66,7 +66,7 @@
     enabled: true
     state: started
   ignore_errors: true
-  when: ansible_facts['distribution'] == 'Archlinux'
+  when: ansible_facts['distribution'] == 'Archlinux' and ansible_facts['virtualization_role'] == 'guest'
 
 - name: Ensure target user exists
   ansible.builtin.user:
