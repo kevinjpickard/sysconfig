@@ -6,6 +6,7 @@
       - sddm
       - konsole
       - dolphin
+      - kvantum
     state: present
   when: ansible_facts['distribution'] == 'Archlinux'
 
@@ -67,3 +68,36 @@
     - { section: 'KDE', option: 'LookAndFeelPackage', value: 'Dracula' }
     - { section: 'General', option: 'ColorScheme', value: 'Dracula' }
     - { section: 'Icons', option: 'Theme', value: 'dracula-icons-main' }
+    - { section: 'KDE', option: 'widgetStyle', value: 'kvantum' }
+
+- name: Ensure Kvantum config directory exists
+  ansible.builtin.file:
+    path: "/home/{{ username | default('kevin') }}/.config/Kvantum"
+    state: directory
+    owner: "{{ username | default('kevin') }}"
+    group: "{{ username | default('kevin') }}"
+    mode: '0755'
+
+- name: Clone Dracula Kvantum Theme
+  ansible.builtin.git:
+    repo: https://github.com/dracula/kvantum.git
+    dest: "/tmp/dracula-kvantum"
+    depth: 1
+
+- name: Copy Dracula Kvantum Theme
+  ansible.builtin.copy:
+    src: "/tmp/dracula-kvantum/Dracula"
+    dest: "/home/{{ username | default('kevin') }}/.config/Kvantum/"
+    owner: "{{ username | default('kevin') }}"
+    group: "{{ username | default('kevin') }}"
+    remote_src: true
+
+- name: Set Kvantum theme to Dracula
+  ansible.builtin.ini_file:
+    path: "/home/{{ username | default('kevin') }}/.config/Kvantum/kvantum.kvconfig"
+    section: "General"
+    option: "theme"
+    value: "Dracula"
+    owner: "{{ username | default('kevin') }}"
+    group: "{{ username | default('kevin') }}"
+    mode: '0644'
