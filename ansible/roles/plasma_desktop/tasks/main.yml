@@ -49,6 +49,7 @@
     cp -r /tmp/dracula_theme/wallpapers/* /home/{{ username | default('kevin') }}/.local/share/wallpapers/
     cp -r /tmp/dracula_theme/konsole/* /home/{{ username | default('kevin') }}/.local/share/konsole/
     cp -r /tmp/dracula_theme/icons/* /home/{{ username | default('kevin') }}/.local/share/icons/
+  become: true
   become_user: "{{ username | default('kevin') }}"
   changed_when: false
 
@@ -61,7 +62,7 @@
     mode: '0755'
 
 - name: Configure KDE globals for Dracula Theme (Dark Mode)
-  ansible.builtin.ini_file:
+  community.general.ini_file:
     path: "/home/{{ username | default('kevin') }}/.config/kdeglobals"
     section: "{{ item.section }}"
     option: "{{ item.option }}"

@@ -8,7 +8,7 @@
   when: ansible_facts['distribution'] == 'Archlinux'
 
 - name: Install STL thumbnailers from AUR
-  ansible.builtin.shell: yay -S --noconfirm --needed stl-thumb stl-thumb-kde
+  ansible.builtin.command: yay -S --noconfirm --needed stl-thumb stl-thumb-kde
   become: false
   changed_when: false
   when: ansible_facts['distribution'] == 'Archlinux'

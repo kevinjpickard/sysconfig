@@ -68,7 +68,7 @@
   loop:
     - qemu-guest-agent.service
     - spice-vdagentd.socket
-  ignore_errors: true
+  failed_when: false
   when: ansible_facts['distribution'] == 'Archlinux' and ansible_facts['virtualization_role'] == 'guest'
 
 - name: Ensure target user exists
@@ -89,34 +89,37 @@
     validate: '/usr/sbin/visudo -cf %s'
 
 - name: Check if yay is installed
-  ansible.builtin.shell: command -v yay
-  register: yay_check
-  ignore_errors: true
+  ansible.builtin.command: command -v yay
+  register: system_setup_yay_check
+  failed_when: false
   changed_when: false
   when: ansible_facts['distribution'] == 'Archlinux'
 
-- name: Clone yay-bin repository
+- name: Clone yay-bin repository # noqa: latest[git]
   ansible.builtin.git:
     repo: https://aur.archlinux.org/yay-bin.git
+    version: HEAD
     dest: /tmp/yay-bin
   become: true
   become_user: "{{ username | default('kevin') }}"
-  when: ansible_facts['distribution'] == 'Archlinux' and yay_check.rc != 0
+  when: ansible_facts['distribution'] == 'Archlinux' and system_setup_yay_check.rc != 0
 
 - name: Build yay
   ansible.builtin.command: makepkg --cleanbuild --nodeps --force
+  changed_when: true
   args:
     chdir: /tmp/yay-bin
   become: true
   become_user: "{{ username | default('kevin') }}"
-  when: ansible_facts['distribution'] == 'Archlinux' and yay_check.rc != 0
+  when: ansible_facts['distribution'] == 'Archlinux' and system_setup_yay_check.rc != 0
 
 - name: Install yay package
   ansible.builtin.shell: pacman -U --noconfirm *.pkg.tar.zst
+  changed_when: true
   args:
     chdir: /tmp/yay-bin
   become: true
-  when: ansible_facts['distribution'] == 'Archlinux' and yay_check.rc != 0
+  when: ansible_facts['distribution'] == 'Archlinux' and system_setup_yay_check.rc != 0
 
 - name: Ensure target user's github directory exists
   ansible.builtin.file:
@@ -129,7 +132,8 @@
 - name: Clone sysconfig repository to the target filesystem
   ansible.builtin.git:
     repo: "https://github.com/kevinjpickard/sysconfig.git"
+    version: main
     dest: "/home/{{ username | default('kevin') }}/github.com/kevinjpickard/sysconfig"
-    update: yes
+    update: true
   become: true
   become_user: "{{ username | default('kevin') }}"

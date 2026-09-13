@@ -12,7 +12,7 @@
     - name: Load local variables
       ansible.builtin.include_vars:
         file: local_vars.yml
-      ignore_errors: yes
+      failed_when: false
 
   roles:
     - system_setup
