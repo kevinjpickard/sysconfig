@@ -12,3 +12,9 @@
   become: false
   changed_when: false
   when: ansible_facts['distribution'] == 'Archlinux'
+
+- name: Install OrcaSlicer via Flatpak
+  community.general.flatpak:
+    name: com.orcaslicer.OrcaSlicer
+    state: present
+    method: system
