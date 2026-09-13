@@ -1,5 +1,5 @@
 {
-  "bootloader": "EFISTUB",
+  "bootloader": "systemd-boot",
   "disk_config": {
     "config_type": "default_layout",
     "device_modifications": [

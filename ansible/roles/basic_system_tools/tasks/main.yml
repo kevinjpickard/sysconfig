@@ -26,6 +26,6 @@
   ansible.builtin.git:
     repo: https://github.com/zplug/zplug.git
     dest: "/home/{{ username | default('kevin') }}/.zplug"
-    version: master
+    version: main
   become: true
   become_user: "{{ username | default('kevin') }}"

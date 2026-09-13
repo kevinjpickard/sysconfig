@@ -60,16 +60,16 @@ archinstall-cmd:
 
 export-vm:
 	@echo "Importing VM into libvirt..."
-	/usr/bin/python3 /usr/bin/virt-install --connect qemu:///session --name $(VM_NAME) --memory 4096 --vcpus 2 --os-variant archlinux \
+	/usr/bin/python3 /usr/bin/virt-install --connect qemu:///system --name $(VM_NAME) --memory 4096 --vcpus 2 --os-variant archlinux \
 		--disk path=$(PWD)/output-archlinux/packer-archlinux,format=qcow2 \
 		--boot loader=/usr/share/edk2/x64/OVMF_CODE.4m.fd,loader.readonly=yes,loader.type=pflash,nvram.template=$(PWD)/output-archlinux/efivars.fd --import --noautoconsole
 	@echo "Launching virt-manager..."
-	/usr/bin/python3 /usr/bin/virt-manager --connect qemu:///session --show-domain-console $(VM_NAME) &
+	/usr/bin/python3 /usr/bin/virt-manager --connect qemu:///system --show-domain-console $(VM_NAME) &
 
 remove-vm:
 	@echo "Removing VM from libvirt..."
-	virsh --connect qemu:///session destroy $(VM_NAME) || true
-	virsh --connect qemu:///session undefine $(VM_NAME) || true
+	virsh --connect qemu:///system destroy $(VM_NAME) || true
+	virsh --connect qemu:///system undefine $(VM_NAME) --nvram || true
 
 clean-image:
 	@echo "Deleting built VM image..."

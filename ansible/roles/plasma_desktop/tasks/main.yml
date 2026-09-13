@@ -14,3 +14,56 @@
     name: sddm.service
     enabled: true
   when: ansible_facts['distribution'] == 'Archlinux'
+
+- name: Ensure KDE local share directories exist for user
+  ansible.builtin.file:
+    path: "/home/{{ username | default('kevin') }}/.local/share/{{ item }}"
+    state: directory
+    owner: "{{ username | default('kevin') }}"
+    group: "{{ username | default('kevin') }}"
+    mode: '0755'
+  loop:
+    - plasma/look-and-feel
+    - plasma/desktoptheme
+    - color-schemes
+    - aurorae/themes
+    - wallpapers
+    - konsole
+    - icons
+
+- name: Copy Dracula theme files
+  ansible.builtin.copy:
+    src: "dracula_theme/{{ item.src }}"
+    dest: "/home/{{ username | default('kevin') }}/.local/share/{{ item.dest }}"
+    owner: "{{ username | default('kevin') }}"
+    group: "{{ username | default('kevin') }}"
+  loop:
+    - { src: "look-and-feel/", dest: "plasma/look-and-feel/" }
+    - { src: "desktoptheme/", dest: "plasma/desktoptheme/" }
+    - { src: "color-schemes/", dest: "color-schemes/" }
+    - { src: "aurorae/themes/", dest: "aurorae/themes/" }
+    - { src: "wallpapers/", dest: "wallpapers/" }
+    - { src: "konsole/", dest: "konsole/" }
+    - { src: "icons/", dest: "icons/" }
+
+- name: Ensure KDE config directory exists
+  ansible.builtin.file:
+    path: "/home/{{ username | default('kevin') }}/.config"
+    state: directory
+    owner: "{{ username | default('kevin') }}"
+    group: "{{ username | default('kevin') }}"
+    mode: '0755'
+
+- name: Configure KDE globals for Dracula Theme (Dark Mode)
+  ansible.builtin.ini_file:
+    path: "/home/{{ username | default('kevin') }}/.config/kdeglobals"
+    section: "{{ item.section }}"
+    option: "{{ item.option }}"
+    value: "{{ item.value }}"
+    owner: "{{ username | default('kevin') }}"
+    group: "{{ username | default('kevin') }}"
+    mode: '0644'
+  loop:
+    - { section: 'KDE', option: 'LookAndFeelPackage', value: 'Dracula' }
+    - { section: 'General', option: 'ColorScheme', value: 'Dracula' }
+    - { section: 'Icons', option: 'Theme', value: 'dracula-icons-main' }

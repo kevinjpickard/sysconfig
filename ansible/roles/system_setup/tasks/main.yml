@@ -39,6 +39,13 @@
     state: started
   when: ansible_facts['distribution'] == 'Archlinux'
 
+- name: Enable SSH service
+  ansible.builtin.systemd:
+    name: sshd.service
+    enabled: true
+    state: started
+  when: ansible_facts['distribution'] == 'Archlinux'
+
 - name: Enable Periodic TRIM for SSDs
   ansible.builtin.systemd:
     name: fstrim.timer
@@ -107,3 +114,19 @@
     chdir: /tmp/yay-bin
   become: true
   when: ansible_facts['distribution'] == 'Archlinux' and yay_check.rc != 0
+
+- name: Ensure target user's github directory exists
+  ansible.builtin.file:
+    path: "/home/{{ username | default('kevin') }}/github.com/kevinjpickard"
+    state: directory
+    owner: "{{ username | default('kevin') }}"
+    group: "{{ username | default('kevin') }}"
+    mode: '0755'
+
+- name: Clone sysconfig repository to the target filesystem
+  ansible.builtin.git:
+    repo: "https://github.com/kevinjpickard/sysconfig.git"
+    dest: "/home/{{ username | default('kevin') }}/github.com/kevinjpickard/sysconfig"
+    update: yes
+  become: true
+  become_user: "{{ username | default('kevin') }}"

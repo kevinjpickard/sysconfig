@@ -1,6 +1,6 @@
 # System Configuration & Arch Linux Automation
 
-Automated Arch Linux installation (baremetal or virtualized) with **EFISTUB**, **LUKS + LVM + Btrfs**, **SDDM**, and **KDE Plasma**, plus Ansible configuration management and Molecule VM testing.
+Automated Arch Linux installation (baremetal or virtualized) with **systemd-boot**, **LUKS + LVM + Btrfs**, **SDDM**, and **KDE Plasma**, plus Ansible configuration management and Molecule VM testing.
 
 ---
 
