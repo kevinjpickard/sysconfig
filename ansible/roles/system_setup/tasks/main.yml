@@ -132,7 +132,7 @@
 - name: Clone sysconfig repository to the target filesystem
   ansible.builtin.git:
     repo: "https://github.com/kevinjpickard/sysconfig.git"
-    version: main
+    version: master
     dest: "/home/{{ username | default('kevin') }}/github.com/kevinjpickard/sysconfig"
     update: true
   become: true
